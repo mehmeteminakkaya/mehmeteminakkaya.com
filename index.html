@@ -203,7 +203,7 @@
     .project-main { grid-column: span 7; min-height: 500px; color: white; background: var(--blue); }
     .project-main p { color: rgba(255,255,255,.72); max-width: 480px; }
     .project-main h3 { max-width: 580px; font: 400 clamp(3rem,6vw,6rem)/.88 var(--font-serif); }
-    .project-main::after { content: "MOGİ"; position: absolute; right: -12px; bottom: -62px; font-size: clamp(7rem,16vw,14rem); font-weight: 800; line-height: 1; color: rgba(255,255,255,.11); letter-spacing: -.1em; }
+    .project-main::after { content: "Mİ-GO"; position: absolute; right: -12px; bottom: -62px; font-size: clamp(7rem,16vw,14rem); font-weight: 800; line-height: 1; color: rgba(255,255,255,.11); letter-spacing: -.1em; pointer-events: none; }
     .project-jam { grid-column: span 5; min-height: 500px; background: var(--acid); color: #11120f; }
     .project-jam p { color: #4f513f; }
     .pixel-grid { display: grid; grid-template-columns: repeat(5, 18px); gap: 7px; position: absolute; right: 32px; bottom: 34px; transform: rotate(9deg); }
@@ -228,12 +228,16 @@
     .lab .section-kicker { color: var(--acid); }
     .lab-grid { display: grid; grid-template-columns: .78fr 1.22fr; gap: 18px; }
     .console, .idea-machine { min-height: 430px; border: 1px solid color-mix(in srgb, var(--paper) 20%, transparent); border-radius: var(--radius); background: color-mix(in srgb, var(--paper) 5%, transparent); }
-    .console { padding: 26px; font: 400 .78rem/1.9 var(--font-mono); }
-    .console-top { display: flex; justify-content: space-between; padding-bottom: 18px; margin-bottom: 20px; border-bottom: 1px solid color-mix(in srgb, var(--paper) 18%, transparent); color: color-mix(in srgb, var(--paper) 55%, transparent); }
-    .terminal-row { display: flex; gap: 10px; }
-    .prompt { color: var(--acid); }
-    .terminal-output { color: color-mix(in srgb, var(--paper) 62%, transparent); margin: 0 0 12px 22px; }
+    .console { padding: 26px; font: 400 .78rem/1.8 var(--font-mono); display: flex; flex-direction: column; overflow-y: auto; max-height: 520px; }
+    .console-top { display: flex; justify-content: space-between; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid color-mix(in srgb, var(--paper) 18%, transparent); color: color-mix(in srgb, var(--paper) 55%, transparent); flex-shrink: 0; }
+    .terminal-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+    .prompt { color: var(--acid); font-weight: 700; flex-shrink: 0; }
+    .terminal-output { color: color-mix(in srgb, var(--paper) 75%, transparent); margin: 0 0 10px 0; word-break: break-word; }
+    .terminal-output.highlight { color: var(--acid); }
     .terminal-cursor { display: inline-block; width: 8px; height: 15px; vertical-align: -2px; background: var(--acid); animation: blink 1s steps(1) infinite; }
+    .cli-input-line { display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 10px; border-top: 1px dashed color-mix(in srgb, var(--paper) 20%, transparent); }
+    .cli-input { flex: 1; background: transparent; border: none; outline: none; color: var(--paper); font: inherit; padding: 0; }
+    .cli-input::placeholder { color: color-mix(in srgb, var(--paper) 35%, transparent); }
     @keyframes blink { 50% { opacity: 0; } }
     .idea-machine { display: grid; align-content: space-between; padding: 38px; background: var(--acid); color: #11120f; }
     .idea-machine p { max-width: 600px; margin: 0; font: 400 clamp(2.1rem,4.5vw,4.5rem)/.95 var(--font-serif); letter-spacing: -.035em; }
@@ -367,6 +371,7 @@
         <a href="#iletisim">İletişim</a>
       </div>
       <div class="nav-actions">
+        <button class="icon-button" id="sound-toggle" type="button" aria-label="Ses efektlerini aç/kapat" title="Ses Açık/Kapalı">🔊</button>
         <button class="command-button" id="open-command" type="button" aria-label="Komut menüsünü aç">⌘ / Ctrl K</button>
         <button class="icon-button" id="theme-toggle" type="button" aria-label="Renk temasını değiştir">◐</button>
       </div>
@@ -390,6 +395,7 @@
             <span class="status"><span class="status-dot"></span>Yeni fikirlere açık</span>
             <span class="time" id="istanbul-time">İstanbul · --:--</span>
             <span class="mono" style="font-size:.68rem;color:var(--muted)">TRT / UTC+3</span>
+            <div style="margin-top:12px;font-size:.72rem;display:flex;align-items:center;gap:7px;color:var(--muted);font-family:var(--font-mono);"><span class="status-dot" style="width:7px;height:7px;background:#3b82f6;box-shadow:0 0 0 4px rgba(59,130,246,.15);"></span><span>Aktif: <strong style="color:var(--ink)">Mİ-GO &amp; Nexus AI</strong></span></div>
           </aside>
         </div>
       </div>
@@ -495,17 +501,36 @@
           <p style="color:color-mix(in srgb,var(--paper) 58%,transparent)">Her fikir proje olmak zorunda değil. Ama her iyi proje, “ya şöyle olsaydı?” diye başlayan küçük bir deneyi hak ediyor.</p>
         </div>
         <div class="lab-grid">
-          <div class="console reveal" aria-label="Etkileşimli terminal görünümü">
-            <div class="console-top"><span>mehmet@istanbul:~</span><span>● live</span></div>
-            <div class="terminal-row"><span class="prompt">$</span><span>cat current_focus.txt</span></div>
-            <p class="terminal-output">AI × mobile × human problems</p>
-            <div class="terminal-row"><span class="prompt">$</span><span>python strengths.py</span></div>
-            <p class="terminal-output">→ analytical_thinking<br>→ ownership<br>→ team_energy<br>→ relentless_learning</p>
-            <div class="terminal-row"><span class="prompt">$</span><span id="terminal-command">build --something-useful</span><span class="terminal-cursor"></span></div>
+          <div class="console reveal" id="interactive-terminal" aria-label="Etkileşimli terminal">
+            <div class="console-top">
+              <span>mehmet@istanbul:~ (interaktif)</span>
+              <span style="display:flex;gap:6px;align-items:center;"><span class="status-dot" style="width:6px;height:6px;"></span>canlı cli</span>
+            </div>
+            <div id="terminal-history">
+              <div class="terminal-row"><span class="prompt">$</span><span>whoami</span></div>
+              <p class="terminal-output">Mehmet Emin Akkaya — Bilgisayar Mühendisliği &amp; AI Geliştiricisi</p>
+              <div class="terminal-row"><span class="prompt">$</span><span>cat current_focus.txt</span></div>
+              <p class="terminal-output">AI × Mobile (Mİ-GO) × Edge IoT (Study Buddy) × B2B SaaS (Nexus AI)</p>
+              <p class="terminal-output highlight" style="font-size:.73rem;">💡 Komutları görmek için <strong>help</strong> yazıp Enter'a basabilirsiniz.</p>
+            </div>
+            <form id="terminal-form" class="cli-input-line" onsubmit="return false;">
+              <span class="prompt">$</span>
+              <input class="cli-input" id="terminal-cli-input" type="text" placeholder="komut yazın (örn: help, projects, migo, cv)..." autocomplete="off" spellcheck="false">
+              <span class="terminal-cursor"></span>
+            </form>
           </div>
           <div class="idea-machine reveal">
-            <div><span class="section-kicker" style="color:#11120f">FİKİR MAKİNESİ / TIKLA</span><p id="idea-text">Kampüsteki boş çalışma alanlarını anlık gösteren mini uygulama.</p></div>
-            <div class="idea-meta"><button class="button" id="idea-button" type="button">Başka bir fikir üret <span>↻</span></button><span class="idea-count" id="idea-count">FİKİR 01 / 06</span></div>
+            <div>
+              <span class="section-kicker" style="color:#11120f">FİKİR MAKİNESİ / TIKLA</span>
+              <p id="idea-text">Kampüsteki boş çalışma alanlarını anlık gösteren mini uygulama.</p>
+            </div>
+            <div class="idea-meta">
+              <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+                <button class="button" id="idea-button" type="button">Başka bir fikir üret <span>↻</span></button>
+                <a class="button" id="idea-discuss" href="mailto:aktaha@gmail.com?subject=Fikir%20Hakk%C4%B1nda%20Sohbet" style="background:#11120f;color:var(--paper);border-color:#11120f;">Bu fikri konuşalım ↗</a>
+              </div>
+              <span class="idea-count" id="idea-count">FİKİR 01 / 16</span>
+            </div>
           </div>
         </div>
         <div class="skills-cloud reveal" aria-label="Teknik yetkinlikler">
@@ -523,6 +548,7 @@
           <a class="button" href="https://www.linkedin.com/in/mehmeteminakkaya/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
           <a class="button" href="https://github.com/mehmeteminakkaya" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
           <button class="button" id="copy-email" type="button">Adresi kopyala</button>
+          <button class="button" id="share-portfolio" type="button" style="background:var(--acid);color:#11120f;border-color:var(--acid);">Portfolyoyu Paylaş 🔗</button>
         </div>
       </div>
     </section>
@@ -603,22 +629,63 @@
       const root = document.documentElement;
       const body = document.body;
       const themeButton = document.querySelector('#theme-toggle');
+      const soundButton = document.querySelector('#sound-toggle');
       const palette = document.querySelector('#command-palette');
       const commandInput = document.querySelector('#command-input');
       const toast = document.querySelector('#toast');
       let toastTimer;
 
+      // Web Audio API Sound Synthesizer (Zero External Dependencies)
+      let audioCtx = null;
+      let soundEnabled = true;
+
+      const initAudio = () => {
+        if (!audioCtx && (window.AudioContext || window.webkitAudioContext)) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+      };
+
+      const playSound = (freq = 600, type = 'sine', duration = 0.04, gainVal = 0.03) => {
+        if (!soundEnabled) return;
+        try {
+          initAudio();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+          gain.gain.setValueAtTime(gainVal, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + duration);
+        } catch {}
+      };
+
+      if (soundButton) {
+        soundButton.addEventListener('click', () => {
+          soundEnabled = !soundEnabled;
+          soundButton.textContent = soundEnabled ? '🔊' : '🔇';
+          soundButton.title = soundEnabled ? 'Ses Açık' : 'Ses Kapalı';
+          showToast(soundEnabled ? 'Ses efektleri: AÇIK 🔊' : 'Ses efektleri: KAPALI 🔇');
+          if (soundEnabled) playSound(800, 'sine', 0.05);
+        });
+      }
+
       const showToast = (message) => {
         toast.textContent = message;
         toast.classList.add('show');
+        playSound(900, 'triangle', 0.06);
         clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
       };
 
       const setTheme = (theme) => {
         root.dataset.theme = theme;
         localStorage.setItem('mea-theme', theme);
         document.querySelector('meta[name="theme-color"]').setAttribute('content', theme === 'night' ? '#11130f' : '#f2f0e9');
+        playSound(450, 'sine', 0.07);
       };
 
       const savedTheme = localStorage.getItem('mea-theme');
@@ -628,9 +695,13 @@
       const openPalette = () => {
         palette.classList.add('open');
         commandInput.value = '';
+        playSound(700, 'sine', 0.04);
         setTimeout(() => commandInput.focus(), 20);
       };
-      const closePalette = () => palette.classList.remove('open');
+      const closePalette = () => {
+        palette.classList.remove('open');
+        playSound(350, 'sine', 0.04);
+      };
       document.querySelector('#open-command').addEventListener('click', openPalette);
       palette.addEventListener('click', (event) => { if (event.target === palette) closePalette(); });
 
@@ -648,51 +719,235 @@
         if (action === 'theme') themeButton.click();
         else if (action === 'chaos') {
           body.classList.toggle('chaos');
+          playSound(1100, 'sawtooth', 0.12, 0.05);
           showToast(body.classList.contains('chaos') ? 'Sürpriz modu: AÇIK ✦' : 'Sürpriz modu kapandı.');
         } else if (action === 'email') window.location.href = 'mailto:aktaha@gmail.com';
         else document.querySelector('#' + action)?.scrollIntoView({ behavior: 'smooth' });
       }));
 
       commandInput.addEventListener('input', () => {
+        playSound(1200, 'sine', 0.015, 0.01);
         const query = commandInput.value.toLocaleLowerCase('tr');
         document.querySelectorAll('.command-list li').forEach(item => {
           item.hidden = !item.textContent.toLocaleLowerCase('tr').includes(query);
         });
       });
 
+      // Expanded Idea Machine (16 ideas)
       const ideas = [
         'Kampüsteki boş çalışma alanlarını anlık gösteren mini uygulama.',
+        'KOBİ’ler için fatura ve fişleri otomatik analiz eden mikro-LLM muhasebe asistanı.',
+        'XIAO ESP32-S3 ile çalışma ortamı gürültü ve hava kalitesini izleyen akıllı masa istasyonu.',
         'Öğrencinin haftasını okuyup gerçekçi çalışma sprintleri öneren AI koçu.',
         'Game jam ekiplerini yetenek ve oyun zevkine göre eşleştiren takım kurucu.',
-        'Kariyer hedefini küçük günlük görevlere bölen “gelecek pusulası”.',
+        'Kariyer hedefini küçük günlük görevlere bölen “gelecek pusulası” (Mİ-GO).',
         'Kulüp etkinliklerinde tanışılan kişileri fikirlere göre yeniden buluşturan ağ.',
+        'Medikal MR görüntülerinde 3D U-Net ile 3 saniyede volumetrik doku segmentasyonu.',
+        'Git commit geçmişinden otomatik sprint raporu ve sürüm notu üreten CLI aracı.',
+        'Yapay zekâ ile sesli teknik mülakat pratiği yaptıran sanal mülakat simülatörü.',
+        'Üniversite yemekhanesindeki besin değerlerini fotoğraftan hesaplayan görüntü işleme asistanı.',
+        'FastAPI ve Docker üzerinde mikrosaniye yanıt süreli dağıtık görev kuyruğu.',
+        'Yerel donanımda çalışan ve internet gerektirmeyen simetrik şifreli not kasası.',
+        'Unity 2D platform oyunları için prosedürel engel ve mekanik üretim algoritması.',
+        'ESP32 ile toplantı odalarında ses seviyesine göre renk değiştiren akıllı LED asistanı.',
         'Kod öğrenirken takıldığın deseni fark edip sana özel alıştırma üreten mentor.'
       ];
       let ideaIndex = 0;
+      const updateIdeaDiscussBtn = (text) => {
+        const discussBtn = document.querySelector('#idea-discuss');
+        if (discussBtn) {
+          discussBtn.href = `mailto:aktaha@gmail.com?subject=${encodeURIComponent('Fikir Sohbeti: ' + text.slice(0, 35) + '...')}&body=${encodeURIComponent('Merhaba Mehmet Emin,\n\nSitedeki şu fikir hakkında konuşmak istiyorum:\n"' + text + '"\n\n')}`;
+        }
+      };
+      updateIdeaDiscussBtn(ideas[0]);
+
       document.querySelector('#idea-button').addEventListener('click', () => {
+        playSound(850, 'triangle', 0.05);
         ideaIndex = (ideaIndex + 1) % ideas.length;
+        const currentIdea = ideas[ideaIndex];
         const ideaText = document.querySelector('#idea-text');
         ideaText.animate([{opacity:0, transform:'translateY(10px)'},{opacity:1, transform:'none'}], {duration:380, easing:'ease-out'});
-        ideaText.textContent = ideas[ideaIndex];
+        ideaText.textContent = currentIdea;
         document.querySelector('#idea-count').textContent = `FİKİR ${String(ideaIndex + 1).padStart(2,'0')} / ${String(ideas.length).padStart(2,'0')}`;
+        updateIdeaDiscussBtn(currentIdea);
       });
 
+      // Interactive Terminal Logic
+      const cliInput = document.querySelector('#terminal-cli-input');
+      const terminalHistory = document.querySelector('#terminal-history');
+      const terminalBox = document.querySelector('#interactive-terminal');
+
+      const appendTerminalRow = (cmd, outputHtml, isHighlight = false) => {
+        const row = document.createElement('div');
+        row.className = 'terminal-row';
+        row.innerHTML = `<span class="prompt">$</span><span>${cmd}</span>`;
+        terminalHistory.appendChild(row);
+
+        if (outputHtml) {
+          const out = document.createElement('p');
+          out.className = `terminal-output ${isHighlight ? 'highlight' : ''}`;
+          out.innerHTML = outputHtml;
+          terminalHistory.appendChild(out);
+        }
+        terminalBox.scrollTop = terminalBox.scrollHeight;
+      };
+
+      if (cliInput) {
+        cliInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            const rawCmd = cliInput.value.trim();
+            const cmd = rawCmd.toLowerCase();
+            cliInput.value = '';
+            if (!rawCmd) return;
+
+            playSound(750, 'square', 0.03, 0.02);
+
+            switch (cmd) {
+              case 'help':
+                appendTerminalRow(rawCmd, `
+                  <strong>Kullanılabilir Komutlar:</strong><br>
+                  • <code>projects</code> — Öne çıkan amiral gemisi projeleri listeler.<br>
+                  • <code>migo</code> — Mİ-GO mobil kariyer pusulası detayları.<br>
+                  • <code>nexus</code> — Nexus AI B2B SaaS platformu mimarisi.<br>
+                  • <code>studybuddy</code> — Study Buddy ESP32 &amp; Llama 3.3 devresi.<br>
+                  • <code>skills</code> — Yetkinlikler ve teknoloji yığını.<br>
+                  • <code>cv</code> — Özgeçmiş modalını açar.<br>
+                  • <code>contact</code> — E-posta adresini kopyalar.<br>
+                  • <code>theme</code> — Gece / gündüz temasını değiştirir.<br>
+                  • <code>clear</code> — Terminal ekranını temizler.<br>
+                  • <code>matrix</code> — Kod akışı simülasyonu başlatır.<br>
+                  • <code>sudo</code> — Yetki kontrolü yapar.
+                `, true);
+                break;
+
+              case 'projects':
+              case 'isler':
+                appendTerminalRow(rawCmd, `
+                  <strong>Amiral Gemisi Projeler:</strong><br>
+                  1. 📱 <strong>Mİ-GO</strong>: Android (Kotlin), Material 3, AI Career Pathfinder [<a href="https://github.com/mehmeteminakkaya/Migo" target="_blank" style="color:var(--acid)">GitHub ↗</a>]<br>
+                  2. 🤖 <strong>Nexus AI</strong>: Google Hackathon Finalisti, FastAPI, React, Gemini OCR [<a href="https://github.com/mehmeteminakkaya/Nexus-Proje" target="_blank" style="color:var(--acid)">GitHub ↗</a>]<br>
+                  3. ⚡ <strong>Study Buddy</strong>: XIAO ESP32-S3, Llama 3.3 70B, Wokwi IoT Devresi [<a href="https://github.com/mehmeteminakkaya/Study-Buddy-Simulation" target="_blank" style="color:var(--acid)">GitHub ↗</a>]<br>
+                  4. 🎙️ <strong>BenimHakkımda</strong>: AI Mülakat Simülatörü [<a href="https://benimhakkimda-aim-lakat.vercel.app/" target="_blank" style="color:var(--acid)">Canlı Demo ↗</a>]<br>
+                  5. 📋 <strong>ToDoGemini</strong>: FastAPI, Docker, Gemini Pro [<a href="https://github.com/mehmeteminakkaya/ToDo-List" target="_blank" style="color:var(--acid)">GitHub ↗</a>]
+                `);
+                break;
+
+              case 'migo':
+                appendTerminalRow(rawCmd, `📱 <strong>Mİ-GO — AI Destekli Kişisel Kariyer Pusulası</strong><br>• Mimari: Kotlin, Jetpack Compose / Material 3, Android Studio<br>• Amaç: Öğrencinin yetkinliklerini analiz edip kişiselleştirilmiş rota ve beceri hedefleri çizmek.<br>• Repo: <a href="https://github.com/mehmeteminakkaya/Migo" target="_blank" style="color:var(--acid)">github.com/mehmeteminakkaya/Migo ↗</a>`);
+                break;
+
+              case 'nexus':
+                appendTerminalRow(rawCmd, `🤖 <strong>Nexus AI — KOBİ B2B Finans Asistanı</strong><br>• Başarı: Google Hackathon Finalisti<br>• Mimari: FastAPI (Asenkron Python), React / Vite, Google Gemini Flash OCR<br>• Repo: <a href="https://github.com/mehmeteminakkaya/Nexus-Proje" target="_blank" style="color:var(--acid)">github.com/mehmeteminakkaya/Nexus-Proje ↗</a>`);
+                break;
+
+              case 'studybuddy':
+                appendTerminalRow(rawCmd, `⚡ <strong>Study Buddy — Akıllı Devre &amp; Pomodoro AI</strong><br>• Mimari: XIAO ESP32-S3, C++, BME280, SSD1306 OLED, Llama 3.3 70B via Groq<br>• Repo: <a href="https://github.com/mehmeteminakkaya/Study-Buddy-Simulation" target="_blank" style="color:var(--acid)">github.com/mehmeteminakkaya/Study-Buddy-Simulation ↗</a>`);
+                break;
+
+              case 'benimhakkimda':
+                appendTerminalRow(rawCmd, `🎙️ <strong>BenimHakkımda — İnteraktif AI Mülakat Simülatörü</strong><br>• Mimari: Node.js, Express, Gemini AI, Web Audio API<br>• Canlı Link: <a href="https://benimhakkimda-aim-lakat.vercel.app/" target="_blank" style="color:var(--acid)">benimhakkimda-aim-lakat.vercel.app ↗</a>`);
+                break;
+
+              case 'todogemini':
+                appendTerminalRow(rawCmd, `📋 <strong>ToDoGemini — AI Görev Orkestrasyonu</strong><br>• Mimari: FastAPI, SQLAlchemy, Alembic, Docker, Gemini Pro<br>• Repo: <a href="https://github.com/mehmeteminakkaya/ToDo-List" target="_blank" style="color:var(--acid)">github.com/mehmeteminakkaya/ToDo-List ↗</a>`);
+                break;
+
+              case 'skills':
+              case 'tech':
+                appendTerminalRow(rawCmd, `<strong>Teknik Yetkinlikler:</strong><br>• Diller: Python, C++, Kotlin, SQL, JavaScript<br>• AI &amp; Veri: PyTorch, Gemini API, Llama 3.3, 3D U-Net, CNN, OCR<br>• Backend &amp; DevOps: FastAPI, Node.js, Docker, Linux, Git<br>• Gömülü &amp; Ağ: ESP32-S3, Arduino, I2C/SPI, Cisco Packet Tracer, OSPF, VLAN`);
+                break;
+
+              case 'cv':
+              case 'resume':
+                appendTerminalRow(rawCmd, `📄 Özgeçmiş açılıyor...`);
+                document.querySelector('#cv-open').click();
+                break;
+
+              case 'contact':
+              case 'email':
+                navigator.clipboard.writeText('aktaha@gmail.com');
+                appendTerminalRow(rawCmd, `📬 E-posta adresi (<strong>aktaha@gmail.com</strong>) panoya kopyalandı!`);
+                showToast('aktaha@gmail.com kopyalandı.');
+                break;
+
+              case 'theme':
+                themeButton.click();
+                appendTerminalRow(rawCmd, `🌓 Tema değiştirildi.`);
+                break;
+
+              case 'clear':
+                terminalHistory.innerHTML = '';
+                break;
+
+              case 'matrix':
+                appendTerminalRow(rawCmd, `01001101 01000101 01000001 00100000 01010010 01001111 01000011 01001011 01010011 00100001`);
+                showToast('Matrix dizisi yüklendi ✦');
+                break;
+
+              case 'sudo':
+              case 'sudo rm -rf /':
+              case 'sudo su':
+                appendTerminalRow(rawCmd, `⚠️ Yetki Reddedildi: root erişimi <strong>Mehmet Emin Akkaya</strong> tarafından korunmaktadır. 😉`);
+                break;
+
+              default:
+                appendTerminalRow(rawCmd, `Komut bulunamadı: <strong>${rawCmd}</strong>. Kullanılabilir komutları görmek için <strong>help</strong> yazın.`);
+            }
+          }
+        });
+      }
+
+      // Copy Email Button
       document.querySelector('#copy-email').addEventListener('click', async () => {
         try { await navigator.clipboard.writeText('aktaha@gmail.com'); showToast('E-posta adresi kopyalandı.'); }
         catch { showToast('aktaha@gmail.com'); }
       });
 
+      // Share Portfolio (Web Share API)
+      const shareBtn = document.querySelector('#share-portfolio');
+      if (shareBtn) {
+        shareBtn.addEventListener('click', async () => {
+          playSound(800, 'sine', 0.05);
+          if (navigator.share) {
+            try {
+              await navigator.share({
+                title: 'Mehmet Emin Akkaya — Portfolio',
+                text: 'Mehmet Emin Akkaya’nın yapay zekâ, mobil ve donanım projelerini inceleyin.',
+                url: window.location.href
+              });
+            } catch {}
+          } else {
+            try {
+              await navigator.clipboard.writeText(window.location.href);
+              showToast('Portfolyo bağlantısı kopyalandı! 📋');
+            } catch {
+              showToast(window.location.href);
+            }
+          }
+        });
+      }
+
+      // CV Modal Controls
       const cvDialog = document.querySelector('#cv-dialog');
       document.querySelector('#cv-open').addEventListener('click', () => {
+        playSound(650, 'sine', 0.04);
         if (typeof cvDialog.showModal === 'function') cvDialog.showModal();
         else cvDialog.setAttribute('open', '');
       });
-      document.querySelector('#cv-close').addEventListener('click', () => cvDialog.close());
+      document.querySelector('#cv-close').addEventListener('click', () => {
+        playSound(350, 'sine', 0.04);
+        cvDialog.close();
+      });
       document.querySelector('#cv-print').addEventListener('click', () => window.print());
       cvDialog.addEventListener('click', event => {
-        if (event.target === cvDialog) cvDialog.close();
+        if (event.target === cvDialog) {
+          playSound(350, 'sine', 0.04);
+          cvDialog.close();
+        }
       });
 
+      // Clock and Progress
       const updateTime = () => {
         const value = new Intl.DateTimeFormat('tr-TR', { timeZone:'Europe/Istanbul', hour:'2-digit', minute:'2-digit', second:'2-digit' }).format(new Date());
         document.querySelector('#istanbul-time').textContent = `İstanbul · ${value}`;
@@ -720,22 +975,16 @@
         }, { passive:true });
       }
 
-      const commands = ['build --something-useful', 'learn --without-stopping', 'ship --then-improve', 'collaborate --with-energy'];
-      let commandIndex = 0;
-      setInterval(() => {
-        commandIndex = (commandIndex + 1) % commands.length;
-        document.querySelector('#terminal-command').textContent = commands[commandIndex];
-      }, 2600);
-
       let secret = '';
       document.addEventListener('keydown', event => {
         secret = (secret + event.key.toLowerCase()).slice(-3);
         if (secret === 'mea') {
           body.classList.toggle('chaos');
+          playSound(1200, 'sawtooth', 0.15, 0.06);
           showToast('Gizli MEA modu bulundu ✦');
         }
       });
     })();
   </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a2c361f2aa9d3a89',t:'MTc4NjkxNDE3Mw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>

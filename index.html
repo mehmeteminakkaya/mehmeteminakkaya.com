@@ -527,7 +527,7 @@
             <div class="idea-meta">
               <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
                 <button class="button" id="idea-button" type="button">Başka bir fikir üret <span>↻</span></button>
-                <a class="button" id="idea-discuss" href="mailto:aktaha@gmail.com?subject=Fikir%20Hakk%C4%B1nda%20Sohbet" style="background:#11120f;color:var(--paper);border-color:#11120f;">Bu fikri konuşalım ↗</a>
+                <a class="button" id="idea-discuss" href="mailto:mehmeteminakkaya12@gmail.com?subject=Fikir%20Hakk%C4%B1nda%20Sohbet" style="background:#11120f;color:var(--paper);border-color:#11120f;">Bu fikri konuşalım ↗</a>
               </div>
               <span class="idea-count" id="idea-count">FİKİR 01 / 16</span>
             </div>
@@ -544,7 +544,7 @@
         <span class="section-kicker">04 / Temas kur</span>
         <h2>Bir fikrin varsa,<br><em>masaya getir.</em></h2>
         <div class="contact-links">
-          <a class="button" href="mailto:aktaha@gmail.com">E-posta gönder ↗</a>
+          <a class="button" href="mailto:mehmeteminakkaya12@gmail.com">E-posta gönder ↗</a>
           <a class="button" href="https://www.linkedin.com/in/mehmeteminakkaya/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
           <a class="button" href="https://github.com/mehmeteminakkaya" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
           <button class="button" id="copy-email" type="button">Adresi kopyala</button>
@@ -565,7 +565,7 @@
     </div>
     <article class="cv-sheet">
       <h2 id="cv-title">Mehmet Emin Akkaya</h2>
-      <p class="cv-contact">Sarıyer / İstanbul · +90 552 245 0003 · <a href="mailto:aktaha@gmail.com">aktaha@gmail.com</a><br>linkedin.com/in/mehmeteminakkaya · github.com/mehmeteminakkaya</p>
+      <p class="cv-contact">Sarıyer / İstanbul · +90 552 245 0003 · <a href="mailto:mehmeteminakkaya12@gmail.com">mehmeteminakkaya12@gmail.com</a><br>linkedin.com/in/mehmeteminakkaya · github.com/mehmeteminakkaya</p>
 
       <section class="cv-block">
         <h3>Hakkımda</h3>
@@ -721,7 +721,7 @@
           body.classList.toggle('chaos');
           playSound(1100, 'sawtooth', 0.12, 0.05);
           showToast(body.classList.contains('chaos') ? 'Sürpriz modu: AÇIK ✦' : 'Sürpriz modu kapandı.');
-        } else if (action === 'email') window.location.href = 'mailto:aktaha@gmail.com';
+        } else if (action === 'email') window.location.href = 'mailto:mehmeteminakkaya12@gmail.com';
         else document.querySelector('#' + action)?.scrollIntoView({ behavior: 'smooth' });
       }));
 
@@ -756,7 +756,7 @@
       const updateIdeaDiscussBtn = (text) => {
         const discussBtn = document.querySelector('#idea-discuss');
         if (discussBtn) {
-          discussBtn.href = `mailto:aktaha@gmail.com?subject=${encodeURIComponent('Fikir Sohbeti: ' + text.slice(0, 35) + '...')}&body=${encodeURIComponent('Merhaba Mehmet Emin,\n\nSitedeki şu fikir hakkında konuşmak istiyorum:\n"' + text + '"\n\n')}`;
+          discussBtn.href = `mailto:mehmeteminakkaya12@gmail.com?subject=${encodeURIComponent('Fikir Sohbeti: ' + text.slice(0, 35) + '...')}&body=${encodeURIComponent('Merhaba Mehmet Emin,\n\nSitedeki şu fikir hakkında konuşmak istiyorum:\n"' + text + '"\n\n')}`;
         }
       };
       updateIdeaDiscussBtn(ideas[0]);
@@ -866,9 +866,9 @@
 
               case 'contact':
               case 'email':
-                navigator.clipboard.writeText('aktaha@gmail.com');
-                appendTerminalRow(rawCmd, `📬 E-posta adresi (<strong>aktaha@gmail.com</strong>) panoya kopyalandı!`);
-                showToast('aktaha@gmail.com kopyalandı.');
+                navigator.clipboard.writeText('mehmeteminakkaya12@gmail.com');
+                appendTerminalRow(rawCmd, `📬 E-posta adresi (<strong>mehmeteminakkaya12@gmail.com</strong>) panoya kopyalandı!`);
+                showToast('mehmeteminakkaya12@gmail.com kopyalandı.');
                 break;
 
               case 'theme':
@@ -900,8 +900,8 @@
 
       // Copy Email Button
       document.querySelector('#copy-email').addEventListener('click', async () => {
-        try { await navigator.clipboard.writeText('aktaha@gmail.com'); showToast('E-posta adresi kopyalandı.'); }
-        catch { showToast('aktaha@gmail.com'); }
+        try { await navigator.clipboard.writeText('mehmeteminakkaya12@gmail.com'); showToast('E-posta adresi kopyalandı.'); }
+        catch { showToast('mehmeteminakkaya12@gmail.com'); }
       });
 
       // Share Portfolio (Web Share API)

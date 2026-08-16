@@ -12,7 +12,7 @@
   Yapay zekâ, mobil deneyimler ve algoritmik düşünceyi somut ürünlere dönüştüren bilgisayar mühendisliği portfolyosu.
 </p>
 
-[Canlı Portfolyoyu Ziyaret Et ↗](https://mehmeteminakkaya.com) • [LinkedIn](https://www.linkedin.com/in/mehmeteminakkaya/) • [E-Posta](mailto:aktaha@gmail.com)
+[Canlı Portfolyoyu Ziyaret Et ↗](https://mehmeteminakkaya.com) • [LinkedIn](https://www.linkedin.com/in/mehmeteminakkaya/) • [E-Posta](mailto:mehmeteminakkaya12@gmail.com)
 
 ---
 
@@ -82,7 +82,7 @@ Tarayıcınızda `http://localhost:3000` adresini açarak inceleyebilirsiniz.
 * 🌐 **Web Sitesi:** [mehmeteminakkaya.com](https://mehmeteminakkaya.com)
 * 💼 **LinkedIn:** [linkedin.com/in/mehmeteminakkaya](https://www.linkedin.com/in/mehmeteminakkaya/)
 * 🐙 **GitHub:** [@mehmeteminakkaya](https://github.com/mehmeteminakkaya)
-* 📬 **E-Posta:** [aktaha@gmail.com](mailto:aktaha@gmail.com)
+* 📬 **E-Posta:** [mehmeteminakkaya12@gmail.com](mailto:mehmeteminakkaya12@gmail.com)
 
 ---
 

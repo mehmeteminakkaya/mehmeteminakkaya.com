@@ -532,7 +532,7 @@
               <div class="terminal-row"><span class="prompt">$</span><span>whoami</span></div>
               <p class="terminal-output">Mehmet Emin Akkaya — Bilgisayar Mühendisliği &amp; AI Geliştiricisi</p>
               <div class="terminal-row"><span class="prompt">$</span><span>cat current_focus.txt</span></div>
-              <p class="terminal-output">AI × Mobile (Mİ-GO) × Edge IoT (Study Buddy) × B2B SaaS (Nexus AI)</p>
+              <p class="terminal-output">AI × Mobile (Mİ-GO) × Edge IoT (Study Buddy) × B2B SaaS (KobiFlow)</p>
               <p class="terminal-output highlight" style="font-size:.73rem;">💡 Komutları görmek için <strong>help</strong> yazıp Enter'a basabilirsiniz.</p>
             </div>
             <form id="terminal-form" class="cli-input-line" onsubmit="return false;">
@@ -611,7 +611,7 @@
         <h3>Projeler</h3>
         <div>
           <div class="cv-entry"><h4>Mİ-GO</h4><p>Öğrencilerin yetkinlikleri ve hedefleri doğrultusunda kariyer yolları, meslek önerileri ve uygulanabilir yol haritaları sunan Android (Kotlin & Material 3) mobil rehberi.</p></div>
-          <div class="cv-entry"><h4>Nexus AI (Google Hackathon Finalisti)</h4><p>KOBİ'lerin finansal verilerini Google Gemini OCR ile analiz eden, gelir-gider simülasyonu ve satış tahmini sunan FastAPI / React platformu.</p></div>
+          <div class="cv-entry"><h4>KobiFlow (Google Hackathon Finalisti)</h4><p>KOBİ'lerin çoklu depo stok takibini, B2B sipariş sevkiyatlarını ve tedarikçi faturalarının Google Gemini OCR ile işlenmesini sağlayan FastAPI / React SaaS platformu.</p></div>
           <div class="cv-entry"><h4>Study Buddy (ESP32-S3 & Llama 3.3 70B)</h4><p>Ortam sensörleri, OLED ekran ve sesli AI koçluğu içeren akıllı Pomodoro çalışma istasyonu ve sanal devre simülasyonu.</p></div>
           <div class="cv-entry"><h4>BenimHakkımda (AI Mülakat Simülatörü)</h4><p>Adayların teknik ve yetkinlik mülakatlarına sesli ve yazılı etkileşimle hazırlanmasını sağlayan canlı web platformu (Node.js, Gemini AI).</p></div>
           <div class="cv-entry"><h4>ToDoGemini</h4><p>FastAPI, SQLAlchemy, Alembic ve Docker ile containerize edilmiş; Gemini Pro ile görevleri alt adımlara bölen görev yönetim servisi.</p></div>
@@ -831,7 +831,7 @@
                   <strong>Kullanılabilir Komutlar:</strong><br>
                   • <code>projects</code> — Öne çıkan amiral gemisi projeleri listeler.<br>
                   • <code>migo</code> — Mİ-GO mobil kariyer pusulası detayları.<br>
-                  • <code>nexus</code> — Nexus AI B2B SaaS platformu mimarisi.<br>
+                  • <code>kobiflow</code> — KobiFlow KOBİ B2B SaaS platformu mimarisi.<br>
                   • <code>studybuddy</code> — Study Buddy ESP32 &amp; Llama 3.3 devresi.<br>
                   • <code>skills</code> — Yetkinlikler ve teknoloji yığını.<br>
                   • <code>cv</code> — Özgeçmiş modalını açar.<br>
@@ -848,7 +848,7 @@
                 appendTerminalRow(rawCmd, `
                   <strong>Amiral Gemisi Projeler:</strong><br>
                   1. 📱 <strong>Mİ-GO</strong>: Android (Kotlin), Material 3, AI Career Pathfinder [<a href="https://github.com/mehmeteminakkaya/Migo" target="_blank" style="color:var(--lab-accent)">GitHub ↗</a>]<br>
-                  2. 🤖 <strong>Nexus AI</strong>: Google Hackathon Finalisti, FastAPI, React, Gemini OCR [<a href="https://github.com/mehmeteminakkaya/Nexus-Proje" target="_blank" style="color:var(--lab-accent)">GitHub ↗</a>]<br>
+                  2. 🤖 <strong>KobiFlow</strong>: Google Hackathon Finalisti, FastAPI, React, Gemini OCR [<a href="https://kobiflow-app.vercel.app" target="_blank" style="color:var(--lab-accent)">Canlı Uygulama ↗</a>] [<a href="https://github.com/mehmeteminakkaya/Nexus-Proje" target="_blank" style="color:var(--lab-accent)">GitHub ↗</a>]<br>
                   3. ⚡ <strong>Study Buddy</strong>: XIAO ESP32-S3, Llama 3.3 70B, Wokwi IoT Devresi [<a href="https://github.com/mehmeteminakkaya/Study-Buddy-Simulation" target="_blank" style="color:var(--lab-accent)">GitHub ↗</a>]<br>
                   4. 🎙️ <strong>BenimHakkımda</strong>: AI Mülakat Simülatörü [<a href="https://benimhakkimda-aim-lakat.vercel.app/" target="_blank" style="color:var(--lab-accent)">Canlı Demo ↗</a>]<br>
                   5. 📋 <strong>ToDoGemini</strong>: FastAPI, Docker, Gemini Pro [<a href="https://github.com/mehmeteminakkaya/ToDo-List" target="_blank" style="color:var(--lab-accent)">GitHub ↗</a>]
@@ -859,8 +859,9 @@
                 appendTerminalRow(rawCmd, `📱 <strong>Mİ-GO — AI Destekli Kişisel Kariyer Pusulası</strong><br>• Mimari: Kotlin, Jetpack Compose / Material 3, Android Studio<br>• Amaç: Öğrencinin yetkinliklerini analiz edip kişiselleştirilmiş rota ve beceri hedefleri çizmek.<br>• Repo: <a href="https://github.com/mehmeteminakkaya/Migo" target="_blank" style="color:var(--lab-accent)">github.com/mehmeteminakkaya/Migo ↗</a>`);
                 break;
 
-              case 'nexus':
-                appendTerminalRow(rawCmd, `🤖 <strong>Nexus AI — KOBİ B2B Finans Asistanı</strong><br>• Başarı: Google Hackathon Finalisti<br>• Mimari: FastAPI (Asenkron Python), React / Vite, Google Gemini Flash OCR<br>• Repo: <a href="https://github.com/mehmeteminakkaya/Nexus-Proje" target="_blank" style="color:var(--lab-accent)">github.com/mehmeteminakkaya/Nexus-Proje ↗</a>`);
+              case 'kobiflow':
+              case 'nexus': // eski ad — kısayol korunuyor
+                appendTerminalRow(rawCmd, `🤖 <strong>KobiFlow — KOBİ Operasyon &amp; Envanter Yönetim Platformu</strong><br>• Başarı: Google Hackathon Finalisti<br>• Mimari: FastAPI (Asenkron Python), React / Vite, Google Gemini Flash OCR<br>• Kapsam: Çoklu depo stok takibi, B2B sipariş sevkiyatı, tedarikçi faturalarının OCR ile işlenmesi.<br>• Canlı: <a href="https://kobiflow-app.vercel.app" target="_blank" style="color:var(--lab-accent)">kobiflow-app.vercel.app ↗</a><br>• Repo: <a href="https://github.com/mehmeteminakkaya/Nexus-Proje" target="_blank" style="color:var(--lab-accent)">github.com/mehmeteminakkaya/Nexus-Proje ↗</a>`);
                 break;
 
               case 'studybuddy':

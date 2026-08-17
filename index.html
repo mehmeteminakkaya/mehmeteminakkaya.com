@@ -8,13 +8,22 @@
   <meta name="author" content="Mehmet Emin Akkaya">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#f2f0e9">
+  <!-- Gömülü SVG favicon — ayrı dosya isteği yapılmaz. -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2311130f'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%233157ff'/%3E%3C/svg%3E">
   <link rel="canonical" href="https://mehmeteminakkaya.com">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Mehmet Emin Akkaya — Kod, merak ve momentum.">
   <meta property="og:description" content="Fikirleri çalışan ürünlere dönüştüren bilgisayar mühendisliği öğrencisi.">
   <meta property="og:url" content="https://mehmeteminakkaya.com">
   <meta property="og:locale" content="tr_TR">
+  <meta property="og:image" content="https://mehmeteminakkaya.com/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:alt" content="Mehmet Emin Akkaya — Kod. Merak. Momentum.">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://mehmeteminakkaya.com/og.jpg">
+  <meta name="twitter:image:alt" content="Mehmet Emin Akkaya — Kod. Merak. Momentum.">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -22,7 +31,7 @@
     "name": "Mehmet Emin Akkaya",
     "url": "https://mehmeteminakkaya.com",
     "jobTitle": "Bilgisayar Mühendisliği Öğrencisi",
-    "email": "mailto:aktaha@gmail.com",
+    "email": "mailto:mehmeteminakkaya12@gmail.com",
     "address": {"@type":"PostalAddress","addressLocality":"İstanbul","addressCountry":"TR"},
     "affiliation": {"@type":"CollegeOrUniversity","name":"İstinye Üniversitesi"},
     "sameAs": ["https://github.com/mehmeteminakkaya","https://www.linkedin.com/in/mehmeteminakkaya/"],
@@ -201,7 +210,7 @@
     .card p { color: var(--muted); }
     .card .number { font: 400 .68rem var(--font-mono); color: var(--muted); }
     .project-main { grid-column: span 7; min-height: 500px; color: white; background: var(--blue); }
-    .project-main p { color: rgba(255,255,255,.72); max-width: 480px; }
+    .project-main p { color: rgba(255,255,255,.92); max-width: 480px; }
     .project-main h3 { max-width: 580px; font: 400 clamp(3rem,6vw,6rem)/.88 var(--font-serif); }
     .project-main::after { content: "Mİ-GO"; position: absolute; right: -12px; bottom: -62px; font-size: clamp(7rem,16vw,14rem); font-weight: 800; line-height: 1; color: rgba(255,255,255,.11); letter-spacing: -.1em; pointer-events: none; }
     .project-jam { grid-column: span 5; min-height: 500px; background: var(--acid); color: #11120f; }
@@ -215,6 +224,13 @@
     .card-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
     .tag { padding: 7px 11px; border: 1px solid currentColor; border-radius: 999px; font: 400 .68rem var(--font-mono); opacity: .75; }
 
+    /* Vurgu kartlarında --muted ve %75 opaklık WCAG AA'yı geçmiyor
+       (mavi zeminde 1.04:1'e kadar düşüyordu); her zemine okunur ton verilir. */
+    .project-main .number { color: rgba(255,255,255,.94); }
+    .project-main .tag { opacity: .95; }
+    .project-jam .number { color: #4f513f; }
+    .mini-card.accent .number { color: #3d1f16; }
+
     .story { border-top: 1px solid var(--line); }
     .timeline { margin-top: 30px; }
     .timeline-item { display: grid; grid-template-columns: 160px 1fr auto; gap: 30px; align-items: start; padding: 34px 0; border-bottom: 1px solid var(--line); transition: padding .3s, color .3s; }
@@ -224,24 +240,29 @@
     .timeline-item p { max-width: 650px; color: var(--muted); }
     .timeline-mark { width: 54px; aspect-ratio: 1; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; font: 400 .75rem var(--font-mono); }
 
-    .lab { background: var(--ink); color: var(--paper); }
-    .lab .section-kicker { color: var(--acid); }
+    /* Lab bölümü sayfayı tersine çevirir: gündüzde koyu, gecede açık zemin.
+       Asit yeşili yalnızca koyu zeminde okunur, bu yüzden accent token'a bağlanır. */
+    .lab { background: var(--ink); color: var(--paper); --lab-accent: var(--acid); }
+    [data-theme="night"] .lab { --lab-accent: #4f6112; }
+    .lab .section-kicker { color: var(--lab-accent); }
     .lab-grid { display: grid; grid-template-columns: .78fr 1.22fr; gap: 18px; }
     .console, .idea-machine { min-height: 430px; border: 1px solid color-mix(in srgb, var(--paper) 20%, transparent); border-radius: var(--radius); background: color-mix(in srgb, var(--paper) 5%, transparent); }
     .console { padding: 26px; font: 400 .78rem/1.8 var(--font-mono); display: flex; flex-direction: column; overflow-y: auto; max-height: 520px; }
-    .console-top { display: flex; justify-content: space-between; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid color-mix(in srgb, var(--paper) 18%, transparent); color: color-mix(in srgb, var(--paper) 55%, transparent); flex-shrink: 0; }
+    .console-top { display: flex; justify-content: space-between; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid color-mix(in srgb, var(--paper) 18%, transparent); color: color-mix(in srgb, var(--paper) 70%, transparent); flex-shrink: 0; }
     .terminal-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
     .prompt { color: var(--acid); font-weight: 700; flex-shrink: 0; }
     .terminal-output { color: color-mix(in srgb, var(--paper) 75%, transparent); margin: 0 0 10px 0; word-break: break-word; }
-    .terminal-output.highlight { color: var(--acid); }
-    .terminal-cursor { display: inline-block; width: 8px; height: 15px; vertical-align: -2px; background: var(--acid); animation: blink 1s steps(1) infinite; }
+    .terminal-output.highlight { color: var(--lab-accent); }
+    .terminal-cursor { display: inline-block; width: 8px; height: 15px; vertical-align: -2px; background: var(--lab-accent); animation: blink 1s steps(1) infinite; }
     .cli-input-line { display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 10px; border-top: 1px dashed color-mix(in srgb, var(--paper) 20%, transparent); }
     .cli-input { flex: 1; background: transparent; border: none; outline: none; color: var(--paper); font: inherit; padding: 0; }
-    .cli-input::placeholder { color: color-mix(in srgb, var(--paper) 35%, transparent); }
+    .cli-input::placeholder { color: color-mix(in srgb, var(--paper) 55%, transparent); }
     @keyframes blink { 50% { opacity: 0; } }
     .idea-machine { display: grid; align-content: space-between; padding: 38px; background: var(--acid); color: #11120f; }
     .idea-machine p { max-width: 600px; margin: 0; font: 400 clamp(2.1rem,4.5vw,4.5rem)/.95 var(--font-serif); letter-spacing: -.035em; }
-    .idea-machine .button { width: max-content; }
+    /* Fikir makinesinin zemini her iki temada da asit yeşili kalır,
+       bu yüzden butonları tema token'ına değil sabit koyuya bağlanır. */
+    .idea-machine .button { width: max-content; color: #11120f; border-color: #11120f; }
     .idea-meta { display: flex; justify-content: space-between; align-items: end; gap: 20px; }
     .idea-count { font: 400 .7rem var(--font-mono); }
 
@@ -395,7 +416,7 @@
             <span class="status"><span class="status-dot"></span>Yeni fikirlere açık</span>
             <span class="time" id="istanbul-time">İstanbul · --:--</span>
             <span class="mono" style="font-size:.68rem;color:var(--muted)">TRT / UTC+3</span>
-            <div style="margin-top:12px;font-size:.72rem;display:flex;align-items:center;gap:7px;color:var(--muted);font-family:var(--font-mono);"><span class="status-dot" style="width:7px;height:7px;background:#3b82f6;box-shadow:0 0 0 4px rgba(59,130,246,.15);"></span><span>Aktif: <strong style="color:var(--ink)">Mİ-GO &amp; Nexus AI</strong></span></div>
+            <div style="margin-top:12px;font-size:.72rem;display:flex;align-items:center;gap:7px;color:var(--muted);font-family:var(--font-mono);"><span class="status-dot" style="width:7px;height:7px;background:#3b82f6;box-shadow:0 0 0 4px rgba(59,130,246,.15);"></span><span>Aktif: <strong style="color:var(--ink)">Mİ-GO &amp; BrewHive AI</strong></span></div>
           </aside>
         </div>
       </div>
@@ -427,15 +448,16 @@
           </div>
         </article>
         <article class="card project-jam reveal">
-          <span class="number">02 · GOOGLE HACKATHON FİNALİSTİ · B2B SAAS</span>
-          <h3>Nexus AI, KOBİ'lerin finansal kararlarını otonomlaştırıyor.</h3>
-          <p>Google Gemini OCR ile fiş/fatura analizi, geçmiş veriden gelir-gider simülasyonu ve anlık nakit akışı tahmini sunan çok katmanlı platform.</p>
+          <span class="number">02 · GOOGLE HACKATHON FİNALİSTİ · KAFE &amp; KOBİ SAAS</span>
+          <h3>BrewHive AI, kahve zinciri ve kafe operasyonlarını otonomlaştırıyor.</h3>
+          <p>Kadıköy, Beşiktaş ve Şişli şubeleri için anlık ciro akışı, toptancı fatura OCR'ı, stok tükenme tahmini ve doğal dil AI Co-Pilot platformu.</p>
           <div class="card-tags" style="margin-top:16px;">
             <span class="tag">FastAPI</span>
             <span class="tag">React / Vite</span>
-            <span class="tag">Gemini API</span>
-            <span class="tag">OCR</span>
-            <a href="https://github.com/mehmeteminakkaya/Nexus-Proje" target="_blank" rel="noopener noreferrer" style="margin-left:auto;color:inherit;text-decoration:none;font-weight:600;">GitHub ↗</a>
+            <span class="tag">Gemini Flash OCR</span>
+            <span class="tag">NVIDIA NIM</span>
+            <a href="https://brewhive-ai.vercel.app" target="_blank" rel="noopener noreferrer" style="margin-left:auto;color:inherit;text-decoration:none;font-weight:600;margin-right:12px;">Canlı Demo ↗</a>
+            <a href="https://github.com/mehmeteminakkaya/Nexus-Proje" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;font-weight:600;">GitHub ↗</a>
           </div>
         </article>
         <article class="card mini-card reveal">
@@ -624,7 +646,7 @@
     </div>
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     (() => {
       const root = document.documentElement;
       const body = document.body;

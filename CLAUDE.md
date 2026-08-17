@@ -14,10 +14,13 @@ Deliberate constraint: **the page makes zero external network requests.** Fonts 
 
 ```bash
 npx serve .                 # or: python -m http.server 3000
-vercel --prod               # deploy (Vercel CLI is not installed; npm i -g vercel)
+git push origin main        # this IS the deploy — see below
+vercel dns ls mehmeteminakkaya.com   # CLI installed & logged in as mehmeteminakkaya
 ```
 
 There is nothing to build, lint, or test. "Verifying a change" means opening the page and exercising the affected control.
+
+**Deploys are automatic.** The Vercel project is GitHub-connected, so every push to `main` ships straight to production — there is no staging step and no `vercel --prod` needed. Note that deploys triggered from a local agent can carry `gitDirty: 1`, i.e. uncommitted working-tree files reach production without being versioned; anything that must survive the *next* clean deploy has to be committed.
 
 ## Reading index.html
 

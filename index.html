@@ -154,13 +154,50 @@
     .icon-button:hover, .command-button:hover { transform: translateY(-2px); border-color: var(--blue); }
     .icon-button { width: 40px; border-radius: 50%; }
     .command-button { border-radius: 999px; padding: 0 13px; font: 500 .7rem var(--font-mono); }
+    .cmd-short { display: none; }
+
+    /* Mobil sekme barı: 900px altında üstteki nav bağlantıları gizlendiği için
+       bölümlere atlamanın tek yolu buydu, yoksa sayfa yalnızca kaydırılabiliyor. */
+    .tabbar { display: none; }
+    @media (max-width: 900px) {
+      .tabbar {
+        position: fixed;
+        inset: auto 0 0 0;
+        z-index: 60;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border-top: 1px solid var(--line);
+        background: color-mix(in srgb, var(--paper) 92%, transparent);
+        backdrop-filter: blur(18px);
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+      .tabbar a {
+        display: grid;
+        gap: 3px;
+        place-items: center;
+        min-height: 58px;
+        padding: 8px 4px;
+        color: var(--muted);
+        text-decoration: none;
+        font: 500 .66rem var(--font-mono);
+        text-transform: uppercase;
+        letter-spacing: .06em;
+      }
+      .tabbar a span { font-size: 1.05rem; line-height: 1; }
+      .tabbar a[aria-current="true"] { color: var(--blue); }
+      /* Sekme barı içeriğin son satırını kapatmasın. */
+      body { padding-bottom: 62px; }
+    }
+    @media print { .tabbar { display: none !important; } body { padding-bottom: 0 !important; } }
 
     .hero { min-height: calc(100svh - 73px); display: grid; align-items: center; padding: 72px 0 46px; }
     .eyebrow { display: flex; gap: 12px; align-items: center; font: 500 .75rem var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
     .eyebrow::before { content: ""; width: 42px; height: 2px; background: var(--orange); }
     .hero h1 { margin: 26px 0 30px; max-width: 1100px; font-size: clamp(4.1rem, 10.5vw, 9.8rem); font-weight: 600; letter-spacing: -.085em; line-height: .82; }
     .hero h1 .soft { font-weight: 400; font-style: italic; color: var(--blue); }
-    .hero-bottom { display: grid; grid-template-columns: 1.45fr .8fr; gap: 60px; align-items: end; }
+    /* Durum kutusu h1'in yanına, göz hattına alınır; yoksa sağ üst çeyrek boş kalıyordu. */
+    .hero-grid { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 56px; align-items: start; }
+    .hero-lead { min-width: 0; }
     .hero-copy { max-width: 680px; font-size: clamp(1.08rem, 1.8vw, 1.45rem); letter-spacing: -.025em; }
     .hero-copy strong { color: var(--blue); }
     .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
@@ -185,7 +222,7 @@
     .button.primary { color: white; background: var(--blue); border-color: var(--blue); }
     .button.primary:hover { box-shadow: 5px 6px 0 var(--acid); }
     .button .arrow { font-size: 1.25rem; }
-    .hero-note { border-left: 1px solid var(--line); padding-left: 26px; }
+    .hero-note { border-left: 1px solid var(--line); padding-left: 26px; padding-top: 6px; width: max-content; max-width: 320px; }
     .hero-note .time { display: block; margin-top: 8px; font: 400 clamp(1.5rem,3vw,2.6rem) var(--font-serif); }
     .status { display: inline-flex; gap: 8px; align-items: center; color: var(--muted); font: 400 .72rem var(--font-mono); }
     .status-dot { width: 9px; height: 9px; border-radius: 50%; background: #36bf69; box-shadow: 0 0 0 5px rgba(54,191,105,.12); animation: pulse 2s infinite; }
@@ -213,8 +250,12 @@
     .project-main p { color: rgba(255,255,255,.92); max-width: 480px; }
     .project-main h3 { max-width: 580px; font: 400 clamp(3rem,6vw,6rem)/.88 var(--font-serif); }
     .project-main::after { content: "Mİ-GO"; position: absolute; right: -12px; bottom: -62px; font-size: clamp(7rem,16vw,14rem); font-weight: 800; line-height: 1; color: rgba(255,255,255,.11); letter-spacing: -.1em; pointer-events: none; }
-    .project-jam { grid-column: span 5; min-height: 500px; background: var(--acid); color: #11120f; }
-    .project-jam p { color: #4f513f; }
+    /* İki amiral gemisi kartı aynı tipografik sistemi paylaşır; serif başlık
+       "flagship" işareti, sadece Mİ-GO'ya verilince iki ayrı tasarım gibi duruyordu. */
+    .project-jam { grid-column: span 5; min-height: 500px; display: flex; flex-direction: column; background: var(--acid); color: #11120f; }
+    .project-jam h3 { max-width: 460px; font: 400 clamp(2.1rem,3.2vw,3.3rem)/.95 var(--font-serif); letter-spacing: -.03em; }
+    .project-jam p { color: #4f513f; max-width: 460px; }
+    .project-jam::after { content: "KOBİFLOW"; position: absolute; right: -8px; bottom: -34px; font-size: clamp(4rem,8vw,7rem); font-weight: 800; line-height: 1; color: rgba(17,18,15,.09); letter-spacing: -.08em; pointer-events: none; }
     .pixel-grid { display: grid; grid-template-columns: repeat(5, 18px); gap: 7px; position: absolute; right: 32px; bottom: 34px; transform: rotate(9deg); }
     .pixel-grid i { width: 18px; aspect-ratio: 1; background: #11120f; animation: pixel 2.2s ease-in-out infinite alternate; animation-delay: calc(var(--i) * .08s); }
     @keyframes pixel { to { transform: translateY(-14px); background: var(--orange); } }
@@ -245,7 +286,8 @@
     .lab { background: var(--ink); color: var(--paper); --lab-accent: var(--acid); }
     [data-theme="night"] .lab { --lab-accent: #4f6112; }
     .lab .section-kicker { color: var(--lab-accent); }
-    .lab-grid { display: grid; grid-template-columns: .78fr 1.22fr; gap: 18px; }
+    /* Terminal sitenin en özgün parçası; daha önce dar yarıyı alıp yarı boş duruyordu. */
+    .lab-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 18px; }
     .console, .idea-machine { min-height: 430px; border: 1px solid color-mix(in srgb, var(--paper) 20%, transparent); border-radius: var(--radius); background: color-mix(in srgb, var(--paper) 5%, transparent); }
     .console { padding: 26px; font: 400 .78rem/1.8 var(--font-mono); display: flex; flex-direction: column; overflow-y: auto; max-height: 520px; }
     .console-top { display: flex; justify-content: space-between; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid color-mix(in srgb, var(--paper) 18%, transparent); color: color-mix(in srgb, var(--paper) 70%, transparent); flex-shrink: 0; }
@@ -263,20 +305,21 @@
     /* Fikir makinesinin zemini her iki temada da asit yeşili kalır,
        bu yüzden butonları tema token'ına değil sabit koyuya bağlanır. */
     .idea-machine .button { width: max-content; color: #11120f; border-color: #11120f; }
-    .idea-meta { display: flex; justify-content: space-between; align-items: end; gap: 20px; }
-    .idea-count { font: 400 .7rem var(--font-mono); }
+    /* Lab oranları değişince panel daraldı; sayaç dar alanda alt satıra iner,
+       iki satıra bölünmez. */
+    .idea-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 20px; }
+    .idea-count { flex-shrink: 0; white-space: nowrap; font: 400 .7rem var(--font-mono); }
 
     .skills-cloud { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 48px; }
     .skill-pill { padding: 13px 18px; border: 1px solid color-mix(in srgb, var(--paper) 25%, transparent); border-radius: 999px; color: color-mix(in srgb, var(--paper) 70%, transparent); background: transparent; cursor: default; font: 400 .74rem var(--font-mono); transition: background .25s, color .25s, transform .25s; }
     .skill-pill:hover { color: #11120f; background: var(--paper); transform: rotate(-2deg) translateY(-3px); }
 
     .cert-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 50px; }
+    /* Sertifikalar link değil, bu yüzden tıklanabilirlik ima eden ↗ oku kaldırıldı. */
     .cert { min-height: 190px; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; border: 1px solid var(--line); border-radius: 20px; }
-    .cert:hover .cert-arrow { transform: rotate(45deg); }
     .cert-provider { color: var(--blue); font: 500 .68rem var(--font-mono); text-transform: uppercase; }
     .cert h3 { margin: 20px 0; font-size: 1rem; letter-spacing: -.025em; }
     .cert-foot { display: flex; justify-content: space-between; color: var(--muted); font: 400 .68rem var(--font-mono); }
-    .cert-arrow { transition: transform .25s; }
 
     .contact { padding-bottom: 40px; }
     .contact-panel { position: relative; padding: clamp(36px,7vw,90px); border-radius: 42px; overflow: hidden; color: white; background: var(--blue); }
@@ -287,6 +330,13 @@
     .contact-links { position: relative; display: flex; flex-wrap: wrap; gap: 10px; }
     .contact-links .button { color: white; border-color: rgba(255,255,255,.65); }
     .contact-links .button:hover { color: #11120f; background: var(--acid); border-color: var(--acid); box-shadow: 5px 6px 0 #11120f; }
+    /* Hiyerarşi: birincil aksiyon e-posta. Paylaşma en sessiz olan, çünkü
+       en parlak buton olduğunda site sahibi için en az değerli işi öne çıkarıyordu. */
+    .contact-links .contact-primary { color: #11120f; background: var(--acid); border-color: var(--acid); }
+    .contact-links .contact-primary:hover { box-shadow: 5px 6px 0 #11120f; }
+    /* Vurguyu düşürmek kenarlık ve font ağırlığıyla yapılır; metin opaklığını
+       kısmak mavi zeminde 3.51:1'e düşürüp okunurluğu bozuyordu. */
+    .contact-links .contact-quiet { border-color: rgba(255,255,255,.3); color: rgba(255,255,255,.92); font-weight: 500; }
 
     footer { padding: 24px 0 30px; }
     .footer-inner { display: flex; justify-content: space-between; gap: 20px; align-items: center; color: var(--muted); font: 400 .68rem var(--font-mono); }
@@ -300,8 +350,12 @@
     .command-input { width: 100%; padding: 22px; border: 0; border-bottom: 1px solid rgba(255,255,255,.12); outline: 0; color: white; background: transparent; font: 400 1rem var(--font-mono); }
     .command-list { list-style: none; margin: 0; padding: 10px; }
     .command-list button { width: 100%; display: flex; justify-content: space-between; padding: 14px; border: 0; border-radius: 12px; color: #d9dacd; background: transparent; cursor: pointer; text-align: left; }
-    .command-list button:hover, .command-list button:focus { color: #11120f; background: var(--acid); outline: none; }
-    .command-list small { opacity: .62; font-family: var(--font-mono); }
+    .command-list button:hover, .command-list button:focus,
+    .command-list li.is-active button { color: #11120f; background: var(--acid); outline: none; }
+    /* İpucu artık gerçek bir söz veriyor: yalnızca seçili satırda ↵ görünür. */
+    .command-list small { opacity: 0; font-family: var(--font-mono); }
+    .command-list li.is-active small { opacity: .75; }
+    .command-hint { display: flex; gap: 14px; padding: 10px 18px 14px; border-top: 1px solid rgba(255,255,255,.12); color: rgba(217,218,205,.55); font: 400 .64rem var(--font-mono); }
 
     .cv-dialog { width: min(850px, calc(100% - 24px)); max-height: 90svh; padding: 0; border: 1px solid var(--line); border-radius: 24px; color: var(--ink); background: var(--card); box-shadow: 0 32px 120px rgba(0,0,0,.35); }
     .cv-dialog::backdrop { background: rgba(6,7,5,.7); backdrop-filter: blur(8px); }
@@ -328,14 +382,14 @@
 
     /* İçerik JavaScript veya Cloudflare optimizasyonu gecikse bile daima görünür. */
     .reveal { opacity: 1; transform: none; }
-    #top { scroll-margin-top: 72px; }
+    #top, #isler, #hikaye, #lab, #iletisim { scroll-margin-top: 84px; }
 
     @media (max-width: 900px) {
       .nav { grid-template-columns: 1fr auto; }
       .nav-links { display: none; }
       .hero { min-height: auto; }
-      .hero-bottom, .section-head, .lab-grid { grid-template-columns: 1fr; }
-      .hero-note { margin-top: 15px; }
+      .hero-grid, .section-head, .lab-grid { grid-template-columns: 1fr; }
+      .hero-note { margin-top: 15px; padding-top: 0; width: auto; max-width: none; }
       .project-main, .project-jam { grid-column: span 12; min-height: 430px; }
       .mini-card { grid-column: span 6; }
       .timeline-item { grid-template-columns: 110px 1fr; }
@@ -347,7 +401,11 @@
     @media (max-width: 620px) {
       .wrap { width: min(100% - 24px, 1240px); }
       .nav { min-height: 64px; }
-      .command-button { display: none; }
+      /* ⌘K butonu mobilde de kalır ama dokunmatikte klavye kısayolu anlamsız,
+         etiket "⌕ Ara"ya döner. */
+      .command-button { padding: 0 12px; }
+      .cmd-long { display: none; }
+      .cmd-short { display: inline; }
       .hero { padding-top: 54px; }
       .hero h1 { font-size: clamp(3.35rem,17vw,4.35rem); overflow-wrap: anywhere; }
       .hero h1 .soft { display: block; }
@@ -393,7 +451,7 @@
       </div>
       <div class="nav-actions">
         <button class="icon-button" id="sound-toggle" type="button" aria-label="Ses efektlerini aç/kapat" title="Ses Açık/Kapalı">🔊</button>
-        <button class="command-button" id="open-command" type="button" aria-label="Komut menüsünü aç">⌘ / Ctrl K</button>
+        <button class="command-button" id="open-command" type="button"><span class="cmd-long">⌘ / Ctrl K</span><span class="cmd-short">⌕ Ara</span><span class="sr-only">— komut menüsünü aç</span></button>
         <button class="icon-button" id="theme-toggle" type="button" aria-label="Renk temasını değiştir">◐</button>
       </div>
     </nav>
@@ -401,24 +459,22 @@
 
   <main id="top">
     <section class="hero wrap">
-      <div>
-        <div class="eyebrow reveal">İstanbul'dan dünyaya açık bir üretici</div>
-        <h1 class="reveal">Kod.<br><span class="serif soft">Merak.</span> Momentum.</h1>
-        <div class="hero-bottom reveal">
-          <div>
-            <p class="hero-copy">Ben <strong>Mehmet Emin.</strong> Yapay zekâyı, mobil deneyimleri ve algoritmik düşünceyi insanların işine yarayan ürünlere dönüştüren bir bilgisayar mühendisliği öğrencisiyim.</p>
-            <div class="hero-cta">
-              <a class="button primary" href="#isler">Ürettiklerimi gör <span class="arrow">↘</span></a>
-              <button class="button" id="cv-open" type="button">CV'yi aç <span class="arrow">↗</span></button>
-            </div>
+      <div class="hero-grid">
+        <div class="hero-lead reveal">
+          <div class="eyebrow">İstanbul'dan dünyaya açık bir üretici</div>
+          <h1>Kod.<br><span class="serif soft">Merak.</span> Momentum.</h1>
+          <p class="hero-copy">Ben <strong>Mehmet Emin.</strong> Yapay zekâyı, mobil deneyimleri ve algoritmik düşünceyi insanların işine yarayan ürünlere dönüştüren bir bilgisayar mühendisliği öğrencisiyim.</p>
+          <div class="hero-cta">
+            <a class="button primary" href="#isler">Ürettiklerimi gör <span class="arrow">↘</span></a>
+            <button class="button" id="cv-open" type="button">CV'yi aç <span class="arrow">↗</span></button>
           </div>
-          <aside class="hero-note" aria-label="Müsaitlik durumu">
-            <span class="status"><span class="status-dot"></span>Yeni fikirlere açık</span>
-            <span class="time" id="istanbul-time">İstanbul · --:--</span>
-            <span class="mono" style="font-size:.68rem;color:var(--muted)">TRT / UTC+3</span>
-            <div style="margin-top:12px;font-size:.72rem;display:flex;align-items:center;gap:7px;color:var(--muted);font-family:var(--font-mono);"><span class="status-dot" style="width:7px;height:7px;background:#3b82f6;box-shadow:0 0 0 4px rgba(59,130,246,.15);"></span><span>Aktif: <strong style="color:var(--ink)">Mİ-GO &amp; KobiFlow</strong></span></div>
-          </aside>
         </div>
+        <aside class="hero-note reveal" aria-label="Müsaitlik durumu">
+          <span class="status"><span class="status-dot"></span>Yeni fikirlere açık</span>
+          <span class="time" id="istanbul-time">İstanbul · --:--</span>
+          <span class="mono" style="font-size:.68rem;color:var(--muted)">TRT / UTC+3</span>
+          <div style="margin-top:12px;font-size:.72rem;display:flex;align-items:center;gap:7px;color:var(--muted);font-family:var(--font-mono);"><span class="status-dot" style="width:7px;height:7px;background:#3b82f6;box-shadow:0 0 0 4px rgba(59,130,246,.15);"></span><span>Aktif: <strong style="color:var(--ink)">Mİ-GO &amp; KobiFlow</strong></span></div>
+        </aside>
       </div>
     </section>
 
@@ -451,7 +507,7 @@
           <span class="number">02 · GOOGLE HACKATHON FİNALİSTİ · KOBİ B2B SAAS</span>
           <h3>KobiFlow — KOBİ Operasyon &amp; Envanter Yönetim Platformu</h3>
           <p>KOBİ'lerin çoklu depo stok takibini, B2B sipariş sevkiyatlarını ve tedarikçi faturalarının OCR ile işlenmesini sağlayan modern SaaS platformu.</p>
-          <div class="card-tags" style="margin-top:16px;">
+          <div class="card-tags" style="margin-top:auto;position:relative;">
             <span class="tag">FastAPI</span>
             <span class="tag">React / Vite</span>
             <span class="tag">Gemini OCR</span>
@@ -508,10 +564,10 @@
         </div>
 
         <div class="cert-grid reveal" aria-label="Sertifikalar">
-          <article class="cert"><span class="cert-provider">Google · 2026</span><h3>Introduction to Artificial Intelligence</h3><div class="cert-foot"><span>Yapay zekâ</span><span class="cert-arrow">↗</span></div></article>
-          <article class="cert"><span class="cert-provider">Google · 2026</span><h3>Project Initiation: Starting a Successful Project</h3><div class="cert-foot"><span>Proje yönetimi</span><span class="cert-arrow">↗</span></div></article>
-          <article class="cert"><span class="cert-provider">Google · 2026</span><h3>Project Management Foundations</h3><div class="cert-foot"><span>Temeller</span><span class="cert-arrow">↗</span></div></article>
-          <article class="cert"><span class="cert-provider">Globally Check · 2025</span><h3>Cloud and DevOps MiniCamp</h3><div class="cert-foot"><span>Cloud / DevOps</span><span class="cert-arrow">↗</span></div></article>
+          <article class="cert"><span class="cert-provider">Google · 2026</span><h3>Introduction to Artificial Intelligence</h3><div class="cert-foot"><span>Yapay zekâ</span></div></article>
+          <article class="cert"><span class="cert-provider">Google · 2026</span><h3>Project Initiation: Starting a Successful Project</h3><div class="cert-foot"><span>Proje yönetimi</span></div></article>
+          <article class="cert"><span class="cert-provider">Google · 2026</span><h3>Project Management Foundations</h3><div class="cert-foot"><span>Temeller</span></div></article>
+          <article class="cert"><span class="cert-provider">Globally Check · 2025</span><h3>Cloud and DevOps MiniCamp</h3><div class="cert-foot"><span>Cloud / DevOps</span></div></article>
         </div>
       </div>
     </section>
@@ -566,11 +622,11 @@
         <span class="section-kicker">04 / Temas kur</span>
         <h2>Bir fikrin varsa,<br><em>masaya getir.</em></h2>
         <div class="contact-links">
-          <a class="button" href="mailto:mehmeteminakkaya12@gmail.com">E-posta gönder ↗</a>
+          <a class="button contact-primary" href="mailto:mehmeteminakkaya12@gmail.com">E-posta gönder ↗</a>
           <a class="button" href="https://www.linkedin.com/in/mehmeteminakkaya/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
           <a class="button" href="https://github.com/mehmeteminakkaya" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
           <button class="button" id="copy-email" type="button">Adresi kopyala</button>
-          <button class="button" id="share-portfolio" type="button" style="background:var(--acid);color:#11120f;border-color:var(--acid);">Portfolyoyu Paylaş 🔗</button>
+          <button class="button contact-quiet" id="share-portfolio" type="button">Paylaş 🔗</button>
         </div>
       </div>
     </section>
@@ -580,6 +636,13 @@
     <div class="footer-inner wrap"><span>© <span id="year">2026</span> MEHMET EMİN AKKAYA</span><span>TASARLANDI + KODLANDI + MERAK EDİLDİ</span></div>
   </footer>
 
+  <nav class="tabbar" id="tabbar" aria-label="Bölüm navigasyonu">
+    <a href="#isler"><span aria-hidden="true">◆</span>İşler</a>
+    <a href="#hikaye"><span aria-hidden="true">▲</span>Hikâye</a>
+    <a href="#lab"><span aria-hidden="true">❯</span>Lab</a>
+    <a href="#iletisim"><span aria-hidden="true">✦</span>İletişim</a>
+  </nav>
+
   <dialog class="cv-dialog" id="cv-dialog" aria-labelledby="cv-title">
     <div class="cv-toolbar">
       <strong>Özgeçmiş · Tek dosyaya gömülü</strong>
@@ -587,7 +650,9 @@
     </div>
     <article class="cv-sheet">
       <h2 id="cv-title">Mehmet Emin Akkaya</h2>
-      <p class="cv-contact">Sarıyer / İstanbul · +90 552 245 0003 · <a href="mailto:mehmeteminakkaya12@gmail.com">mehmeteminakkaya12@gmail.com</a><br>linkedin.com/in/mehmeteminakkaya · github.com/mehmeteminakkaya</p>
+      <!-- Numara parçalı tutulup çalışma anında birleştirilir: sayfa kaynağında
+           tek parça telefon dizgisi yok, naif scraper'lar boş döner. -->
+      <p class="cv-contact">Sarıyer / İstanbul · <span id="cv-phone" data-cc="+90" data-n1="552" data-n2="245" data-n3="0003">+90 5·· ··· ····</span> · <a href="mailto:mehmeteminakkaya12@gmail.com">mehmeteminakkaya12@gmail.com</a><br>linkedin.com/in/mehmeteminakkaya · github.com/mehmeteminakkaya</p>
 
       <section class="cv-block">
         <h3>Hakkımda</h3>
@@ -637,12 +702,16 @@
       <label class="sr-only" id="command-title" for="command-input">Hızlı komutlar</label>
       <input class="command-input" id="command-input" type="text" placeholder="Bir yere git veya bir şey yap…" autocomplete="off">
       <ul class="command-list">
-        <li><button type="button" data-action="isler"><span>Seçilmiş işlere git</span><small>01</small></button></li>
-        <li><button type="button" data-action="lab"><span>Deney alanını aç</span><small>02</small></button></li>
-        <li><button type="button" data-action="theme"><span>Temayı değiştir</span><small>T</small></button></li>
-        <li><button type="button" data-action="chaos"><span>Sürpriz modunu çalıştır</span><small>!</small></button></li>
-        <li><button type="button" data-action="email"><span>Mehmet'e e-posta gönder</span><small>↗</small></button></li>
+        <li><button type="button" data-action="isler"><span>Seçilmiş işlere git</span><small>↵</small></button></li>
+        <li><button type="button" data-action="hikaye"><span>Hikâyeye git</span><small>↵</small></button></li>
+        <li><button type="button" data-action="lab"><span>Deney alanını aç</span><small>↵</small></button></li>
+        <li><button type="button" data-action="iletisim"><span>İletişime git</span><small>↵</small></button></li>
+        <li><button type="button" data-action="cv"><span>CV'yi aç</span><small>↵</small></button></li>
+        <li><button type="button" data-action="theme"><span>Temayı değiştir</span><small>↵</small></button></li>
+        <li><button type="button" data-action="chaos"><span>Sürpriz modunu çalıştır</span><small>↵</small></button></li>
+        <li><button type="button" data-action="email"><span>Mehmet'e e-posta gönder</span><small>↵</small></button></li>
       </ul>
+      <div class="command-hint" aria-hidden="true"><span>↑ ↓ gezin</span><span>↵ seç</span><span>esc kapat</span></div>
     </div>
   </div>
 
@@ -714,9 +783,31 @@
       if (savedTheme) setTheme(savedTheme);
       themeButton.addEventListener('click', () => setTheme(root.dataset.theme === 'night' ? 'day' : 'night'));
 
+      // Komut paleti klavye gezinmesi: ⌘K'yı açıp fareye geçmek zorunda kalmamak için.
+      const paletteRows = [...palette.querySelectorAll('.command-list li')];
+      let activeRow = 0;
+
+      const visibleRows = () => paletteRows.filter(row => !row.hidden);
+      const paintActiveRow = () => {
+        const rows = visibleRows();
+        if (!rows.length) return;
+        activeRow = (activeRow + rows.length) % rows.length;
+        paletteRows.forEach(row => row.classList.remove('is-active'));
+        rows[activeRow].classList.add('is-active');
+        rows[activeRow].scrollIntoView({ block: 'nearest' });
+      };
+
+      paletteRows.forEach(row => row.addEventListener('mousemove', () => {
+        const index = visibleRows().indexOf(row);
+        if (index !== -1 && index !== activeRow) { activeRow = index; paintActiveRow(); }
+      }));
+
       const openPalette = () => {
         palette.classList.add('open');
         commandInput.value = '';
+        paletteRows.forEach(row => { row.hidden = false; });
+        activeRow = 0;
+        paintActiveRow();
         playSound(700, 'sine', 0.04);
         setTimeout(() => commandInput.focus(), 20);
       };
@@ -726,6 +817,18 @@
       };
       document.querySelector('#open-command').addEventListener('click', openPalette);
       palette.addEventListener('click', (event) => { if (event.target === palette) closePalette(); });
+
+      commandInput.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+          event.preventDefault();
+          activeRow += event.key === 'ArrowDown' ? 1 : -1;
+          paintActiveRow();
+          playSound(1000, 'sine', 0.02, 0.012);
+        } else if (event.key === 'Enter') {
+          event.preventDefault();
+          visibleRows()[activeRow]?.querySelector('button')?.click();
+        }
+      });
 
       document.addEventListener('keydown', (event) => {
         if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
@@ -744,15 +847,18 @@
           playSound(1100, 'sawtooth', 0.12, 0.05);
           showToast(body.classList.contains('chaos') ? 'Sürpriz modu: AÇIK ✦' : 'Sürpriz modu kapandı.');
         } else if (action === 'email') window.location.href = 'mailto:mehmeteminakkaya12@gmail.com';
+        else if (action === 'cv') document.querySelector('#cv-open').click();
         else document.querySelector('#' + action)?.scrollIntoView({ behavior: 'smooth' });
       }));
 
       commandInput.addEventListener('input', () => {
         playSound(1200, 'sine', 0.015, 0.01);
         const query = commandInput.value.toLocaleLowerCase('tr');
-        document.querySelectorAll('.command-list li').forEach(item => {
+        paletteRows.forEach(item => {
           item.hidden = !item.textContent.toLocaleLowerCase('tr').includes(query);
         });
+        activeRow = 0;
+        paintActiveRow();
       });
 
       // Expanded Idea Machine (16 ideas)
@@ -985,6 +1091,30 @@
         progress.style.width = max > 0 ? `${(scrollY / max) * 100}%` : '0%';
       };
       addEventListener('scroll', updateProgress, { passive:true });
+
+      // CV telefonunu parçalardan kur.
+      const cvPhone = document.querySelector('#cv-phone');
+      if (cvPhone) {
+        const { cc, n1, n2, n3 } = cvPhone.dataset;
+        cvPhone.textContent = `${cc} ${n1} ${n2} ${n3}`;
+      }
+
+      // Mobil sekme barında bulunduğun bölümü işaretle.
+      const tabLinks = [...document.querySelectorAll('.tabbar a')];
+      if (tabLinks.length) {
+        const sectionFor = new Map(tabLinks.map(link => [document.querySelector(link.hash), link]));
+        const sectionObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            const link = sectionFor.get(entry.target);
+            if (!link) return;
+            if (entry.isIntersecting) {
+              tabLinks.forEach(other => other.removeAttribute('aria-current'));
+              link.setAttribute('aria-current', 'true');
+            }
+          });
+        }, { rootMargin: '-45% 0px -45% 0px' });
+        sectionFor.forEach((link, section) => { if (section) sectionObserver.observe(section); });
+      }
 
       const revealObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); } });

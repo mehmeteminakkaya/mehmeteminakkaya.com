@@ -72,7 +72,8 @@ Fixed (don't regress these):
 - **`og:image`** — `og.jpg` (1200×630, 176 KB, downscaled from the 1731×909 `og.png` master, which stays in the repo as the source) plus width/height/type/alt and `twitter:image`.
 - **`robots.txt` + `sitemap.xml`** added; `sitemap.xml` carries a hand-maintained `<lastmod>`, so bump it when content changes materially.
 
+- **Anti-spoofing DNS** (2026-08-17, verified on `ns1.vercel-dns.com` and public resolvers): apex TXT `v=spf1 -all` and `_dmarc` TXT `v=DMARC1; p=reject; sp=reject; rua=mailto:mehmeteminakkaya12@gmail.com`. The domain sends no mail — contact runs through Gmail — so the null SPF is correct. **If mail on `@mehmeteminakkaya.com` is ever set up, both records must change first**, or every message will be rejected.
+
 Still open:
 
-- No `MX`, `SPF`, or `DMARC` records on the domain. Mail is Gmail-based so nothing is broken, but the domain is spoofable; a null SPF (`v=spf1 -all`) + `p=reject` DMARC is the hardening move. Needs DNS access at Vercel, not a repo change.
-- `Mehmet Emin Akkaya CV.pdf` is deleted in the working tree while still tracked in HEAD (and still live, 200, 383 KB); nothing in `index.html` links to it (the CV is the in-page dialog).
+- `Mehmet Emin Akkaya CV.pdf` is deleted in the working tree while still tracked in HEAD (and still live, 200, 383 KB); nothing in `index.html` links to it (the CV is the in-page dialog). The `.gitignore` addition of `.vercel` is likewise staged-but-uncommitted in the working tree.

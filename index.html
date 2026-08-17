@@ -250,7 +250,7 @@
     .console { padding: 26px; font: 400 .78rem/1.8 var(--font-mono); display: flex; flex-direction: column; overflow-y: auto; max-height: 520px; }
     .console-top { display: flex; justify-content: space-between; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid color-mix(in srgb, var(--paper) 18%, transparent); color: color-mix(in srgb, var(--paper) 70%, transparent); flex-shrink: 0; }
     .terminal-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
-    .prompt { color: var(--acid); font-weight: 700; flex-shrink: 0; }
+    .prompt { color: var(--lab-accent); font-weight: 700; flex-shrink: 0; }
     .terminal-output { color: color-mix(in srgb, var(--paper) 75%, transparent); margin: 0 0 10px 0; word-break: break-word; }
     .terminal-output.highlight { color: var(--lab-accent); }
     .terminal-cursor { display: inline-block; width: 8px; height: 15px; vertical-align: -2px; background: var(--lab-accent); animation: blink 1s steps(1) infinite; }
@@ -520,7 +520,7 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div><span class="section-kicker">03 / Deney alanı</span><h2>Merakın<br>çalıştığı yer.</h2></div>
-          <p style="color:color-mix(in srgb,var(--paper) 58%,transparent)">Her fikir proje olmak zorunda değil. Ama her iyi proje, “ya şöyle olsaydı?” diye başlayan küçük bir deneyi hak ediyor.</p>
+          <p style="color:color-mix(in srgb,var(--paper) 74%,transparent)">Her fikir proje olmak zorunda değil. Ama her iyi proje, “ya şöyle olsaydı?” diye başlayan küçük bir deneyi hak ediyor.</p>
         </div>
         <div class="lab-grid">
           <div class="console reveal" id="interactive-terminal" aria-label="Etkileşimli terminal">
@@ -549,7 +549,7 @@
             <div class="idea-meta">
               <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
                 <button class="button" id="idea-button" type="button">Başka bir fikir üret <span>↻</span></button>
-                <a class="button" id="idea-discuss" href="mailto:mehmeteminakkaya12@gmail.com?subject=Fikir%20Hakk%C4%B1nda%20Sohbet" style="background:#11120f;color:var(--paper);border-color:#11120f;">Bu fikri konuşalım ↗</a>
+                <a class="button" id="idea-discuss" href="mailto:mehmeteminakkaya12@gmail.com?subject=Fikir%20Hakk%C4%B1nda%20Sohbet" style="background:#11120f;color:#f2f0e9;border-color:#11120f;">Bu fikri konuşalım ↗</a>
               </div>
               <span class="idea-count" id="idea-count">FİKİR 01 / 16</span>
             </div>
@@ -847,32 +847,32 @@
               case 'isler':
                 appendTerminalRow(rawCmd, `
                   <strong>Amiral Gemisi Projeler:</strong><br>
-                  1. 📱 <strong>Mİ-GO</strong>: Android (Kotlin), Material 3, AI Career Pathfinder [<a href="https://github.com/mehmeteminakkaya/Migo" target="_blank" style="color:var(--acid)">GitHub ↗</a>]<br>
-                  2. 🤖 <strong>Nexus AI</strong>: Google Hackathon Finalisti, FastAPI, React, Gemini OCR [<a href="https://github.com/mehmeteminakkaya/Nexus-Proje" target="_blank" style="color:var(--acid)">GitHub ↗</a>]<br>
-                  3. ⚡ <strong>Study Buddy</strong>: XIAO ESP32-S3, Llama 3.3 70B, Wokwi IoT Devresi [<a href="https://github.com/mehmeteminakkaya/Study-Buddy-Simulation" target="_blank" style="color:var(--acid)">GitHub ↗</a>]<br>
-                  4. 🎙️ <strong>BenimHakkımda</strong>: AI Mülakat Simülatörü [<a href="https://benimhakkimda-aim-lakat.vercel.app/" target="_blank" style="color:var(--acid)">Canlı Demo ↗</a>]<br>
-                  5. 📋 <strong>ToDoGemini</strong>: FastAPI, Docker, Gemini Pro [<a href="https://github.com/mehmeteminakkaya/ToDo-List" target="_blank" style="color:var(--acid)">GitHub ↗</a>]
+                  1. 📱 <strong>Mİ-GO</strong>: Android (Kotlin), Material 3, AI Career Pathfinder [<a href="https://github.com/mehmeteminakkaya/Migo" target="_blank" style="color:var(--lab-accent)">GitHub ↗</a>]<br>
+                  2. 🤖 <strong>Nexus AI</strong>: Google Hackathon Finalisti, FastAPI, React, Gemini OCR [<a href="https://github.com/mehmeteminakkaya/Nexus-Proje" target="_blank" style="color:var(--lab-accent)">GitHub ↗</a>]<br>
+                  3. ⚡ <strong>Study Buddy</strong>: XIAO ESP32-S3, Llama 3.3 70B, Wokwi IoT Devresi [<a href="https://github.com/mehmeteminakkaya/Study-Buddy-Simulation" target="_blank" style="color:var(--lab-accent)">GitHub ↗</a>]<br>
+                  4. 🎙️ <strong>BenimHakkımda</strong>: AI Mülakat Simülatörü [<a href="https://benimhakkimda-aim-lakat.vercel.app/" target="_blank" style="color:var(--lab-accent)">Canlı Demo ↗</a>]<br>
+                  5. 📋 <strong>ToDoGemini</strong>: FastAPI, Docker, Gemini Pro [<a href="https://github.com/mehmeteminakkaya/ToDo-List" target="_blank" style="color:var(--lab-accent)">GitHub ↗</a>]
                 `);
                 break;
 
               case 'migo':
-                appendTerminalRow(rawCmd, `📱 <strong>Mİ-GO — AI Destekli Kişisel Kariyer Pusulası</strong><br>• Mimari: Kotlin, Jetpack Compose / Material 3, Android Studio<br>• Amaç: Öğrencinin yetkinliklerini analiz edip kişiselleştirilmiş rota ve beceri hedefleri çizmek.<br>• Repo: <a href="https://github.com/mehmeteminakkaya/Migo" target="_blank" style="color:var(--acid)">github.com/mehmeteminakkaya/Migo ↗</a>`);
+                appendTerminalRow(rawCmd, `📱 <strong>Mİ-GO — AI Destekli Kişisel Kariyer Pusulası</strong><br>• Mimari: Kotlin, Jetpack Compose / Material 3, Android Studio<br>• Amaç: Öğrencinin yetkinliklerini analiz edip kişiselleştirilmiş rota ve beceri hedefleri çizmek.<br>• Repo: <a href="https://github.com/mehmeteminakkaya/Migo" target="_blank" style="color:var(--lab-accent)">github.com/mehmeteminakkaya/Migo ↗</a>`);
                 break;
 
               case 'nexus':
-                appendTerminalRow(rawCmd, `🤖 <strong>Nexus AI — KOBİ B2B Finans Asistanı</strong><br>• Başarı: Google Hackathon Finalisti<br>• Mimari: FastAPI (Asenkron Python), React / Vite, Google Gemini Flash OCR<br>• Repo: <a href="https://github.com/mehmeteminakkaya/Nexus-Proje" target="_blank" style="color:var(--acid)">github.com/mehmeteminakkaya/Nexus-Proje ↗</a>`);
+                appendTerminalRow(rawCmd, `🤖 <strong>Nexus AI — KOBİ B2B Finans Asistanı</strong><br>• Başarı: Google Hackathon Finalisti<br>• Mimari: FastAPI (Asenkron Python), React / Vite, Google Gemini Flash OCR<br>• Repo: <a href="https://github.com/mehmeteminakkaya/Nexus-Proje" target="_blank" style="color:var(--lab-accent)">github.com/mehmeteminakkaya/Nexus-Proje ↗</a>`);
                 break;
 
               case 'studybuddy':
-                appendTerminalRow(rawCmd, `⚡ <strong>Study Buddy — Akıllı Devre &amp; Pomodoro AI</strong><br>• Mimari: XIAO ESP32-S3, C++, BME280, SSD1306 OLED, Llama 3.3 70B via Groq<br>• Repo: <a href="https://github.com/mehmeteminakkaya/Study-Buddy-Simulation" target="_blank" style="color:var(--acid)">github.com/mehmeteminakkaya/Study-Buddy-Simulation ↗</a>`);
+                appendTerminalRow(rawCmd, `⚡ <strong>Study Buddy — Akıllı Devre &amp; Pomodoro AI</strong><br>• Mimari: XIAO ESP32-S3, C++, BME280, SSD1306 OLED, Llama 3.3 70B via Groq<br>• Repo: <a href="https://github.com/mehmeteminakkaya/Study-Buddy-Simulation" target="_blank" style="color:var(--lab-accent)">github.com/mehmeteminakkaya/Study-Buddy-Simulation ↗</a>`);
                 break;
 
               case 'benimhakkimda':
-                appendTerminalRow(rawCmd, `🎙️ <strong>BenimHakkımda — İnteraktif AI Mülakat Simülatörü</strong><br>• Mimari: Node.js, Express, Gemini AI, Web Audio API<br>• Canlı Link: <a href="https://benimhakkimda-aim-lakat.vercel.app/" target="_blank" style="color:var(--acid)">benimhakkimda-aim-lakat.vercel.app ↗</a>`);
+                appendTerminalRow(rawCmd, `🎙️ <strong>BenimHakkımda — İnteraktif AI Mülakat Simülatörü</strong><br>• Mimari: Node.js, Express, Gemini AI, Web Audio API<br>• Canlı Link: <a href="https://benimhakkimda-aim-lakat.vercel.app/" target="_blank" style="color:var(--lab-accent)">benimhakkimda-aim-lakat.vercel.app ↗</a>`);
                 break;
 
               case 'todogemini':
-                appendTerminalRow(rawCmd, `📋 <strong>ToDoGemini — AI Görev Orkestrasyonu</strong><br>• Mimari: FastAPI, SQLAlchemy, Alembic, Docker, Gemini Pro<br>• Repo: <a href="https://github.com/mehmeteminakkaya/ToDo-List" target="_blank" style="color:var(--acid)">github.com/mehmeteminakkaya/ToDo-List ↗</a>`);
+                appendTerminalRow(rawCmd, `📋 <strong>ToDoGemini — AI Görev Orkestrasyonu</strong><br>• Mimari: FastAPI, SQLAlchemy, Alembic, Docker, Gemini Pro<br>• Repo: <a href="https://github.com/mehmeteminakkaya/ToDo-List" target="_blank" style="color:var(--lab-accent)">github.com/mehmeteminakkaya/ToDo-List ↗</a>`);
                 break;
 
               case 'skills':

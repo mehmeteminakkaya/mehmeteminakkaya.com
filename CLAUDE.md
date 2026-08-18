@@ -92,4 +92,5 @@ Fixed (don't regress these):
 
 Still open:
 
-- `Mehmet Emin Akkaya CV.pdf` is deleted in the working tree while still tracked in HEAD (and still live, 200, 383 KB); nothing in `index.html` links to it (the CV is the in-page dialog). The `.gitignore` addition of `.vercel` is likewise staged-but-uncommitted in the working tree.
+- **`Mehmet Emin Akkaya CV.pdf` has two masters and the workspace copy is the live one.** The authoritative file is `../Mehmet Emin Akkaya CV.pdf` in the `PROJELERİM` root; the repo copy is a snapshot of it, refreshed on 2026-08-19 (383 KB → 386 KB). When the CV changes, copy it in again rather than editing the repo copy. Note that **nothing in `index.html` links to this PDF** — the CV visitors see is the in-page `#cv-dialog`, and `#cv-print` prints *that*, not the PDF. So the two can drift apart silently; if the PDF is ever linked from the page, the dialog markup has to be brought in line with it first.
+- The `.gitignore` addition of `.vercel` is still uncommitted in the working tree.

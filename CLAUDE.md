@@ -68,7 +68,7 @@ All user-facing copy was rewritten on 2026-08-19 because it read as machine-writ
 
 ## Deployment
 
-Vercel project `mehmeteminakkaya-com` (`.vercel/project.json`), configured by `vercel.json`: `cleanUrls`, no trailing slash, and `X-Content-Type-Options` / `X-Frame-Options` / `X-XSS-Protection` headers on all routes.
+Vercel project `mehmeteminakkaya-com` (`.vercel/project.json` — present locally but **gitignored** since 2026-08-19, so it will not exist in a fresh clone; re-link with `vercel link`), configured by `vercel.json`: `cleanUrls`, no trailing slash, and `X-Content-Type-Options` / `X-Frame-Options` / `X-XSS-Protection` headers on all routes.
 
 DNS moved from Cloudflare to **Vercel DNS** (`ns1/ns2.vercel-dns.com`) on 2026-08-16; registrar is Turkticaret.net, domain expires 2027-06-23. Apex and `www` both A-record straight to Vercel (`216.198.79.65` / `64.29.17.1`), each with its own auto-renewing Let's Encrypt cert. Cloudflare is no longer in the path at all — treat any Cloudflare-shaped code in this repo as a fossil.
 
@@ -93,4 +93,4 @@ Fixed (don't regress these):
 Still open:
 
 - **`Mehmet Emin Akkaya CV.pdf` has two masters and the workspace copy is the live one.** The authoritative file is `../Mehmet Emin Akkaya CV.pdf` in the `PROJELERİM` root; the repo copy is a snapshot of it, refreshed on 2026-08-19 (383 KB → 386 KB). When the CV changes, copy it in again rather than editing the repo copy. Note that **nothing in `index.html` links to this PDF** — the CV visitors see is the in-page `#cv-dialog`, and `#cv-print` prints *that*, not the PDF. So the two can drift apart silently; if the PDF is ever linked from the page, the dialog markup has to be brought in line with it first.
-- The `.gitignore` addition of `.vercel` is still uncommitted in the working tree.
+- The CV PDF is deliberately **left unlinked** (decision, 2026-08-19): the in-page dialog is the CV visitors see, the PDF is just the copy kept at a known URL. Do not add a download link without first reconciling the two.

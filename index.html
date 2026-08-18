@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mehmet Emin Akkaya — Kod, merak ve momentum.</title>
-  <meta name="description" content="Mehmet Emin Akkaya'nın yapay zeka, mobil ürünler, algoritmalar ve topluluk liderliği etrafında şekillenen interaktif portfolyosu.">
+  <meta name="description" content="Mehmet Emin Akkaya'nın kişisel sitesi. Kotlin, Python ve dil modelleriyle yaptığı Android, web ve gömülü sistem projeleri.">
   <meta name="author" content="Mehmet Emin Akkaya">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#f2f0e9">
@@ -13,7 +13,7 @@
   <link rel="canonical" href="https://mehmeteminakkaya.com">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Mehmet Emin Akkaya — Kod, merak ve momentum.">
-  <meta property="og:description" content="Fikirleri çalışan ürünlere dönüştüren bilgisayar mühendisliği öğrencisi.">
+  <meta property="og:description" content="Bilgisayar mühendisliği öğrencisi. Android, web ve gömülü sistem projeleri yapıyor.">
   <meta property="og:url" content="https://mehmeteminakkaya.com">
   <meta property="og:locale" content="tr_TR">
   <meta property="og:image" content="https://mehmeteminakkaya.com/og.jpg">
@@ -56,6 +56,10 @@
       --muted: #686961;
       --line: rgba(17,18,15,.16);
       --blue: #3157ff;
+      /* Yazı rengi olarak kullanılan mavi ayrı tutulur: --blue aynı zamanda
+         .project-main / .contact-panel / .button.primary'nin zemini, gecede
+         açılırsa üstündeki beyaz yazı okunmaz olur. */
+      --blue-text: #3157ff;
       --acid: #c7ff45;
       --orange: #ff6b35;
       --card: #fbfaf5;
@@ -75,6 +79,8 @@
       --line: rgba(245,243,234,.18);
       --card: #191c17;
       --shadow: 0 24px 90px rgba(0,0,0,.35);
+      /* #3157ff gece zemininde 3.2–3.5:1'de kalıyordu (AA sınırı 4.5); bu ton 6.5:1. */
+      --blue-text: #7d9bff;
     }
 
     * { box-sizing: border-box; }
@@ -141,7 +147,7 @@
     .brand span { display: inline-block; width: 9px; height: 9px; margin-right: 8px; border-radius: 50%; background: var(--blue); }
     .nav-links { display: flex; gap: 24px; align-items: center; }
     .nav-links a { font-size: .83rem; font-weight: 700; text-decoration: none; }
-    .nav-links a:hover { color: var(--blue); }
+    .nav-links a:hover { color: var(--blue-text); }
     .nav-actions { justify-self: end; display: flex; align-items: center; gap: 8px; }
     .icon-button, .command-button {
       min-height: 38px;
@@ -184,7 +190,7 @@
         letter-spacing: .06em;
       }
       .tabbar a span { font-size: 1.05rem; line-height: 1; }
-      .tabbar a[aria-current="true"] { color: var(--blue); }
+      .tabbar a[aria-current="true"] { color: var(--blue-text); }
       /* Sekme barı içeriğin son satırını kapatmasın. */
       body { padding-bottom: 62px; }
     }
@@ -194,12 +200,12 @@
     .eyebrow { display: flex; gap: 12px; align-items: center; font: 500 .75rem var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
     .eyebrow::before { content: ""; width: 42px; height: 2px; background: var(--orange); }
     .hero h1 { margin: 26px 0 30px; max-width: 1100px; font-size: clamp(4.1rem, 10.5vw, 9.8rem); font-weight: 600; letter-spacing: -.085em; line-height: .82; }
-    .hero h1 .soft { font-weight: 400; font-style: italic; color: var(--blue); }
+    .hero h1 .soft { font-weight: 400; font-style: italic; color: var(--blue-text); }
     /* Durum kutusu h1'in yanına, göz hattına alınır; yoksa sağ üst çeyrek boş kalıyordu. */
     .hero-grid { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 56px; align-items: start; }
     .hero-lead { min-width: 0; }
     .hero-copy { max-width: 680px; font-size: clamp(1.08rem, 1.8vw, 1.45rem); letter-spacing: -.025em; }
-    .hero-copy strong { color: var(--blue); }
+    .hero-copy strong { color: var(--blue-text); }
     .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
     .button {
       display: inline-flex;
@@ -235,7 +241,7 @@
     @keyframes ticker { to { transform: translateX(-50%); } }
 
     section { padding: 120px 0; }
-    .section-kicker { color: var(--blue); font: 500 .72rem var(--font-mono); text-transform: uppercase; letter-spacing: .12em; }
+    .section-kicker { color: var(--blue-text); font: 500 .72rem var(--font-mono); text-transform: uppercase; letter-spacing: .12em; }
     .section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 54px; }
     .section-head h2 { margin: 10px 0 0; font: 400 clamp(3.4rem,7vw,7.2rem)/.88 var(--font-serif); letter-spacing: -.045em; }
     .section-head p { max-width: 480px; justify-self: end; margin: 0; color: var(--muted); font-size: 1rem; }
@@ -275,7 +281,7 @@
     .story { border-top: 1px solid var(--line); }
     .timeline { margin-top: 30px; }
     .timeline-item { display: grid; grid-template-columns: 160px 1fr auto; gap: 30px; align-items: start; padding: 34px 0; border-bottom: 1px solid var(--line); transition: padding .3s, color .3s; }
-    .timeline-item:hover { padding-left: 16px; color: var(--blue); }
+    .timeline-item:hover { padding-left: 16px; color: var(--blue-text); }
     .timeline-date { font: 400 .72rem var(--font-mono); color: var(--muted); }
     .timeline-item h3 { margin: 0; font-size: clamp(1.4rem,3vw,2.25rem); letter-spacing: -.045em; }
     .timeline-item p { max-width: 650px; color: var(--muted); }
@@ -298,7 +304,7 @@
     .terminal-cursor { display: inline-block; width: 8px; height: 15px; vertical-align: -2px; background: var(--lab-accent); animation: blink 1s steps(1) infinite; }
     .cli-input-line { display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 10px; border-top: 1px dashed color-mix(in srgb, var(--paper) 20%, transparent); }
     .cli-input { flex: 1; background: transparent; border: none; outline: none; color: var(--paper); font: inherit; padding: 0; }
-    .cli-input::placeholder { color: color-mix(in srgb, var(--paper) 55%, transparent); }
+    .cli-input::placeholder { color: color-mix(in srgb, var(--paper) 70%, transparent); }
     @keyframes blink { 50% { opacity: 0; } }
     .idea-machine { display: grid; align-content: space-between; padding: 38px; background: var(--acid); color: #11120f; }
     .idea-machine p { max-width: 600px; margin: 0; font: 400 clamp(2.1rem,4.5vw,4.5rem)/.95 var(--font-serif); letter-spacing: -.035em; }
@@ -312,12 +318,12 @@
 
     .skills-cloud { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 48px; }
     .skill-pill { padding: 13px 18px; border: 1px solid color-mix(in srgb, var(--paper) 25%, transparent); border-radius: 999px; color: color-mix(in srgb, var(--paper) 70%, transparent); background: transparent; cursor: default; font: 400 .74rem var(--font-mono); transition: background .25s, color .25s, transform .25s; }
-    .skill-pill:hover { color: #11120f; background: var(--paper); transform: rotate(-2deg) translateY(-3px); }
+    .skill-pill:hover { color: var(--ink); background: var(--paper); transform: rotate(-2deg) translateY(-3px); }
 
     .cert-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 50px; }
     /* Sertifikalar link değil, bu yüzden tıklanabilirlik ima eden ↗ oku kaldırıldı. */
     .cert { min-height: 190px; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; border: 1px solid var(--line); border-radius: 20px; }
-    .cert-provider { color: var(--blue); font: 500 .68rem var(--font-mono); text-transform: uppercase; }
+    .cert-provider { color: var(--blue-text); font: 500 .68rem var(--font-mono); text-transform: uppercase; }
     .cert h3 { margin: 20px 0; font-size: 1rem; letter-spacing: -.025em; }
     .cert-foot { display: flex; justify-content: space-between; color: var(--muted); font: 400 .68rem var(--font-mono); }
 
@@ -367,7 +373,7 @@
     .cv-sheet h2 { margin: 0 0 5px; font: 700 clamp(2rem,5vw,3.5rem)/1 var(--font-sans); letter-spacing: -.05em; }
     .cv-contact { margin: 0 0 38px; color: var(--muted); font: 400 .72rem/1.8 var(--font-mono); }
     .cv-block { display: grid; grid-template-columns: 130px 1fr; gap: 24px; padding: 24px 0; border-top: 1px solid var(--line); }
-    .cv-block h3 { margin: 0; color: var(--blue); font: 600 .7rem var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
+    .cv-block h3 { margin: 0; color: var(--blue-text); font: 600 .7rem var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
     .cv-block h4 { margin: 0 0 4px; font-size: 1rem; }
     .cv-block p, .cv-block li { color: var(--muted); font-size: .84rem; }
     .cv-entry + .cv-entry { margin-top: 22px; }
@@ -461,19 +467,19 @@
     <section class="hero wrap">
       <div class="hero-grid">
         <div class="hero-lead reveal">
-          <div class="eyebrow">İstanbul'dan dünyaya açık bir üretici</div>
+          <div class="eyebrow">İstanbul · Bilgisayar mühendisliği öğrencisi</div>
           <h1>Kod.<br><span class="serif soft">Merak.</span> Momentum.</h1>
-          <p class="hero-copy">Ben <strong>Mehmet Emin.</strong> Yapay zekâyı, mobil deneyimleri ve algoritmik düşünceyi insanların işine yarayan ürünlere dönüştüren bir bilgisayar mühendisliği öğrencisiyim.</p>
+          <p class="hero-copy">Ben <strong>Mehmet Emin.</strong> İstinye Üniversitesi'nde bilgisayar mühendisliği okuyorum. Kotlin ve Python'la Android uygulaması, web servisi ve gömülü sistem projeleri yapıyorum.</p>
           <div class="hero-cta">
-            <a class="button primary" href="#isler">Ürettiklerimi gör <span class="arrow">↘</span></a>
+            <a class="button primary" href="#isler">Projelere bak <span class="arrow">↘</span></a>
             <button class="button" id="cv-open" type="button">CV'yi aç <span class="arrow">↗</span></button>
           </div>
         </div>
         <aside class="hero-note reveal" aria-label="Müsaitlik durumu">
-          <span class="status"><span class="status-dot"></span>Yeni fikirlere açık</span>
+          <span class="status"><span class="status-dot"></span>Yeni projelere açığım</span>
           <span class="time" id="istanbul-time">İstanbul · --:--</span>
           <span class="mono" style="font-size:.68rem;color:var(--muted)">TRT / UTC+3</span>
-          <div style="margin-top:12px;font-size:.72rem;display:flex;align-items:center;gap:7px;color:var(--muted);font-family:var(--font-mono);"><span class="status-dot" style="width:7px;height:7px;background:#3b82f6;box-shadow:0 0 0 4px rgba(59,130,246,.15);"></span><span>Aktif: <strong style="color:var(--ink)">Mİ-GO &amp; KobiFlow</strong></span></div>
+          <div style="margin-top:12px;font-size:.72rem;display:flex;align-items:center;gap:7px;color:var(--muted);font-family:var(--font-mono);"><span class="status-dot" style="width:7px;height:7px;background:#3b82f6;box-shadow:0 0 0 4px rgba(59,130,246,.15);"></span><span>Üstünde çalıştığım: <strong style="color:var(--ink)">Mİ-GO &amp; KobiFlow</strong></span></div>
         </aside>
       </div>
     </section>
@@ -487,64 +493,64 @@
 
     <section id="isler" class="wrap">
       <div class="section-head reveal">
-        <div><span class="section-kicker">01 / Seçilmiş işler</span><h2>Fikirden<br>çalışan şeye.</h2></div>
-        <p>Benim için iyi proje yalnızca koddan ibaret değil. Doğru problemi seçmek, sade bir yol çizmek ve insanın elinde gerçekten çalışan bir şey bırakmak.</p>
+        <div><span class="section-kicker">01 / Projeler</span><h2>Yaptığım<br>şeyler.</h2></div>
+        <p>Çoğuna okul dışında, merak ettiğim için başladım. Hepsinin kodu açık; yayında olanların linki de kartın içinde.</p>
       </div>
       <div class="bento">
         <article class="card project-main reveal">
-          <span class="number">01 · MOBİL ÜRÜN / DEVAM EDİYOR</span>
-          <h3>Mİ-GO, “hangi kariyer?” sorusuna kişisel bir rota çiziyor.</h3>
-          <p>Öğrencinin yetkinliklerini ve hedeflerini okuyup uygun kariyer yolları, meslek önerileri ve uygulanabilir bir yol haritası sunan AI destekli mobil rehber.</p>
+          <span class="number">01 · ANDROID · DEVAM EDİYOR</span>
+          <h3>Mİ-GO, kariyer sorusuna kişisel bir rota çiziyor.</h3>
+          <p>Öğrencinin profilini ve hedefini alıp meslek önerisi ve haftalık bir plan çıkaran Android uygulaması. Model çağrıları anahtarı istemcide tutmamak için bir Cloudflare Worker üzerinden geçiyor.</p>
           <div class="card-tags">
             <span class="tag">Kotlin</span>
-            <span class="tag">Android Studio</span>
-            <span class="tag">Material 3</span>
-            <span class="tag">AI Guidance</span>
+            <span class="tag">Jetpack Compose</span>
+            <span class="tag">Cloudflare Worker</span>
+            <span class="tag">Llama 3.1</span>
             <a href="https://github.com/mehmeteminakkaya/Migo" target="_blank" rel="noopener noreferrer" style="margin-left:auto;color:inherit;text-decoration:none;font-weight:600;">GitHub ↗</a>
           </div>
         </article>
         <article class="card project-jam reveal">
-          <span class="number">02 · GOOGLE HACKATHON FİNALİSTİ · KOBİ B2B SAAS</span>
-          <h3>KobiFlow — KOBİ Operasyon &amp; Envanter Yönetim Platformu</h3>
-          <p>KOBİ'lerin çoklu depo stok takibini, B2B sipariş sevkiyatlarını ve tedarikçi faturalarının OCR ile işlenmesini sağlayan modern SaaS platformu.</p>
+          <span class="number">02 · GOOGLE HACKATHON FİNALİSTİ</span>
+          <h3>KobiFlow, küçük işletmeler için stok ve sipariş paneli.</h3>
+          <p>Çoklu depo stok takibi, sipariş akışı ve tedarikçi faturasını fotoğraftan okuyup kalemlere ayırma. Fatura okumayı Llama 3.2 Vision yapıyor, Tesseract yedekte duruyor.</p>
           <div class="card-tags" style="margin-top:auto;position:relative;">
             <span class="tag">FastAPI</span>
             <span class="tag">React / Vite</span>
-            <span class="tag">Gemini OCR</span>
-            <span class="tag">B2B SaaS</span>
+            <span class="tag">Llama 3.2 Vision</span>
+            <span class="tag">SQLAlchemy</span>
             <a href="https://kobiflow-app.vercel.app" target="_blank" rel="noopener noreferrer" style="margin-left:auto;color:inherit;text-decoration:none;font-weight:600;margin-right:12px;">Canlı Uygulama ↗</a>
             <a href="https://github.com/mehmeteminakkaya/Nexus-Proje" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;font-weight:600;">GitHub ↗</a>
           </div>
         </article>
         <article class="card mini-card reveal">
-          <span class="number">03 · DONANIM &amp; AI TAKIM PROJESİ</span>
-          <h3>Study Buddy — Akıllı Devre &amp; Pomodoro AI İstasyonu</h3>
-          <p>XIAO ESP32-S3, BME280 ortam sensörleri ve Llama 3.3 70B ile sesli koçluk sunan sanal Wokwi devre simülatörü.</p>
+          <span class="number">03 · GÖMÜLÜ SİSTEM · TAKIM PROJESİ</span>
+          <h3>Study Buddy, masanda duran bir pomodoro arkadaşı.</h3>
+          <p>ESP32-S3 üzerinde çalışan firmware: ortam sensörü, OLED ekran ve mikrofon. Söylediğini Wit.ai yazıya çeviriyor, cevabı Groq üretiyor, VoiceRSS sesli okuyor.</p>
           <div class="card-tags" style="margin-top:12px;">
             <span class="tag">ESP32-S3</span>
             <span class="tag">C++</span>
-            <span class="tag">Llama 3.3 70B</span>
+            <span class="tag">Groq / Llama 3.1</span>
             <a href="https://github.com/mehmeteminakkaya/Study-Buddy-Simulation" target="_blank" rel="noopener noreferrer" style="margin-left:auto;color:inherit;text-decoration:none;font-weight:600;">GitHub ↗</a>
           </div>
         </article>
         <article class="card mini-card accent reveal">
-          <span class="number">04 · WEB AI / ÜRETİMDE</span>
-          <h3>BenimHakkımda — İnteraktif AI Mülakat Simülatörü</h3>
-          <p>Adayların teknik ve yetkinlik mülakatlarına sesli ve yazılı etkileşimle hazırlanmasını sağlayan canlı web platformu.</p>
+          <span class="number">04 · WEB · YAYINDA</span>
+          <h3>BenimHakkımda, mülakat provası yapabildiğin bir site.</h3>
+          <p>Soru soruyor, sesli ya da yazılı cevap veriyorsun, cevabı STAR'a göre puanlıyor. Sunucu tarafı tek bir Node dosyası — hiç npm bağımlılığı yok.</p>
           <div class="card-tags" style="margin-top:12px;">
-            <span class="tag">Node.js</span>
-            <span class="tag">Gemini AI</span>
+            <span class="tag">Node.js (bağımlılıksız)</span>
+            <span class="tag">Llama 3.1</span>
             <a href="https://benimhakkimda-aim-lakat.vercel.app/" target="_blank" rel="noopener noreferrer" style="margin-left:auto;color:inherit;text-decoration:none;font-weight:600;">Canlı Demo ↗</a>
           </div>
         </article>
         <article class="card mini-card reveal">
-          <span class="number">05 · FULL-STACK PYTHON</span>
-          <h3>ToDoGemini — AI Destekli Görev Orkestrasyonu</h3>
-          <p>FastAPI, SQLAlchemy, Alembic ve Docker ile containerize edilmiş; Gemini Pro ile görevleri alt adımlara bölen üretkenlik servisi.</p>
+          <span class="number">05 · PYTHON · SERVİS</span>
+          <h3>ToDoGemini, büyük görevleri kendi bölen yapılacaklar listesi.</h3>
+          <p>Yazdığın maddeyi Gemini'ye verip alt adımlara böldüren FastAPI servisi. Şema değişiklikleri Alembic'te, tamamı Docker'da ayağa kalkıyor.</p>
           <div class="card-tags" style="margin-top:12px;">
             <span class="tag">FastAPI</span>
             <span class="tag">Docker</span>
-            <span class="tag">Gemini Pro</span>
+            <span class="tag">Gemini</span>
             <a href="https://github.com/mehmeteminakkaya/ToDo-List" target="_blank" rel="noopener noreferrer" style="margin-left:auto;color:inherit;text-decoration:none;font-weight:600;">GitHub ↗</a>
           </div>
         </article>
@@ -554,13 +560,13 @@
     <section id="hikaye" class="story">
       <div class="wrap">
         <div class="section-head reveal">
-          <div><span class="section-kicker">02 / Hikâye</span><h2>Henüz yolun<br>başında. Hızlı.</h2></div>
-          <p>Öğrenme, liderlik ve uygulama aynı çizgide ilerliyor. Çünkü bilgi ancak paylaşıldığında ve bir ürüne dönüştüğünde gerçek ağırlığını kazanıyor.</p>
+          <div><span class="section-kicker">02 / Hikâye</span><h2>Nereden<br>geliyorum.</h2></div>
+          <p>Okul, kulüp ve kendi projelerim aynı anda gidiyor. Aşağısı tarih sırasıyla.</p>
         </div>
         <div class="timeline">
-          <article class="timeline-item reveal"><div class="timeline-date">2025 — DEVAM</div><div><h3>Google Yapay Zeka ve Teknoloji Akademisi</h3><p>Türkiye genelinde seçilen 1.500 katılımcıdan biri. Yapay zekâ, veri analizi ve modern yazılım teknolojileri üzerine yoğunlaşan eğitim bursu.</p></div><div class="timeline-mark">01</div></article>
-          <article class="timeline-item reveal"><div class="timeline-date">2023 — 2027</div><div><h3>Bilgisayar Mühendisliği · %100 İngilizce</h3><p>İstinye Üniversitesi'nde algoritmalar, veri yapıları, yazılım geliştirme ve bilgisayar sistemleri odağında lisans eğitimi.</p></div><div class="timeline-mark">02</div></article>
-          <article class="timeline-item reveal"><div class="timeline-date">2023 — DEVAM</div><div><h3>Bilişim Kulübü · Başkan Yardımcısı</h3><p>Teknoloji etkinlikleri, yazılım atölyeleri, yapay zekâ ve girişimcilik buluşmaları için proje yönetimi ve takım koordinasyonu.</p></div><div class="timeline-mark">03</div></article>
+          <article class="timeline-item reveal"><div class="timeline-date">2025 — DEVAM</div><div><h3>Google Yapay Zeka ve Teknoloji Akademisi</h3><p>Türkiye genelinden seçilen 1.500 kişiden biriyim. Yapay zekâ, veri analizi ve yazılım üzerine eğitim bursu.</p></div><div class="timeline-mark">01</div></article>
+          <article class="timeline-item reveal"><div class="timeline-date">2023 — 2027</div><div><h3>Bilgisayar Mühendisliği · %100 İngilizce</h3><p>İstinye Üniversitesi. Ağırlık algoritmalar, veri yapıları ve bilgisayar sistemlerinde.</p></div><div class="timeline-mark">02</div></article>
+          <article class="timeline-item reveal"><div class="timeline-date">2023 — DEVAM</div><div><h3>Bilişim Kulübü · Başkan Yardımcısı</h3><p>Etkinlik ve yazılım atölyesi planlıyorum, ekibin koordinasyonunu yürütüyorum.</p></div><div class="timeline-mark">03</div></article>
         </div>
 
         <div class="cert-grid reveal" aria-label="Sertifikalar">
@@ -575,8 +581,8 @@
     <section id="lab" class="lab">
       <div class="wrap">
         <div class="section-head reveal">
-          <div><span class="section-kicker">03 / Deney alanı</span><h2>Merakın<br>çalıştığı yer.</h2></div>
-          <p style="color:color-mix(in srgb,var(--paper) 74%,transparent)">Her fikir proje olmak zorunda değil. Ama her iyi proje, “ya şöyle olsaydı?” diye başlayan küçük bir deneyi hak ediyor.</p>
+          <div><span class="section-kicker">03 / Deney alanı</span><h2>Burada<br>oynayabilirsin.</h2></div>
+          <p style="color:color-mix(in srgb,var(--paper) 74%,transparent)">Soldaki terminal gerçekten çalışıyor, komut yazabilirsin. Sağda da aklımdan geçen, bir kısmı hâlâ defterde duran fikirler var.</p>
         </div>
         <div class="lab-grid">
           <div class="console reveal" id="interactive-terminal" aria-label="Etkileşimli terminal">
@@ -586,20 +592,20 @@
             </div>
             <div id="terminal-history">
               <div class="terminal-row"><span class="prompt">$</span><span>whoami</span></div>
-              <p class="terminal-output">Mehmet Emin Akkaya — Bilgisayar Mühendisliği &amp; AI Geliştiricisi</p>
+              <p class="terminal-output">Mehmet Emin Akkaya · bilgisayar mühendisliği öğrencisi</p>
               <div class="terminal-row"><span class="prompt">$</span><span>cat current_focus.txt</span></div>
-              <p class="terminal-output">AI × Mobile (Mİ-GO) × Edge IoT (Study Buddy) × B2B SaaS (KobiFlow)</p>
-              <p class="terminal-output highlight" style="font-size:.73rem;">💡 Komutları görmek için <strong>help</strong> yazıp Enter'a basabilirsiniz.</p>
+              <p class="terminal-output">Mİ-GO (Android) ve KobiFlow (stok paneli) üzerinde çalışıyorum.</p>
+              <p class="terminal-output highlight" style="font-size:.73rem;">Komutları görmek için <strong>help</strong> yaz.</p>
             </div>
             <form id="terminal-form" class="cli-input-line" onsubmit="return false;">
               <span class="prompt">$</span>
-              <input class="cli-input" id="terminal-cli-input" type="text" placeholder="komut yazın (örn: help, projects, migo, cv)..." autocomplete="off" spellcheck="false">
+              <input class="cli-input" id="terminal-cli-input" type="text" placeholder="komut yaz (örn: help, projects, migo, cv)" autocomplete="off" spellcheck="false">
               <span class="terminal-cursor"></span>
             </form>
           </div>
           <div class="idea-machine reveal">
             <div>
-              <span class="section-kicker" style="color:#11120f">FİKİR MAKİNESİ / TIKLA</span>
+              <span class="section-kicker" style="color:#11120f">AKLIMDAKİ FİKİRLER / TIKLA</span>
               <p id="idea-text">Kampüsteki boş çalışma alanlarını anlık gösteren mini uygulama.</p>
             </div>
             <div class="idea-meta">
@@ -619,8 +625,8 @@
 
     <section id="iletisim" class="contact wrap">
       <div class="contact-panel reveal">
-        <span class="section-kicker">04 / Temas kur</span>
-        <h2>Bir fikrin varsa,<br><em>masaya getir.</em></h2>
+        <span class="section-kicker">04 / İletişim</span>
+        <h2>Bir şey sormak<br><em>istersen.</em></h2>
         <div class="contact-links">
           <a class="button contact-primary" href="mailto:mehmeteminakkaya12@gmail.com">E-posta gönder ↗</a>
           <a class="button" href="https://www.linkedin.com/in/mehmeteminakkaya/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
@@ -633,7 +639,7 @@
   </main>
 
   <footer>
-    <div class="footer-inner wrap"><span>© <span id="year">2026</span> MEHMET EMİN AKKAYA</span><span>TASARLANDI + KODLANDI + MERAK EDİLDİ</span></div>
+    <div class="footer-inner wrap"><span>© <span id="year">2026</span> MEHMET EMİN AKKAYA</span><span>TEK BİR HTML DOSYASI · ELDE YAZILDI</span></div>
   </footer>
 
   <nav class="tabbar" id="tabbar" aria-label="Bölüm navigasyonu">
@@ -656,7 +662,7 @@
 
       <section class="cv-block">
         <h3>Hakkımda</h3>
-        <div><p>Bilgisayar mühendisliği öğrencisi olarak yazılım geliştirme ve yapay zekâ alanlarına ilgi duyuyor, bu alanlarda kendimi sürekli geliştirmeye odaklanıyorum. Analitik düşünmeyi seven, öğrenmeye açık ve çözüm odaklı bir yapıya sahibim. Sorumluluk almaktan çekinmem, ekip çalışmasına uyum sağlar ve yaptığım işi disiplinli biçimde yürütürüm.</p></div>
+        <div><p>İstinye Üniversitesi'nde bilgisayar mühendisliği okuyorum. Android tarafında Kotlin, backend tarafında Python ve FastAPI ile çalışıyorum; son bir yıldır projelerimin çoğunda dil modeli API'leri kullanıyorum. Bilişim Kulübü'nde başkan yardımcısıyım, etkinlik ve atölye organizasyonundan sorumluyum.</p></div>
       </section>
 
       <section class="cv-block">
@@ -675,11 +681,11 @@
       <section class="cv-block">
         <h3>Projeler</h3>
         <div>
-          <div class="cv-entry"><h4>Mİ-GO</h4><p>Öğrencilerin yetkinlikleri ve hedefleri doğrultusunda kariyer yolları, meslek önerileri ve uygulanabilir yol haritaları sunan Android (Kotlin & Material 3) mobil rehberi.</p></div>
-          <div class="cv-entry"><h4>KobiFlow (Google Hackathon Finalisti)</h4><p>KOBİ'lerin çoklu depo stok takibini, B2B sipariş sevkiyatlarını ve tedarikçi faturalarının Google Gemini OCR ile işlenmesini sağlayan FastAPI / React SaaS platformu.</p></div>
-          <div class="cv-entry"><h4>Study Buddy (ESP32-S3 & Llama 3.3 70B)</h4><p>Ortam sensörleri, OLED ekran ve sesli AI koçluğu içeren akıllı Pomodoro çalışma istasyonu ve sanal devre simülasyonu.</p></div>
-          <div class="cv-entry"><h4>BenimHakkımda (AI Mülakat Simülatörü)</h4><p>Adayların teknik ve yetkinlik mülakatlarına sesli ve yazılı etkileşimle hazırlanmasını sağlayan canlı web platformu (Node.js, Gemini AI).</p></div>
-          <div class="cv-entry"><h4>ToDoGemini</h4><p>FastAPI, SQLAlchemy, Alembic ve Docker ile containerize edilmiş; Gemini Pro ile görevleri alt adımlara bölen görev yönetim servisi.</p></div>
+          <div class="cv-entry"><h4>Mİ-GO</h4><p>Öğrencinin profilini ve hedefini alıp meslek önerisi ve yol haritası çıkaran Android uygulaması. Kotlin ve Jetpack Compose; model çağrıları Cloudflare Worker üzerinden NVIDIA NIM'e gidiyor.</p></div>
+          <div class="cv-entry"><h4>KobiFlow (Google Hackathon Finalisti)</h4><p>Küçük işletmeler için çoklu depo stok takibi, B2B sipariş akışı ve fatura okuma paneli. FastAPI / SQLAlchemy backend, React arayüz; fatura okuma Llama 3.2 Vision ile, Tesseract yedekli.</p></div>
+          <div class="cv-entry"><h4>Study Buddy (ESP32-S3)</h4><p>Ortam sensörü, OLED ekran ve mikrofon içeren pomodoro istasyonu firmware'i. Konuşma Wit.ai ile yazıya, cevap Groq / Llama 3.1 ile metne, metin VoiceRSS ile sese dönüyor.</p></div>
+          <div class="cv-entry"><h4>BenimHakkımda (Mülakat Simülatörü)</h4><p>Sesli veya yazılı mülakat provası yaptıran, cevabı STAR kriterlerine göre puanlayan web uygulaması. Sunucu tarafı bağımlılıksız Node.js, modeller NVIDIA NIM üzerinden.</p></div>
+          <div class="cv-entry"><h4>ToDoGemini</h4><p>Girilen görevi Gemini ile alt adımlara bölen FastAPI servisi. SQLAlchemy ve Alembic ile veri katmanı, tamamı Docker üzerinde çalışıyor.</p></div>
         </div>
       </section>
 
@@ -864,21 +870,21 @@
       // Expanded Idea Machine (16 ideas)
       const ideas = [
         'Kampüsteki boş çalışma alanlarını anlık gösteren mini uygulama.',
-        'KOBİ’ler için fatura ve fişleri otomatik analiz eden mikro-LLM muhasebe asistanı.',
+        'KOBİ’ler için fatura ve fişleri fotoğraftan okuyup kalemlere ayıran muhasebe asistanı.',
         'XIAO ESP32-S3 ile çalışma ortamı gürültü ve hava kalitesini izleyen akıllı masa istasyonu.',
         'Öğrencinin haftasını okuyup gerçekçi çalışma sprintleri öneren AI koçu.',
         'Game jam ekiplerini yetenek ve oyun zevkine göre eşleştiren takım kurucu.',
-        'Kariyer hedefini küçük günlük görevlere bölen “gelecek pusulası” (Mİ-GO).',
+        'Kariyer hedefini küçük günlük görevlere bölen bir planlama aracı.',
         'Kulüp etkinliklerinde tanışılan kişileri fikirlere göre yeniden buluşturan ağ.',
-        'Medikal MR görüntülerinde 3D U-Net ile 3 saniyede volumetrik doku segmentasyonu.',
+        'Medikal MR görüntülerinde 3D U-Net ile doku segmentasyonu.',
         'Git commit geçmişinden otomatik sprint raporu ve sürüm notu üreten CLI aracı.',
-        'Yapay zekâ ile sesli teknik mülakat pratiği yaptıran sanal mülakat simülatörü.',
+        'Ders notlarından soru üretip seni kendi notlarınla sınayan çalışma aracı.',
         'Üniversite yemekhanesindeki besin değerlerini fotoğraftan hesaplayan görüntü işleme asistanı.',
-        'FastAPI ve Docker üzerinde mikrosaniye yanıt süreli dağıtık görev kuyruğu.',
+        'FastAPI ve Docker üzerinde çalışan küçük bir dağıtık görev kuyruğu.',
         'Yerel donanımda çalışan ve internet gerektirmeyen simetrik şifreli not kasası.',
         'Unity 2D platform oyunları için prosedürel engel ve mekanik üretim algoritması.',
         'ESP32 ile toplantı odalarında ses seviyesine göre renk değiştiren akıllı LED asistanı.',
-        'Kod öğrenirken takıldığın deseni fark edip sana özel alıştırma üreten mentor.'
+        'Hep aynı yerde takıldığını fark edip o konuda alıştırma üreten çalışma arkadaşı.'
       ];
       let ideaIndex = 0;
       const updateIdeaDiscussBtn = (text) => {
@@ -934,75 +940,77 @@
             switch (cmd) {
               case 'help':
                 appendTerminalRow(rawCmd, `
-                  <strong>Kullanılabilir Komutlar:</strong><br>
-                  • <code>projects</code> — Öne çıkan amiral gemisi projeleri listeler.<br>
-                  • <code>migo</code> — Mİ-GO mobil kariyer pusulası detayları.<br>
-                  • <code>kobiflow</code> — KobiFlow KOBİ B2B SaaS platformu mimarisi.<br>
-                  • <code>studybuddy</code> — Study Buddy ESP32 &amp; Llama 3.3 devresi.<br>
-                  • <code>skills</code> — Yetkinlikler ve teknoloji yığını.<br>
-                  • <code>cv</code> — Özgeçmiş modalını açar.<br>
+                  <strong>Kullanılabilir komutlar:</strong><br>
+                  • <code>projects</code> — Projelerin listesi.<br>
+                  • <code>migo</code> — Mİ-GO, Android kariyer uygulaması.<br>
+                  • <code>kobiflow</code> — KobiFlow, stok ve sipariş paneli.<br>
+                  • <code>studybuddy</code> — Study Buddy, ESP32-S3 pomodoro istasyonu.<br>
+                  • <code>benimhakkimda</code> — BenimHakkımda, mülakat simülatörü.<br>
+                  • <code>todogemini</code> — ToDoGemini, görev bölen FastAPI servisi.<br>
+                  • <code>skills</code> — Kullandığım diller ve araçlar.<br>
+                  • <code>cv</code> — Özgeçmişi açar.<br>
                   • <code>contact</code> — E-posta adresini kopyalar.<br>
                   • <code>theme</code> — Gece / gündüz temasını değiştirir.<br>
-                  • <code>clear</code> — Terminal ekranını temizler.<br>
-                  • <code>matrix</code> — Kod akışı simülasyonu başlatır.<br>
-                  • <code>sudo</code> — Yetki kontrolü yapar.
+                  • <code>clear</code> — Ekranı temizler.<br>
+                  • <code>matrix</code> — Küçük bir şaka.<br>
+                  • <code>sudo</code> — Denemesi bedava.
                 `, true);
                 break;
 
               case 'projects':
               case 'isler':
                 appendTerminalRow(rawCmd, `
-                  <strong>Amiral Gemisi Projeler:</strong><br>
-                  1. 📱 <strong>Mİ-GO</strong>: Android (Kotlin), Material 3, AI Career Pathfinder [<a href="https://github.com/mehmeteminakkaya/Migo" target="_blank" style="color:var(--lab-accent)">GitHub ↗</a>]<br>
-                  2. 🤖 <strong>KobiFlow</strong>: Google Hackathon Finalisti, FastAPI, React, Gemini OCR [<a href="https://kobiflow-app.vercel.app" target="_blank" style="color:var(--lab-accent)">Canlı Uygulama ↗</a>] [<a href="https://github.com/mehmeteminakkaya/Nexus-Proje" target="_blank" style="color:var(--lab-accent)">GitHub ↗</a>]<br>
-                  3. ⚡ <strong>Study Buddy</strong>: XIAO ESP32-S3, Llama 3.3 70B, Wokwi IoT Devresi [<a href="https://github.com/mehmeteminakkaya/Study-Buddy-Simulation" target="_blank" style="color:var(--lab-accent)">GitHub ↗</a>]<br>
-                  4. 🎙️ <strong>BenimHakkımda</strong>: AI Mülakat Simülatörü [<a href="https://benimhakkimda-aim-lakat.vercel.app/" target="_blank" style="color:var(--lab-accent)">Canlı Demo ↗</a>]<br>
-                  5. 📋 <strong>ToDoGemini</strong>: FastAPI, Docker, Gemini Pro [<a href="https://github.com/mehmeteminakkaya/ToDo-List" target="_blank" style="color:var(--lab-accent)">GitHub ↗</a>]
+                  <strong>Projeler:</strong><br>
+                  1. <strong>Mİ-GO</strong> — Android; Kotlin, Jetpack Compose, Cloudflare Worker [<a href="https://github.com/mehmeteminakkaya/Migo" target="_blank" style="color:var(--lab-accent)">GitHub ↗</a>]<br>
+                  2. <strong>KobiFlow</strong> — Google Hackathon finalisti; FastAPI, React, Llama 3.2 Vision [<a href="https://kobiflow-app.vercel.app" target="_blank" style="color:var(--lab-accent)">Canlı ↗</a>] [<a href="https://github.com/mehmeteminakkaya/Nexus-Proje" target="_blank" style="color:var(--lab-accent)">GitHub ↗</a>]<br>
+                  3. <strong>Study Buddy</strong> — ESP32-S3; C++, Groq / Llama 3.1 [<a href="https://github.com/mehmeteminakkaya/Study-Buddy-Simulation" target="_blank" style="color:var(--lab-accent)">GitHub ↗</a>]<br>
+                  4. <strong>BenimHakkımda</strong> — Bağımlılıksız Node.js, NVIDIA NIM [<a href="https://benimhakkimda-aim-lakat.vercel.app/" target="_blank" style="color:var(--lab-accent)">Canlı ↗</a>]<br>
+                  5. <strong>ToDoGemini</strong> — FastAPI, Docker, Gemini [<a href="https://github.com/mehmeteminakkaya/ToDo-List" target="_blank" style="color:var(--lab-accent)">GitHub ↗</a>]
                 `);
                 break;
 
               case 'migo':
-                appendTerminalRow(rawCmd, `📱 <strong>Mİ-GO — AI Destekli Kişisel Kariyer Pusulası</strong><br>• Mimari: Kotlin, Jetpack Compose / Material 3, Android Studio<br>• Amaç: Öğrencinin yetkinliklerini analiz edip kişiselleştirilmiş rota ve beceri hedefleri çizmek.<br>• Repo: <a href="https://github.com/mehmeteminakkaya/Migo" target="_blank" style="color:var(--lab-accent)">github.com/mehmeteminakkaya/Migo ↗</a>`);
+                appendTerminalRow(rawCmd, `<strong>Mİ-GO — Android kariyer uygulaması</strong><br>• Yığın: Kotlin, Jetpack Compose / Material 3<br>• Öğrencinin profilini ve hedefini alıp meslek önerisi ve yol haritası çıkarıyor.<br>• Model çağrıları Cloudflare Worker üzerinden NVIDIA NIM'e gidiyor (Llama 3.1, yedek Mistral).<br>• Repo: <a href="https://github.com/mehmeteminakkaya/Migo" target="_blank" style="color:var(--lab-accent)">github.com/mehmeteminakkaya/Migo ↗</a>`);
                 break;
 
               case 'kobiflow':
               case 'nexus': // eski ad — kısayol korunuyor
-                appendTerminalRow(rawCmd, `🤖 <strong>KobiFlow — KOBİ Operasyon &amp; Envanter Yönetim Platformu</strong><br>• Başarı: Google Hackathon Finalisti<br>• Mimari: FastAPI (Asenkron Python), React / Vite, Google Gemini Flash OCR<br>• Kapsam: Çoklu depo stok takibi, B2B sipariş sevkiyatı, tedarikçi faturalarının OCR ile işlenmesi.<br>• Canlı: <a href="https://kobiflow-app.vercel.app" target="_blank" style="color:var(--lab-accent)">kobiflow-app.vercel.app ↗</a><br>• Repo: <a href="https://github.com/mehmeteminakkaya/Nexus-Proje" target="_blank" style="color:var(--lab-accent)">github.com/mehmeteminakkaya/Nexus-Proje ↗</a>`);
+                appendTerminalRow(rawCmd, `<strong>KobiFlow — stok ve sipariş paneli</strong><br>• Google Hackathon finalisti<br>• Yığın: FastAPI / SQLAlchemy, React + Vite<br>• Kapsam: çoklu depo stok takibi, B2B sipariş akışı, tedarikçi faturasını fotoğraftan okuma.<br>• Fatura okuma Llama 3.2 Vision ile yapılıyor, Tesseract yedekte.<br>• Canlı: <a href="https://kobiflow-app.vercel.app" target="_blank" style="color:var(--lab-accent)">kobiflow-app.vercel.app ↗</a><br>• Repo: <a href="https://github.com/mehmeteminakkaya/Nexus-Proje" target="_blank" style="color:var(--lab-accent)">github.com/mehmeteminakkaya/Nexus-Proje ↗</a>`);
                 break;
 
               case 'studybuddy':
-                appendTerminalRow(rawCmd, `⚡ <strong>Study Buddy — Akıllı Devre &amp; Pomodoro AI</strong><br>• Mimari: XIAO ESP32-S3, C++, BME280, SSD1306 OLED, Llama 3.3 70B via Groq<br>• Repo: <a href="https://github.com/mehmeteminakkaya/Study-Buddy-Simulation" target="_blank" style="color:var(--lab-accent)">github.com/mehmeteminakkaya/Study-Buddy-Simulation ↗</a>`);
+                appendTerminalRow(rawCmd, `<strong>Study Buddy — pomodoro istasyonu</strong><br>• Donanım: XIAO ESP32-S3, BME280, SH1106 OLED, HX711 yük hücresi<br>• Ses zinciri: Wit.ai (konuşmayı yazıya), Groq / Llama 3.1 (cevap), VoiceRSS (seslendirme)<br>• Repo: <a href="https://github.com/mehmeteminakkaya/Study-Buddy-Simulation" target="_blank" style="color:var(--lab-accent)">github.com/mehmeteminakkaya/Study-Buddy-Simulation ↗</a>`);
                 break;
 
               case 'benimhakkimda':
-                appendTerminalRow(rawCmd, `🎙️ <strong>BenimHakkımda — İnteraktif AI Mülakat Simülatörü</strong><br>• Mimari: Node.js, Express, Gemini AI, Web Audio API<br>• Canlı Link: <a href="https://benimhakkimda-aim-lakat.vercel.app/" target="_blank" style="color:var(--lab-accent)">benimhakkimda-aim-lakat.vercel.app ↗</a>`);
+                appendTerminalRow(rawCmd, `<strong>BenimHakkımda — mülakat simülatörü</strong><br>• Sunucu: saf node:http, hiç npm bağımlılığı yok<br>• Model: NVIDIA NIM üzerinden Llama 3.1<br>• Cevapları STAR kriterlerine göre puanlıyor.<br>• Canlı: <a href="https://benimhakkimda-aim-lakat.vercel.app/" target="_blank" style="color:var(--lab-accent)">benimhakkimda-aim-lakat.vercel.app ↗</a>`);
                 break;
 
               case 'todogemini':
-                appendTerminalRow(rawCmd, `📋 <strong>ToDoGemini — AI Görev Orkestrasyonu</strong><br>• Mimari: FastAPI, SQLAlchemy, Alembic, Docker, Gemini Pro<br>• Repo: <a href="https://github.com/mehmeteminakkaya/ToDo-List" target="_blank" style="color:var(--lab-accent)">github.com/mehmeteminakkaya/ToDo-List ↗</a>`);
+                appendTerminalRow(rawCmd, `<strong>ToDoGemini — görev bölen servis</strong><br>• Yığın: FastAPI, SQLAlchemy, Alembic, Docker<br>• Girilen görevi Gemini ile alt adımlara bölüyor.<br>• Repo: <a href="https://github.com/mehmeteminakkaya/ToDo-List" target="_blank" style="color:var(--lab-accent)">github.com/mehmeteminakkaya/ToDo-List ↗</a>`);
                 break;
 
               case 'skills':
               case 'tech':
-                appendTerminalRow(rawCmd, `<strong>Teknik Yetkinlikler:</strong><br>• Diller: Python, C++, Kotlin, SQL, JavaScript<br>• AI &amp; Veri: PyTorch, Gemini API, Llama 3.3, 3D U-Net, CNN, OCR<br>• Backend &amp; DevOps: FastAPI, Node.js, Docker, Linux, Git<br>• Gömülü &amp; Ağ: ESP32-S3, Arduino, I2C/SPI, Cisco Packet Tracer, OSPF, VLAN`);
+                appendTerminalRow(rawCmd, `<strong>Kullandığım diller ve araçlar:</strong><br>• Diller: Python, C++, Kotlin, SQL, JavaScript<br>• AI ve veri: PyTorch, Gemini API, Llama, 3D U-Net, CNN, OCR<br>• Backend &amp; DevOps: FastAPI, Node.js, Docker, Linux, Git<br>• Gömülü &amp; Ağ: ESP32-S3, Arduino, I2C/SPI, Cisco Packet Tracer, OSPF, VLAN`);
                 break;
 
               case 'cv':
               case 'resume':
-                appendTerminalRow(rawCmd, `📄 Özgeçmiş açılıyor...`);
+                appendTerminalRow(rawCmd, `Özgeçmiş açılıyor...`);
                 document.querySelector('#cv-open').click();
                 break;
 
               case 'contact':
               case 'email':
                 navigator.clipboard.writeText('mehmeteminakkaya12@gmail.com');
-                appendTerminalRow(rawCmd, `📬 E-posta adresi (<strong>mehmeteminakkaya12@gmail.com</strong>) panoya kopyalandı!`);
+                appendTerminalRow(rawCmd, `E-posta adresi panoya kopyalandı: <strong>mehmeteminakkaya12@gmail.com</strong>`);
                 showToast('mehmeteminakkaya12@gmail.com kopyalandı.');
                 break;
 
               case 'theme':
                 themeButton.click();
-                appendTerminalRow(rawCmd, `🌓 Tema değiştirildi.`);
+                appendTerminalRow(rawCmd, `Tema değiştirildi.`);
                 break;
 
               case 'clear':
@@ -1011,17 +1019,17 @@
 
               case 'matrix':
                 appendTerminalRow(rawCmd, `01001101 01000101 01000001 00100000 01010010 01001111 01000011 01001011 01010011 00100001`);
-                showToast('Matrix dizisi yüklendi ✦');
+                showToast('matrix');
                 break;
 
               case 'sudo':
               case 'sudo rm -rf /':
               case 'sudo su':
-                appendTerminalRow(rawCmd, `⚠️ Yetki Reddedildi: root erişimi <strong>Mehmet Emin Akkaya</strong> tarafından korunmaktadır. 😉`);
+                appendTerminalRow(rawCmd, `izin reddedildi: mehmet bu makinede sudoers listesinde değil. olay raporlandı.`);
                 break;
 
               default:
-                appendTerminalRow(rawCmd, `Komut bulunamadı: <strong>${rawCmd}</strong>. Kullanılabilir komutları görmek için <strong>help</strong> yazın.`);
+                appendTerminalRow(rawCmd, `Böyle bir komut yok: <strong>${rawCmd}</strong>. Listeyi görmek için <strong>help</strong> yaz.`);
             }
           }
         });
@@ -1042,14 +1050,14 @@
             try {
               await navigator.share({
                 title: 'Mehmet Emin Akkaya — Portfolio',
-                text: 'Mehmet Emin Akkaya’nın yapay zekâ, mobil ve donanım projelerini inceleyin.',
+                text: 'Mehmet Emin Akkaya’nın Android, web ve gömülü sistem projeleri.',
                 url: window.location.href
               });
             } catch {}
           } else {
             try {
               await navigator.clipboard.writeText(window.location.href);
-              showToast('Portfolyo bağlantısı kopyalandı! 📋');
+              showToast('Bağlantı kopyalandı.');
             } catch {
               showToast(window.location.href);
             }

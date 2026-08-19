@@ -321,11 +321,10 @@
     .prompt { color: var(--lab-accent); font-weight: 500; flex-shrink: 0; }
     .terminal-output { color: color-mix(in srgb, var(--paper) 84%, transparent); margin: 0 0 10px 0; word-break: break-word; }
     .terminal-output.highlight { color: var(--lab-accent); }
-    .cli-input-line { display: flex; align-items: center; gap: 10px; margin-top: auto; padding: 8px 12px; border: 1px dashed color-mix(in srgb, var(--paper) 25%, transparent); border-radius: 8px; background: color-mix(in srgb, var(--paper) 4%, transparent); transition: border-color .2s, background .2s, outline .2s; }
+    .cli-input-line { display: flex; align-items: center; gap: 10px; margin-top: auto; padding-top: 12px; border-top: 1px dashed color-mix(in srgb, var(--paper) 20%, transparent); background: transparent; transition: border-top-color .2s; }
+    .cli-input-line:focus-within { border-top-color: var(--lab-accent); border-top-style: solid; }
     .cli-input { flex: 1; min-height: 24px; background: transparent; border: none; outline: none; color: var(--paper); font: inherit; padding: 0; caret-color: var(--lab-accent); }
-    .cli-input-line:focus-within { border-style: solid; border-color: var(--lab-accent); background: color-mix(in srgb, var(--paper) 8%, transparent); }
-    .cli-input-line:has(.cli-input:focus-visible) { outline: 2px solid var(--lab-accent); outline-offset: 1px; }
-    .cli-input::placeholder { color: color-mix(in srgb, var(--paper) 65%, transparent); }
+    .cli-input::placeholder { color: color-mix(in srgb, var(--paper) 55%, transparent); }
     .idea-machine { display: grid; align-content: space-between; gap: 28px; padding: 38px; background: var(--acid); color: #11120f; }
     .idea-machine p { max-width: 620px; margin: 10px 0 0; font: 400 clamp(2.4rem,3.8vw,3.5rem)/1.02 var(--font-serif); letter-spacing: -.03em; text-wrap: balance; }
     .idea-machine .button { width: max-content; color: #11120f; border-color: #11120f; }

@@ -91,6 +91,7 @@
       background:
         radial-gradient(600px circle at var(--pointer-x) var(--pointer-y), rgba(49,87,255,.11), transparent 42%),
         var(--paper);
+      background-attachment: fixed;
       font-family: var(--font-sans);
       line-height: 1.55;
       overflow-x: hidden;
@@ -596,7 +597,6 @@
           <div class="console reveal" id="interactive-terminal" aria-label="Etkileşimli terminal">
             <div class="console-top">
               <span>mehmet@istanbul:~ (interaktif)</span>
-              <span style="display:flex;gap:6px;align-items:center;"><span class="status-dot" style="width:6px;height:6px;"></span>canlı cli</span>
             </div>
             <div id="terminal-history">
               <div class="terminal-row"><span class="prompt">$</span><span>whoami</span></div>
@@ -620,7 +620,6 @@
                 <button class="button" id="idea-button" type="button">Başka bir fikir üret <span>↻</span></button>
                 <a class="button" id="idea-discuss" href="mailto:mehmeteminakkaya12@gmail.com?subject=Fikir%20Hakk%C4%B1nda%20Sohbet" style="background:#11120f;color:#f2f0e9;border-color:#11120f;">Bu fikri konuşalım ↗</a>
               </div>
-              <span class="idea-count" id="idea-count">FİKİR 01 / 16</span>
             </div>
           </div>
         </div>
@@ -913,7 +912,6 @@
         const ideaText = document.querySelector('#idea-text');
         ideaText.animate([{opacity:0, transform:'translateY(10px)'},{opacity:1, transform:'none'}], {duration:380, easing:'ease-out'});
         ideaText.textContent = currentIdea;
-        document.querySelector('#idea-count').textContent = `FİKİR ${String(ideaIndex + 1).padStart(2,'0')} / ${String(ideas.length).padStart(2,'0')}`;
         updateIdeaDiscussBtn(currentIdea);
       });
 

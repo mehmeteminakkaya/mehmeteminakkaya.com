@@ -257,11 +257,11 @@
     .ticker-line span::after { content: "✦"; margin-left: 28px; }
     @keyframes ticker { to { transform: translateX(-50%); } }
 
-    section { padding: 120px 0; }
+    section { padding: clamp(68px, 7vw, 92px) 0; }
     .section-kicker { color: var(--blue-text); font: 500 .76rem var(--font-mono); text-transform: uppercase; letter-spacing: .12em; }
-    .section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 54px; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 32px; flex-wrap: wrap; margin-bottom: 32px; }
     .section-head h2 { margin: 10px 0 0; font: 400 clamp(3.4rem,7vw,7.2rem)/.88 var(--font-serif); letter-spacing: -.045em; }
-    .section-head p { max-width: 480px; justify-self: end; margin: 0; color: var(--muted); font-size: 1rem; }
+    .section-head p { max-width: 480px; margin: 0; color: var(--muted); font-size: 1rem; }
 
     .bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
     .card { position: relative; min-height: 280px; padding: 28px; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); box-shadow: 0 1px 0 rgba(255,255,255,.25) inset; transition: transform .35s, box-shadow .35s, border-color .35s; }
@@ -298,8 +298,8 @@
     .mini-card.accent .number { color: #2b1409; }
 
     .story { border-top: 1px solid var(--line); }
-    .timeline { margin-top: 30px; }
-    .timeline-item { display: grid; grid-template-columns: 160px 1fr auto; gap: 30px; align-items: start; padding: 34px 0; border-bottom: 1px solid var(--line); transition: padding .3s, color .3s; }
+    .timeline { margin-top: 0; }
+    .timeline-item { display: grid; grid-template-columns: 160px 1fr auto; gap: 30px; align-items: start; padding: 24px 0; border-bottom: 1px solid var(--line); transition: padding .3s, color .3s; }
     .timeline-item:hover { padding-left: 16px; color: var(--blue-text); }
     .timeline-date { font: 500 .75rem var(--font-mono); color: var(--muted); }
     .timeline-item h3 { margin: 0; font-size: clamp(1.4rem,3vw,2.25rem); letter-spacing: -.045em; }
@@ -337,7 +337,7 @@
     .cli-input::placeholder { color: color-mix(in srgb, var(--paper) 70%, transparent); }
     @keyframes blink { 50% { opacity: 0; } }
     .idea-machine { display: grid; align-content: space-between; gap: 28px; padding: 38px; background: var(--acid); color: #11120f; }
-    .idea-machine p { max-width: 600px; margin: 0; font: 400 clamp(2rem,3vw,2.75rem)/1.02 var(--font-serif); letter-spacing: -.03em; text-wrap: balance; }
+    .idea-machine p { max-width: 620px; margin: 10px 0 0; font: 400 clamp(2.4rem,3.8vw,3.5rem)/1.02 var(--font-serif); letter-spacing: -.03em; text-wrap: balance; }
     /* Fikir makinesinin zemini her iki temada da asit yeşili kalır,
        bu yüzden butonları tema token'ına değil sabit koyuya bağlanır. */
     .idea-machine .button { width: max-content; color: #11120f; border-color: #11120f; }
@@ -347,7 +347,7 @@
     .idea-count { flex-shrink: 0; white-space: nowrap; font: 500 .74rem var(--font-mono); }
 
 
-    .cert-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 50px; }
+    .cert-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 36px; }
     /* Sertifikalar link değil, bu yüzden tıklanabilirlik ima eden ↗ oku kaldırıldı. */
     .cert { min-height: 190px; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; border: 1px solid var(--line); border-radius: 20px; }
     .cert-provider { color: var(--blue-text); font: 500 .73rem var(--font-mono); text-transform: uppercase; }
@@ -451,8 +451,8 @@
       .hero h1 { font-size: clamp(3.35rem,17vw,4.35rem); overflow-wrap: anywhere; }
       .hero h1 .soft { display: block; }
       .hero-note { padding-left: 16px; }
-      section { padding: 84px 0; }
-      .section-head { margin-bottom: 34px; }
+      section { padding: 56px 0; }
+      .section-head { margin-bottom: 24px; }
       .section-head h2 { font-size: 3.5rem; }
       .mini-card { grid-column: span 12; }
       .timeline-item { grid-template-columns: 1fr; gap: 8px; }
@@ -516,7 +516,6 @@
           <span class="status"><span class="status-dot"></span>Yeni projelere açığım</span>
           <span class="time" id="istanbul-time">İstanbul · --:--</span>
           <span class="mono" style="font-size:.73rem;font-weight:500;color:var(--muted)">TRT / UTC+3</span>
-          <div style="margin-top:12px;font-size:.75rem;font-weight:500;display:flex;align-items:center;gap:7px;color:var(--muted);font-family:var(--font-mono);"><span class="status-dot" style="width:7px;height:7px;background:#3b82f6;box-shadow:0 0 0 4px rgba(59,130,246,.15);"></span><span>Üstünde çalıştığım: <strong style="color:var(--ink)">Mİ-GO &amp; KobiFlow</strong></span></div>
         </aside>
       </div>
     </section>
@@ -582,7 +581,6 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div><span class="section-kicker">02 / Hikâye</span><h2>Nereden<br>geliyorum.</h2></div>
-          <p>Okul, kulüp ve kendi projelerim aynı anda gidiyor. Aşağısı tarih sırasıyla.</p>
         </div>
         <div class="timeline">
           <article class="timeline-item reveal"><div class="timeline-date">2025 — DEVAM</div><div><h3>Google Yapay Zeka ve Teknoloji Akademisi</h3><p>Türkiye genelinden seçilen 1.500 kişiden biriyim. Yapay zekâ, veri analizi ve yazılım üzerine eğitim bursu.</p></div><div class="timeline-mark">01</div></article>
@@ -657,7 +655,7 @@
   </main>
 
   <footer>
-    <div class="footer-inner wrap"><span>© <span id="year">2026</span> MEHMET EMİN AKKAYA</span><span>TEK BİR HTML DOSYASI · ELDE YAZILDI</span></div>
+    <div class="footer-inner wrap"><span>© <span id="year">2026</span> MEHMET EMİN AKKAYA</span></div>
   </footer>
 
   <nav class="tabbar" id="tabbar" aria-label="Bölüm navigasyonu">

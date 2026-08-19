@@ -328,13 +328,8 @@
     .cli-input::placeholder { color: color-mix(in srgb, var(--paper) 65%, transparent); }
     .idea-machine { display: grid; align-content: space-between; gap: 28px; padding: 38px; background: var(--acid); color: #11120f; }
     .idea-machine p { max-width: 620px; margin: 10px 0 0; font: 400 clamp(2.4rem,3.8vw,3.5rem)/1.02 var(--font-serif); letter-spacing: -.03em; text-wrap: balance; }
-    /* Fikir makinesinin zemini her iki temada da asit yeşili kalır,
-       bu yüzden butonları tema token'ına değil sabit koyuya bağlanır. */
     .idea-machine .button { width: max-content; color: #11120f; border-color: #11120f; }
-    /* Lab oranları değişince panel daraldı; sayaç dar alanda alt satıra iner,
-       iki satıra bölünmez. */
-    .idea-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 20px; }
-    .idea-count { flex-shrink: 0; white-space: nowrap; font: 500 .74rem var(--font-mono); }
+    .idea-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 
 
     .cert-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 36px; }

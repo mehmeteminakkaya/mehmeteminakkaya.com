@@ -320,22 +320,11 @@
     .prompt { color: var(--lab-accent); font-weight: 500; flex-shrink: 0; }
     .terminal-output { color: color-mix(in srgb, var(--paper) 84%, transparent); margin: 0 0 10px 0; word-break: break-word; }
     .terminal-output.highlight { color: var(--lab-accent); }
-    .terminal-cursor { display: inline-block; width: 8px; height: 15px; vertical-align: -2px; background: var(--lab-accent); animation: blink 1s steps(1) infinite; }
-    .cli-input-line { display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 10px; border-top: 1px dashed color-mix(in srgb, var(--paper) 20%, transparent); }
-    .cli-input { flex: 1; min-height: 30px; background: transparent; border: none; outline: none; color: var(--paper); font: inherit; padding: 0; }
-    /* Girdinin kendi halkasi dar satiri tasiyordu; odak isareti komut
-       satirinin tamamina verilir, bos alanda da gorunur. */
-    .cli-input-line { border-radius: 8px; padding-inline: 8px; margin-inline: -8px; }
-    .cli-input-line:has(.cli-input:focus-visible) {
-      border-top-color: var(--lab-accent);
-      border-top-style: solid;
-      outline: 3px solid #11120f;
-      outline-offset: 2px;
-      box-shadow: 0 0 0 6px #f2f0e9;
-      border-radius: 8px;
-    }
-    .cli-input::placeholder { color: color-mix(in srgb, var(--paper) 70%, transparent); }
-    @keyframes blink { 50% { opacity: 0; } }
+    .cli-input-line { display: flex; align-items: center; gap: 10px; margin-top: auto; padding: 8px 12px; border: 1px dashed color-mix(in srgb, var(--paper) 25%, transparent); border-radius: 8px; background: color-mix(in srgb, var(--paper) 4%, transparent); transition: border-color .2s, background .2s, outline .2s; }
+    .cli-input { flex: 1; min-height: 24px; background: transparent; border: none; outline: none; color: var(--paper); font: inherit; padding: 0; caret-color: var(--lab-accent); }
+    .cli-input-line:focus-within { border-style: solid; border-color: var(--lab-accent); background: color-mix(in srgb, var(--paper) 8%, transparent); }
+    .cli-input-line:has(.cli-input:focus-visible) { outline: 2px solid var(--lab-accent); outline-offset: 1px; }
+    .cli-input::placeholder { color: color-mix(in srgb, var(--paper) 65%, transparent); }
     .idea-machine { display: grid; align-content: space-between; gap: 28px; padding: 38px; background: var(--acid); color: #11120f; }
     .idea-machine p { max-width: 620px; margin: 10px 0 0; font: 400 clamp(2.4rem,3.8vw,3.5rem)/1.02 var(--font-serif); letter-spacing: -.03em; text-wrap: balance; }
     /* Fikir makinesinin zemini her iki temada da asit yeşili kalır,
@@ -619,7 +608,6 @@
             <form id="terminal-form" class="cli-input-line" onsubmit="return false;">
               <span class="prompt">$</span>
               <input class="cli-input" id="terminal-cli-input" type="text" placeholder="komut yaz (örn: help, projects, migo, cv)" autocomplete="off" spellcheck="false">
-              <span class="terminal-cursor"></span>
             </form>
           </div>
           <div class="idea-machine reveal">

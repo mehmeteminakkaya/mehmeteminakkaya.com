@@ -253,30 +253,34 @@
     .card p { color: var(--muted); }
     .card .number { font: 500 .73rem var(--font-mono); color: var(--muted); }
     .project-main { grid-column: span 7; min-height: 500px; color: white; background: var(--blue); }
-    .project-main p { color: rgba(255,255,255,.92); max-width: 480px; }
+    .project-main p { color: #fff; font-weight: 500; max-width: 480px; }
     .project-main h3 { max-width: 580px; font: 400 clamp(3rem,6vw,6rem)/.88 var(--font-serif); }
     .project-main::after { content: "Mİ-GO"; position: absolute; right: -12px; bottom: -62px; font-size: clamp(7rem,16vw,14rem); font-weight: 800; line-height: 1; color: rgba(255,255,255,.11); letter-spacing: -.1em; pointer-events: none; }
     /* İki amiral gemisi kartı aynı tipografik sistemi paylaşır; serif başlık
        "flagship" işareti, sadece Mİ-GO'ya verilince iki ayrı tasarım gibi duruyordu. */
     .project-jam { grid-column: span 5; min-height: 500px; display: flex; flex-direction: column; background: var(--acid); color: #11120f; }
     .project-jam h3 { max-width: 460px; font: 400 clamp(2.1rem,3.2vw,3.3rem)/.95 var(--font-serif); letter-spacing: -.03em; }
-    .project-jam p { color: #4f513f; max-width: 460px; }
+    .project-jam p { color: #3f4031; font-weight: 500; max-width: 460px; }
     .project-jam::after { content: "KOBİFLOW"; position: absolute; right: -8px; bottom: -34px; font-size: clamp(4rem,8vw,7rem); font-weight: 800; line-height: 1; color: rgba(17,18,15,.09); letter-spacing: -.08em; pointer-events: none; }
     .pixel-grid { display: grid; grid-template-columns: repeat(5, 18px); gap: 7px; position: absolute; right: 32px; bottom: 34px; transform: rotate(9deg); }
     .pixel-grid i { width: 18px; aspect-ratio: 1; background: #11120f; animation: pixel 2.2s ease-in-out infinite alternate; animation-delay: calc(var(--i) * .08s); }
     @keyframes pixel { to { transform: translateY(-14px); background: var(--orange); } }
     .mini-card { grid-column: span 4; min-height: 260px; }
     .mini-card.accent { background: var(--orange); color: #11120f; }
-    .mini-card.accent p { color: #4b271c; }
+    .mini-card.accent p { color: #2b1409; font-weight: 500; }
     .card-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
     .tag { padding: 7px 11px; border: 1px solid color-mix(in srgb, currentColor 40%, transparent); border-radius: 999px; font: 500 .72rem var(--font-mono); }
 
-    /* Vurgu kartlarında --muted ve %75 opaklık WCAG AA'yı geçmiyor
+    /* Doymuş renkli zeminde aynı kontrast oranı açık zemindekinden daha
+       zayıf okunur ve 400 kesim erir; bu yüzden vurgu kartlarının gövde
+       metni hem koyu hem 500 ağırlıkta. Turuncu sayfadaki en parlak zemin
+       (#ff6b35), en çok oradaki metin acı çekiyordu: 4.61:1 -> 6.14:1.
+       Vurgu kartlarında --muted ve %75 opaklık WCAG AA'yı geçmiyor
        (mavi zeminde 1.04:1'e kadar düşüyordu); her zemine okunur ton verilir. */
-    .project-main .number { color: rgba(255,255,255,.94); }
+    .project-main .number { color: #fff; }
     .project-main .tag { border-color: rgba(255,255,255,.5); }
-    .project-jam .number { color: #4f513f; }
-    .mini-card.accent .number { color: #3d1f16; }
+    .project-jam .number { color: #3f4031; }
+    .mini-card.accent .number { color: #2b1409; }
 
     .story { border-top: 1px solid var(--line); }
     .timeline { margin-top: 30px; }

@@ -21,7 +21,7 @@
 ## 🌟 Öne Çıkan Özellikler
 
 * **🖋️ Editoryal & Lüks Minimalist Tasarım:** Tipografik hiyerarşi, özel HSL renk paleti ve gömülü (zero-CDN) WOFF2 font mimarisi.
-* **💻 Canlı Etkileşimli CLI Terminal (`#lab`):** Klavyeden gerçek komutları çalıştıran dahili terminal (`help`, `projects`, `migo`, `kobiflow`, `studybuddy`, `benimhakkimda`, `todogemini`, `skills`, `cv`, `contact`, `theme`, `clear`, `matrix`, `sudo`).
+* **💻 Canlı Etkileşimli CLI Terminal (`#lab`):** Klavyeden gerçek komutları çalıştıran dahili terminal (`help`, `whoami`, `projects`, `migo`, `kobiflow`, `studybuddy`, `benimhakkimda`, `todogemini`, `skills`, `cv`, `contact`, `theme`, `clear`, `matrix`, `sudo`).
 * **🔊 Web Audio API Ses Sentezleyici Motoru:** Sıfır harici ses dosyasıyla osilatör tabanlı gerçek zamanlı mekanik tuş ve klik ses geri bildirimi (Açılabilir / Kapatılabilir).
 * **⌨️ ⌘K / Ctrl+K Komut Paleti:** Sayfa içi hızlı erişim, tema geçişi ve sürpriz (chaos) modları.
 * **💡 Dinamik Fikir Makinesi:** Odak alanlarına özel 16 özgün fikir ve tek tıkla doğrudan e-posta taslağı oluşturan entegrasyon.

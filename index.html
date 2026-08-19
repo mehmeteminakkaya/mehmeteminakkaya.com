@@ -53,7 +53,7 @@
     :root {
       --paper: #f2f0e9;
       --ink: #11120f;
-      --muted: #686961;
+      --muted: #5a5b54;
       --line: rgba(17,18,15,.16);
       --blue: #3157ff;
       /* Yazı rengi olarak kullanılan mavi ayrı tutulur: --blue aynı zamanda
@@ -102,7 +102,7 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: .28;
+      opacity: .16;
       z-index: 20;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
       mix-blend-mode: multiply;
@@ -159,7 +159,7 @@
     }
     .icon-button:hover, .command-button:hover { transform: translateY(-2px); border-color: var(--blue); }
     .icon-button { width: 40px; border-radius: 50%; }
-    .command-button { border-radius: 999px; padding: 0 13px; font: 500 .7rem var(--font-mono); }
+    .command-button { border-radius: 999px; padding: 0 13px; font: 500 .76rem var(--font-mono); }
     .cmd-short { display: none; }
 
     /* Mobil sekme barı: 900px altında üstteki nav bağlantıları gizlendiği için
@@ -185,7 +185,7 @@
         padding: 8px 4px;
         color: var(--muted);
         text-decoration: none;
-        font: 500 .66rem var(--font-mono);
+        font: 500 .72rem var(--font-mono);
         text-transform: uppercase;
         letter-spacing: .06em;
       }
@@ -197,7 +197,7 @@
     @media print { .tabbar { display: none !important; } body { padding-bottom: 0 !important; } }
 
     .hero { min-height: calc(100svh - 73px); display: grid; align-items: center; padding: 72px 0 46px; }
-    .eyebrow { display: flex; gap: 12px; align-items: center; font: 500 .75rem var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
+    .eyebrow { display: flex; gap: 12px; align-items: center; font: 500 .78rem var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
     .eyebrow::before { content: ""; width: 42px; height: 2px; background: var(--orange); }
     .hero h1 { margin: 26px 0 30px; max-width: 1100px; font-size: clamp(4.1rem, 10.5vw, 9.8rem); font-weight: 600; letter-spacing: -.085em; line-height: .82; }
     .hero h1 .soft { font-weight: 400; font-style: italic; color: var(--blue-text); }
@@ -230,18 +230,18 @@
     .button .arrow { font-size: 1.25rem; }
     .hero-note { border-left: 1px solid var(--line); padding-left: 26px; padding-top: 6px; width: max-content; max-width: 320px; }
     .hero-note .time { display: block; margin-top: 8px; font: 400 clamp(1.5rem,3vw,2.6rem) var(--font-serif); }
-    .status { display: inline-flex; gap: 8px; align-items: center; color: var(--muted); font: 400 .72rem var(--font-mono); }
+    .status { display: inline-flex; gap: 8px; align-items: center; color: var(--muted); font: 500 .75rem var(--font-mono); }
     .status-dot { width: 9px; height: 9px; border-radius: 50%; background: #36bf69; box-shadow: 0 0 0 5px rgba(54,191,105,.12); animation: pulse 2s infinite; }
     @keyframes pulse { 50% { box-shadow: 0 0 0 10px rgba(54,191,105,0); } }
 
     .ticker { overflow: hidden; border-block: 1px solid var(--line); background: var(--acid); color: #11120f; transform: rotate(-1deg) scale(1.01); }
     .ticker-track { display: flex; width: max-content; animation: ticker 26s linear infinite; }
-    .ticker-line { display: flex; gap: 28px; align-items: center; padding: 13px 14px; font: 500 .74rem var(--font-mono); text-transform: uppercase; letter-spacing: .06em; }
+    .ticker-line { display: flex; gap: 28px; align-items: center; padding: 13px 14px; font: 500 .78rem var(--font-mono); text-transform: uppercase; letter-spacing: .06em; }
     .ticker-line span::after { content: "✦"; margin-left: 28px; }
     @keyframes ticker { to { transform: translateX(-50%); } }
 
     section { padding: 120px 0; }
-    .section-kicker { color: var(--blue-text); font: 500 .72rem var(--font-mono); text-transform: uppercase; letter-spacing: .12em; }
+    .section-kicker { color: var(--blue-text); font: 500 .76rem var(--font-mono); text-transform: uppercase; letter-spacing: .12em; }
     .section-head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 54px; }
     .section-head h2 { margin: 10px 0 0; font: 400 clamp(3.4rem,7vw,7.2rem)/.88 var(--font-serif); letter-spacing: -.045em; }
     .section-head p { max-width: 480px; justify-self: end; margin: 0; color: var(--muted); font-size: 1rem; }
@@ -251,7 +251,7 @@
     .card:hover { transform: translateY(-7px); box-shadow: var(--shadow); border-color: color-mix(in srgb, var(--blue) 50%, var(--line)); }
     .card h3 { margin: 12px 0 8px; font-size: clamp(1.45rem,2.5vw,2.2rem); letter-spacing: -.05em; line-height: 1.04; }
     .card p { color: var(--muted); }
-    .card .number { font: 400 .68rem var(--font-mono); color: var(--muted); }
+    .card .number { font: 500 .73rem var(--font-mono); color: var(--muted); }
     .project-main { grid-column: span 7; min-height: 500px; color: white; background: var(--blue); }
     .project-main p { color: rgba(255,255,255,.92); max-width: 480px; }
     .project-main h3 { max-width: 580px; font: 400 clamp(3rem,6vw,6rem)/.88 var(--font-serif); }
@@ -269,12 +269,12 @@
     .mini-card.accent { background: var(--orange); color: #11120f; }
     .mini-card.accent p { color: #4b271c; }
     .card-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
-    .tag { padding: 7px 11px; border: 1px solid currentColor; border-radius: 999px; font: 400 .68rem var(--font-mono); opacity: .75; }
+    .tag { padding: 7px 11px; border: 1px solid color-mix(in srgb, currentColor 40%, transparent); border-radius: 999px; font: 500 .72rem var(--font-mono); }
 
     /* Vurgu kartlarında --muted ve %75 opaklık WCAG AA'yı geçmiyor
        (mavi zeminde 1.04:1'e kadar düşüyordu); her zemine okunur ton verilir. */
     .project-main .number { color: rgba(255,255,255,.94); }
-    .project-main .tag { opacity: .95; }
+    .project-main .tag { border-color: rgba(255,255,255,.5); }
     .project-jam .number { color: #4f513f; }
     .mini-card.accent .number { color: #3d1f16; }
 
@@ -282,10 +282,10 @@
     .timeline { margin-top: 30px; }
     .timeline-item { display: grid; grid-template-columns: 160px 1fr auto; gap: 30px; align-items: start; padding: 34px 0; border-bottom: 1px solid var(--line); transition: padding .3s, color .3s; }
     .timeline-item:hover { padding-left: 16px; color: var(--blue-text); }
-    .timeline-date { font: 400 .72rem var(--font-mono); color: var(--muted); }
+    .timeline-date { font: 500 .75rem var(--font-mono); color: var(--muted); }
     .timeline-item h3 { margin: 0; font-size: clamp(1.4rem,3vw,2.25rem); letter-spacing: -.045em; }
     .timeline-item p { max-width: 650px; color: var(--muted); }
-    .timeline-mark { width: 54px; aspect-ratio: 1; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; font: 400 .75rem var(--font-mono); }
+    .timeline-mark { width: 54px; aspect-ratio: 1; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; font: 500 .78rem var(--font-mono); }
 
     /* Lab bölümü sayfayı tersine çevirir: gündüzde koyu, gecede açık zemin.
        Asit yeşili yalnızca koyu zeminde okunur, bu yüzden accent token'a bağlanır. */
@@ -295,11 +295,11 @@
     /* Terminal sitenin en özgün parçası; daha önce dar yarıyı alıp yarı boş duruyordu. */
     .lab-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 18px; }
     .console, .idea-machine { min-height: 430px; border: 1px solid color-mix(in srgb, var(--paper) 20%, transparent); border-radius: var(--radius); background: color-mix(in srgb, var(--paper) 5%, transparent); }
-    .console { padding: 26px; font: 400 .78rem/1.8 var(--font-mono); display: flex; flex-direction: column; overflow-y: auto; max-height: 520px; }
-    .console-top { display: flex; justify-content: space-between; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid color-mix(in srgb, var(--paper) 18%, transparent); color: color-mix(in srgb, var(--paper) 70%, transparent); flex-shrink: 0; }
+    .console { padding: 26px; font: 400 .83rem/1.75 var(--font-mono); display: flex; flex-direction: column; overflow-y: auto; max-height: 520px; }
+    .console-top { display: flex; justify-content: space-between; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid color-mix(in srgb, var(--paper) 18%, transparent); color: color-mix(in srgb, var(--paper) 80%, transparent); flex-shrink: 0; }
     .terminal-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
-    .prompt { color: var(--lab-accent); font-weight: 700; flex-shrink: 0; }
-    .terminal-output { color: color-mix(in srgb, var(--paper) 75%, transparent); margin: 0 0 10px 0; word-break: break-word; }
+    .prompt { color: var(--lab-accent); font-weight: 500; flex-shrink: 0; }
+    .terminal-output { color: color-mix(in srgb, var(--paper) 84%, transparent); margin: 0 0 10px 0; word-break: break-word; }
     .terminal-output.highlight { color: var(--lab-accent); }
     .terminal-cursor { display: inline-block; width: 8px; height: 15px; vertical-align: -2px; background: var(--lab-accent); animation: blink 1s steps(1) infinite; }
     .cli-input-line { display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 10px; border-top: 1px dashed color-mix(in srgb, var(--paper) 20%, transparent); }
@@ -314,23 +314,26 @@
     /* Lab oranları değişince panel daraldı; sayaç dar alanda alt satıra iner,
        iki satıra bölünmez. */
     .idea-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 20px; }
-    .idea-count { flex-shrink: 0; white-space: nowrap; font: 400 .7rem var(--font-mono); }
+    .idea-count { flex-shrink: 0; white-space: nowrap; font: 500 .74rem var(--font-mono); }
 
     .skills-cloud { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 48px; }
-    .skill-pill { padding: 13px 18px; border: 1px solid color-mix(in srgb, var(--paper) 25%, transparent); border-radius: 999px; color: color-mix(in srgb, var(--paper) 70%, transparent); background: transparent; cursor: default; font: 400 .74rem var(--font-mono); transition: background .25s, color .25s, transform .25s; }
+    .skill-pill { padding: 13px 18px; border: 1px solid color-mix(in srgb, var(--paper) 25%, transparent); border-radius: 999px; color: color-mix(in srgb, var(--paper) 84%, transparent); background: transparent; cursor: default; font: 500 .78rem var(--font-mono); transition: background .25s, color .25s, transform .25s; }
     .skill-pill:hover { color: var(--ink); background: var(--paper); transform: rotate(-2deg) translateY(-3px); }
 
     .cert-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 50px; }
     /* Sertifikalar link değil, bu yüzden tıklanabilirlik ima eden ↗ oku kaldırıldı. */
     .cert { min-height: 190px; display: flex; flex-direction: column; justify-content: space-between; padding: 22px; border: 1px solid var(--line); border-radius: 20px; }
-    .cert-provider { color: var(--blue-text); font: 500 .68rem var(--font-mono); text-transform: uppercase; }
+    .cert-provider { color: var(--blue-text); font: 500 .73rem var(--font-mono); text-transform: uppercase; }
     .cert h3 { margin: 20px 0; font-size: 1rem; letter-spacing: -.025em; }
-    .cert-foot { display: flex; justify-content: space-between; color: var(--muted); font: 400 .68rem var(--font-mono); }
+    .cert-foot { display: flex; justify-content: space-between; color: var(--muted); font: 500 .73rem var(--font-mono); }
 
     .contact { padding-bottom: 40px; }
     .contact-panel { position: relative; padding: clamp(36px,7vw,90px); border-radius: 42px; overflow: hidden; color: white; background: var(--blue); }
     .contact-panel::before { content: ""; position: absolute; width: 280px; height: 280px; right: -50px; top: -110px; border: 52px solid var(--acid); border-radius: 50%; opacity: .9; }
-    .contact-panel .section-kicker { color: var(--acid); }
+    /* Asit yesili mavi zeminde 4.52:1 ile AA sinirinin kilpayi ustundeydi;
+       12px buyuk harf mono icin fazla dar. Vurgu panelde zaten h2'nin <em>'i
+       ve birincil butonla veriliyor, bu satir okunurluga birakilir. */
+    .contact-panel .section-kicker { color: rgba(255,255,255,.92); }
     .contact-panel h2 { position: relative; max-width: 900px; margin: 18px 0 38px; font: 400 clamp(3.2rem,8vw,8rem)/.85 var(--font-serif); letter-spacing: -.05em; }
     .contact-panel h2 em { color: var(--acid); font-weight: 400; }
     .contact-links { position: relative; display: flex; flex-wrap: wrap; gap: 10px; }
@@ -344,10 +347,15 @@
        kısmak mavi zeminde 3.51:1'e düşürüp okunurluğu bozuyordu. */
     .contact-links .contact-quiet { border-color: rgba(255,255,255,.3); color: rgba(255,255,255,.92); font-weight: 500; }
 
-    footer { padding: 24px 0 30px; }
-    .footer-inner { display: flex; justify-content: space-between; gap: 20px; align-items: center; color: var(--muted); font: 400 .68rem var(--font-mono); }
+    /* DM Mono yalnizca 400/500 iceriyor: mono icinde 600/700 isteyen her
+       kural sahte kalinla ciziliyor ve 11-12px'te harfleri bulandiriyor.
+       Vurgu bu yuzden renkle verilir, agirlikla degil. */
+    .console strong, .hero-note strong, .terminal-output strong { font-weight: 500; }
 
-    .toast { position: fixed; left: 50%; bottom: 28px; z-index: 110; transform: translate(-50%, 30px); padding: 13px 18px; border-radius: 999px; color: white; background: #11120f; box-shadow: var(--shadow); font: 400 .72rem var(--font-mono); opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s; }
+    footer { padding: 24px 0 30px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; align-items: center; color: var(--muted); font: 500 .73rem var(--font-mono); }
+
+    .toast { position: fixed; left: 50%; bottom: 28px; z-index: 110; transform: translate(-50%, 30px); padding: 13px 18px; border-radius: 999px; color: white; background: #11120f; box-shadow: var(--shadow); font: 500 .76rem var(--font-mono); opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s; }
     .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
     .command-palette { position: fixed; inset: 0; z-index: 120; display: none; place-items: start center; padding-top: 12vh; background: rgba(6,7,5,.58); backdrop-filter: blur(10px); }
@@ -360,8 +368,8 @@
     .command-list li.is-active button { color: #11120f; background: var(--acid); outline: none; }
     /* İpucu artık gerçek bir söz veriyor: yalnızca seçili satırda ↵ görünür. */
     .command-list small { opacity: 0; font-family: var(--font-mono); }
-    .command-list li.is-active small { opacity: .75; }
-    .command-hint { display: flex; gap: 14px; padding: 10px 18px 14px; border-top: 1px solid rgba(255,255,255,.12); color: rgba(217,218,205,.55); font: 400 .64rem var(--font-mono); }
+    .command-list li.is-active small { opacity: .9; }
+    .command-hint { display: flex; gap: 14px; padding: 10px 18px 14px; border-top: 1px solid rgba(255,255,255,.12); color: rgba(217,218,205,.8); font: 500 .72rem var(--font-mono); }
 
     .cv-dialog { width: min(850px, calc(100% - 24px)); max-height: 90svh; padding: 0; border: 1px solid var(--line); border-radius: 24px; color: var(--ink); background: var(--card); box-shadow: 0 32px 120px rgba(0,0,0,.35); }
     .cv-dialog::backdrop { background: rgba(6,7,5,.7); backdrop-filter: blur(8px); }
@@ -371,13 +379,13 @@
     .cv-toolbar button { padding: 9px 13px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); background: var(--paper); cursor: pointer; }
     .cv-sheet { padding: clamp(26px,6vw,64px); }
     .cv-sheet h2 { margin: 0 0 5px; font: 700 clamp(2rem,5vw,3.5rem)/1 var(--font-sans); letter-spacing: -.05em; }
-    .cv-contact { margin: 0 0 38px; color: var(--muted); font: 400 .72rem/1.8 var(--font-mono); }
+    .cv-contact { margin: 0 0 38px; color: var(--muted); font: 500 .76rem/1.75 var(--font-mono); }
     .cv-block { display: grid; grid-template-columns: 130px 1fr; gap: 24px; padding: 24px 0; border-top: 1px solid var(--line); }
-    .cv-block h3 { margin: 0; color: var(--blue-text); font: 600 .7rem var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
+    .cv-block h3 { margin: 0; color: var(--blue-text); font: 500 .74rem var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
     .cv-block h4 { margin: 0 0 4px; font-size: 1rem; }
-    .cv-block p, .cv-block li { color: var(--muted); font-size: .84rem; }
+    .cv-block p, .cv-block li { color: var(--muted); font-size: .88rem; }
     .cv-entry + .cv-entry { margin-top: 22px; }
-    .cv-date { font: 400 .68rem var(--font-mono); color: var(--muted); }
+    .cv-date { font: 500 .73rem var(--font-mono); color: var(--muted); }
     .cv-block ul { margin: 8px 0 0; padding-left: 18px; }
 
     body.chaos .hero h1 { animation: chroma 1.8s steps(2) infinite; }
@@ -422,7 +430,7 @@
       .mini-card { grid-column: span 12; }
       .timeline-item { grid-template-columns: 1fr; gap: 8px; }
       .cert-grid { grid-template-columns: 1fr; }
-      .console { min-height: 380px; padding: 20px; font-size: .7rem; }
+      .console { min-height: 380px; padding: 20px; font-size: .78rem; }
       .idea-machine { min-height: 400px; padding: 28px; }
       .idea-meta { align-items: start; flex-direction: column; }
       .contact-panel { border-radius: 28px; }
@@ -478,8 +486,8 @@
         <aside class="hero-note reveal" aria-label="Müsaitlik durumu">
           <span class="status"><span class="status-dot"></span>Yeni projelere açığım</span>
           <span class="time" id="istanbul-time">İstanbul · --:--</span>
-          <span class="mono" style="font-size:.68rem;color:var(--muted)">TRT / UTC+3</span>
-          <div style="margin-top:12px;font-size:.72rem;display:flex;align-items:center;gap:7px;color:var(--muted);font-family:var(--font-mono);"><span class="status-dot" style="width:7px;height:7px;background:#3b82f6;box-shadow:0 0 0 4px rgba(59,130,246,.15);"></span><span>Üstünde çalıştığım: <strong style="color:var(--ink)">Mİ-GO &amp; KobiFlow</strong></span></div>
+          <span class="mono" style="font-size:.73rem;font-weight:500;color:var(--muted)">TRT / UTC+3</span>
+          <div style="margin-top:12px;font-size:.75rem;font-weight:500;display:flex;align-items:center;gap:7px;color:var(--muted);font-family:var(--font-mono);"><span class="status-dot" style="width:7px;height:7px;background:#3b82f6;box-shadow:0 0 0 4px rgba(59,130,246,.15);"></span><span>Üstünde çalıştığım: <strong style="color:var(--ink)">Mİ-GO &amp; KobiFlow</strong></span></div>
         </aside>
       </div>
     </section>
@@ -595,7 +603,7 @@
               <p class="terminal-output">Mehmet Emin Akkaya · bilgisayar mühendisliği öğrencisi</p>
               <div class="terminal-row"><span class="prompt">$</span><span>cat current_focus.txt</span></div>
               <p class="terminal-output">Mİ-GO (Android) ve KobiFlow (stok paneli) üzerinde çalışıyorum.</p>
-              <p class="terminal-output highlight" style="font-size:.73rem;">Komutları görmek için <strong>help</strong> yaz.</p>
+              <p class="terminal-output highlight" style="font-size:.79rem;">Komutları görmek için <strong>help</strong> yaz.</p>
             </div>
             <form id="terminal-form" class="cli-input-line" onsubmit="return false;">
               <span class="prompt">$</span>
@@ -938,9 +946,20 @@
             playSound(750, 'square', 0.03, 0.02);
 
             switch (cmd) {
+              /* Terminalin acilis dokumu bu iki satiri yazilmis gibi gosteriyor;
+                 karsiliklari olmayinca yazan kisiye "komut yok" donuyorlardi. */
+              case 'whoami':
+                appendTerminalRow(rawCmd, 'Mehmet Emin Akkaya · bilgisayar mühendisliği öğrencisi');
+                break;
+
+              case 'cat current_focus.txt':
+                appendTerminalRow(rawCmd, 'Mİ-GO (Android) ve KobiFlow (stok paneli) üzerinde çalışıyorum.');
+                break;
+
               case 'help':
                 appendTerminalRow(rawCmd, `
                   <strong>Kullanılabilir komutlar:</strong><br>
+                  • <code>whoami</code> — Tek satırlık tanıtım.<br>
                   • <code>projects</code> — Projelerin listesi.<br>
                   • <code>migo</code> — Mİ-GO, Android kariyer uygulaması.<br>
                   • <code>kobiflow</code> — KobiFlow, stok ve sipariş paneli.<br>

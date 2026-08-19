@@ -24,15 +24,16 @@ There is nothing to build, lint, or test. "Verifying a change" means opening the
 
 ## Reading index.html
 
-**Never `Read` the whole file** — lines 34–43 are the base64 font payloads (15–33 KB *per line*) and will blow the token limit. Read around them or grep. Structure:
+**Never `Read` the whole file** — the base64 font payloads are **lines 43–52** (13–33 KB *per line*) and will blow the token limit. Read around them or grep. To find them mechanically rather than trusting these numbers:
+`awk '{ if (length($0) > 2000) print NR": "length($0) }' index.html`
 
 | Lines (approx) | Content |
 | :--- | :--- |
-| 1–31 | `<head>` meta, OpenGraph, `application/ld+json` Person schema |
-| 32–43 | `<style>` opens; embedded WOFF2 `@font-face` (MEA Manrope / Instrument Serif / DM Mono) |
-| 44–360 | Design system + all component CSS, ending with responsive (900px / 620px), `@media print`, `prefers-reduced-motion` |
-| 362–625 | Markup: `header.topbar`, `main` with sections `#isler` / `#hikaye` / `#lab` / `#iletisim`, `#cv-dialog`, `#toast`, `#command-palette` |
-| 627–988 | Single IIFE holding all behavior |
+| 1–40 | `<head>` meta, OpenGraph, `application/ld+json` Person schema |
+| 41–52 | `<style>` opens; embedded WOFF2 `@font-face` (MEA Manrope / Instrument Serif / DM Mono) |
+| 53–453 | Design system + all component CSS, ending with responsive (900px / 620px), `@media print`, `prefers-reduced-motion` |
+| 455–731 | Markup: `header.topbar`, `main` with sections `#isler` / `#hikaye` / `#lab` / `#iletisim`, `#cv-dialog`, `#toast`, `#command-palette` |
+| 732–1168 | Single IIFE holding all behavior |
 
 ## Conventions that matter
 
@@ -41,11 +42,27 @@ There is nothing to build, lint, or test. "Verifying a change" means opening the
 - **Mobile navigation lives in `.tabbar`**, a fixed bottom bar shown under 900px (where `.nav-links` is hidden). It sets `aria-current` from an `IntersectionObserver` with a `-45%` root margin, and `body` gets `padding-bottom: 62px` so it never covers the footer. Both are reset in `@media print`. The `⌘K` button stays visible on mobile but swaps its label to `⌕ Ara` via `.cmd-long` / `.cmd-short`; its accessible name is completed by an `.sr-only` span rather than an `aria-label`, because an `aria-label` that omits the visible text fails `label-content-name-mismatch`.
 - **The command palette is keyboard-driven**: `↑`/`↓` move `.is-active` across `.command-list li:not([hidden])`, `Enter` clicks the active row, filtering resets to the first match, and the ends wrap. The `<small>` in each row is the `↵` marker and only shows on the active row — do not put fake shortcut hints there (`T`, `!`, `01`) unless they are actually bound to keys.
 - **Inverted / fixed-background regions — the biggest theming trap.** `.lab` deliberately swaps roles (`background: var(--ink); color: var(--paper)`), so it is dark by day and **light by night**. Anything inside it that hardcodes `var(--acid)` becomes unreadable at night — that is what `--lab-accent` exists for (acid by day, `#4f6112` olive at night), and it must be used for every accent inside `#lab`, including the inline `style="color:var(--lab-accent)"` in the terminal's JS output strings. Conversely `.idea-machine`, `.project-main`, `.contact-panel` and `.ticker` keep a **fixed** accent background in both themes, so their text must use literal `#11120f` / `#f2f0e9`, never `var(--ink)` / `var(--paper)` — those flip out from under the fixed background. Lighthouse only audits the default theme, so **check night mode by hand** (`data-theme="night"`) after touching colors — and check **hover states too**: `.skill-pill:hover` inverts to `background: var(--paper)`, so its text has to be `var(--ink)`; it was hardcoded `#11120f` and went dark-on-dark (1.01:1) at night, which no static audit catches.
+- **Only ask for weights the embedded fonts actually ship.** This is the trap that made the site look "thin and blurry" and it is invisible to every contrast audit. The three faces are *not* equally equipped:
+  - **MEA DM Mono — 400 and 500 only.** Any mono rule asking for 600/700 gets **synthetic bold** from the browser, which at 11–12px smears the glyphs instead of thickening them. `.prompt`, `.cv-block h3` and bare `<strong>` inside mono blocks all did this. Emphasis inside mono must come from **color**, not weight; `.console strong, .hero-note strong, .terminal-output strong { font-weight: 500 }` pins the `<strong>` default (700) back down.
+  - **MEA Instrument Serif — 400 only** (plus italic 400). Never bold it.
+  - **MEA Manrope — variable 400–800**, so sans text may use any weight freely.
+  Verify with: `sed -n '43,52p' index.html | cut -c1-120`.
+- **Microtext floor: nothing renders below ~11.5px, and the mono micro tier is weight 500.** The site is full of small uppercase mono labels (`.number`, `.tag`, `.cert-provider`, `.cert-foot`, `.footer-inner`, `.cv-date`, `.idea-count`, `.timeline-date`, `.section-kicker`, `.status`, `.skill-pill`, `.command-hint`, `.tabbar a`, `.console`). These were 10.2–11.8px at weight 400 and read as mush in Turkish, where ı/İ/ğ/ş/ç lose their marks first. They were lifted to .72–.83rem at weight 500 on 2026-08-19. **Do not reintroduce a `.6xrem` mono label**, and remember three sizes live in *inline* `style=` attributes (the `TRT / UTC+3` span, the hero status line, the terminal highlight `<p>`) where a CSS-only sweep will miss them.
+- **`.tag` carries no `opacity`.** It used to be `opacity: .75` *and* 10.9px — two independent weakeners stacked. The pill is now full-opacity text with the ring faded on its own (`border-color: color-mix(in srgb, currentColor 40%, transparent)`). If a tag needs to recede, fade the border, never the text.
 - **Sound**: every interactive handler calls `playSound(freq, type, duration, gain)`. New buttons should too, for consistency.
 - **Reveal animations**: elements get `class="reveal"` and an `IntersectionObserver` adds `.visible`. Note line 309 intentionally forces `.reveal { opacity: 1 }` as a no-JS/slow-optimizer fallback — the observer is progressive enhancement, so content must be readable without it.
 - **Turkish locale**: use `toLocaleLowerCase('tr')` / `toLocaleUpperCase('tr')` for any user-typed string comparison (dotted/dotless İ/ı). The command palette filter already does.
 - **CV printing**: `@media print` hides `body > *:not(.cv-dialog)`, so `#cv-print` → `window.print()` produces a clean PDF from the `<dialog>` markup. Print output is the only "export"; keep CV blocks `break-inside: avoid`.
 - **Easter eggs**: typing `mea` anywhere and the palette's `chaos` action toggle `body.chaos`.
+
+## Auditing contrast in the browser — two traps that produce fake results
+
+A DOM sweep that resolves every text node's colour is the only way to check this page (Lighthouse audits one theme and never opens the dialog or the palette). Two things will silently corrupt the numbers:
+
+1. **`body` has `transition: color .35s, background-color .35s`.** Flip `data-theme` and `getComputedStyle` returns the *mid-transition* value, so text and ground briefly read as the same colour and every node reports ~1.0:1. Inject `*{transition:none !important;animation:none !important}` and wait a tick before measuring, or you will "discover" dozens of failures that do not exist.
+2. **`color-mix()` computes to `color(srgb r g b / a)`, not `rgba()`.** A regex written for `rgba()` picks the wrong channels — it reads the alpha as blue and defaults alpha to 1 — which makes the 5 %-alpha `.console` background look opaque and dark. Parse the `color()` form explicitly, and composite the *whole* ancestor chain (including the element's own background) rather than stopping at the first "opaque-looking" one.
+
+With both handled, the sweep reports **0 AA failures in each theme**, dialog and palette open, and the tightest ratio on the page is 4.61:1.
 
 ## Copy rules — the site is written in the first person, not in press-release
 
@@ -63,7 +80,7 @@ All user-facing copy was rewritten on 2026-08-19 because it read as machine-writ
 
 - **A project** appears in three places: its `article.card` in the `.bento` grid (`#isler`), its terminal command case (`migo`, `nexus`, `studybuddy`, `benimhakkimda`, `todogemini`) *and* the `projects` listing case, and its `.cv-entry` under Projeler in `#cv-dialog`.
 - **The contact email** appears ~12 times: JSON-LD, `mailto:` links, `#copy-email`, `#idea-discuss` mailto template, the terminal `contact`/`email` case, and the CV sheet. The last two commits exist solely because one of these was missed — grep the full old address before declaring an email change done. As of 2026-08-17 the working tree still holds one uncommitted fix (JSON-LD `"email"`, line 25) and **production still serves the old `aktaha@gmail.com` there**; live output is otherwise byte-identical to HEAD.
-- **The terminal** (`#terminal-cli-input` keydown switch) is a plain `switch` on the lowercased command. Adding a command means adding the `case` *and* the `help` output listing *and* the command list in `README.md`. `benimhakkimda` and `todogemini` had working cases but were missing from `help` for months — the drift goes both ways.
+- **The terminal** (`#terminal-cli-input` keydown switch) is a plain `switch` on the lowercased command. Adding a command means adding the `case` *and* the `help` output listing *and* the command list in `README.md`. `benimhakkimda` and `todogemini` had working cases but were missing from `help` for months — the drift goes both ways. The opposite drift also existed: the terminal's **boot transcript** showed `$ whoami` and `$ cat current_focus.txt` as if they had been typed, but neither had a `case`, so typing them answered "no such command". Both are real commands as of 2026-08-19; anything the boot transcript displays must be executable.
 - **The idea machine** reads from the `ideas` array; the `FİKİR nn / NN` counter derives from `ideas.length`, so only the array needs editing.
 
 ## Deployment
@@ -83,6 +100,7 @@ Fixed (don't regress these):
 - **Accent-card contrast.** `.card .number` inherited `--muted` (#686961), landing at 1.04:1 on blue and 1.95:1 on orange — those `01 · MOBİL ÜRÜN` labels were invisible. Now each accent card overrides `.number` (and `.project-main p` / `.tag`) with a ground-appropriate tone.
 - **Night-mode Lab section.** Acid green on the night theme's light lab background ran 1.04–1.06:1 across `.section-kicker`, `.prompt`, `.terminal-output.highlight`, the cursor and the terminal's injected links; `#idea-button` was white-on-acid (1.06:1) and `#idea-discuss` was dark-on-dark (1.01:1). Fixed via `--lab-accent` plus literal colors on the fixed-background idea machine. See the theming bullet above.
 - **Night-mode blue** (2026-08-19). `--blue` was doing double duty as ground and ink; on the night paper the blue text ran 3.23–3.50:1. Split into `--blue` / `--blue-text` — see the theming bullet. Same pass fixed `.skill-pill:hover` (1.01:1 dark-on-dark at night) and lifted the terminal placeholder from 55% to 70% paper (4.01 → 6.4:1). A full DOM sweep of every text node now reports **zero** AA failures in both themes, dialogs and command palette included.
+- **Typography legibility pass (2026-08-19).** The complaint was "some text is so thin it can't be read", and it was *not* a contrast problem — every one of these nodes already passed AA. Three separate causes: 27 distinct styles rendered below 13px (smallest 10.2px), the whole mono micro tier sat at weight 400, and 11 nodes were faux-bolded because DM Mono has no 600/700. Fixed by raising the floor to 11.5px, moving the micro tier to weight 500, pinning mono `<strong>` to 500, dropping `.tag`'s stacked `opacity: .75`, darkening day `--muted` #686961 → #5a5b54 (5.31 → 6.56:1), and cutting the grain overlay from `opacity: .28` to `.16` (it sits at `z-index: 20` *over* the text with `mix-blend-mode: multiply`, so it was muddying every small glyph). **AA numbers alone will not catch this class of bug** — check rendered size and real available weight too.
 - **Cloudflare fossil removed** — the injected `/cdn-cgi/.../email-decode.min.js` tag 404'd and logged a MIME error.
 - **Favicon** — inline SVG data URI (dark rounded square + blue dot, matching the `MEA / 2026` brand mark). Stops the `/favicon.ico` 404.
 - **`og:image`** — `og.jpg` (1200×630, 176 KB, downscaled from the 1731×909 `og.png` master, which stays in the repo as the source) plus width/height/type/alt and `twitter:image`.

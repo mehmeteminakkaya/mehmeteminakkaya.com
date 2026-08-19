@@ -108,6 +108,23 @@
       mix-blend-mode: multiply;
     }
 
+    /* Klavye odagi. Sitede hic :focus-visible kurali yoktu ve .cli-input
+       outline'i tamamen kapatiyordu.
+
+       Tek renk burada iş görmez: zeminler kağıt, kart, mavi, asit, turuncu
+       ve koyu lab arasında değişiyor, seçilen her renk bir zeminde
+       kayboluyor (beyaz halka asit üstünde 1.18:1'e düşmüştü). Bu yüzden
+       koyu halka + açık hale çifti kullanılır; hangi zemin olursa olsun
+       ikisinden biri görünür kalır. Sabit zeminli bölgelerde token değil
+       literal renk verilir, yoksa gece modunda halka zeminle aynılaşır.
+       Yeni bir odak stili eklerken bu çifti bozma. */
+    :focus-visible {
+      outline: 3px solid #11120f;
+      outline-offset: 2px;
+      box-shadow: 0 0 0 6px #f2f0e9;
+      border-radius: 4px;
+    }
+
     ::selection { color: #11120f; background: var(--acid); }
     a { color: inherit; }
     button, a { -webkit-tap-highlight-color: transparent; }
@@ -143,7 +160,7 @@
       gap: 20px;
     }
 
-    .brand { font: 500 .82rem var(--font-mono); text-decoration: none; letter-spacing: -.03em; }
+    .brand { display: inline-flex; align-items: center; min-height: 30px; font: 500 .82rem var(--font-mono); text-decoration: none; letter-spacing: -.03em; }
     .brand span { display: inline-block; width: 9px; height: 9px; margin-right: 8px; border-radius: 50%; background: var(--blue); }
     .nav-links { display: flex; gap: 24px; align-items: center; }
     .nav-links a { font-size: .83rem; font-weight: 700; text-decoration: none; }
@@ -268,8 +285,7 @@
     .mini-card { grid-column: span 4; min-height: 260px; }
     .mini-card.accent { background: var(--orange); color: #11120f; }
     .mini-card.accent p { color: #2b1409; font-weight: 500; }
-    .card-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
-    .tag { padding: 7px 11px; border: 1px solid color-mix(in srgb, currentColor 40%, transparent); border-radius: 999px; font: 500 .72rem var(--font-mono); }
+    .card-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin-top: 28px; font-size: .95rem; }
 
     /* Doymuş renkli zeminde aynı kontrast oranı açık zemindekinden daha
        zayıf okunur ve 400 kesim erir; bu yüzden vurgu kartlarının gövde
@@ -278,7 +294,6 @@
        Vurgu kartlarında --muted ve %75 opaklık WCAG AA'yı geçmiyor
        (mavi zeminde 1.04:1'e kadar düşüyordu); her zemine okunur ton verilir. */
     .project-main .number { color: #fff; }
-    .project-main .tag { border-color: rgba(255,255,255,.5); }
     .project-jam .number { color: #3f4031; }
     .mini-card.accent .number { color: #2b1409; }
 
@@ -307,7 +322,18 @@
     .terminal-output.highlight { color: var(--lab-accent); }
     .terminal-cursor { display: inline-block; width: 8px; height: 15px; vertical-align: -2px; background: var(--lab-accent); animation: blink 1s steps(1) infinite; }
     .cli-input-line { display: flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 10px; border-top: 1px dashed color-mix(in srgb, var(--paper) 20%, transparent); }
-    .cli-input { flex: 1; background: transparent; border: none; outline: none; color: var(--paper); font: inherit; padding: 0; }
+    .cli-input { flex: 1; min-height: 30px; background: transparent; border: none; outline: none; color: var(--paper); font: inherit; padding: 0; }
+    /* Girdinin kendi halkasi dar satiri tasiyordu; odak isareti komut
+       satirinin tamamina verilir, bos alanda da gorunur. */
+    .cli-input-line { border-radius: 8px; padding-inline: 8px; margin-inline: -8px; }
+    .cli-input-line:has(.cli-input:focus-visible) {
+      border-top-color: var(--lab-accent);
+      border-top-style: solid;
+      outline: 3px solid #11120f;
+      outline-offset: 2px;
+      box-shadow: 0 0 0 6px #f2f0e9;
+      border-radius: 8px;
+    }
     .cli-input::placeholder { color: color-mix(in srgb, var(--paper) 70%, transparent); }
     @keyframes blink { 50% { opacity: 0; } }
     .idea-machine { display: grid; align-content: space-between; padding: 38px; background: var(--acid); color: #11120f; }
@@ -320,9 +346,6 @@
     .idea-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px 20px; }
     .idea-count { flex-shrink: 0; white-space: nowrap; font: 500 .74rem var(--font-mono); }
 
-    .skills-cloud { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 48px; }
-    .skill-pill { padding: 13px 18px; border: 1px solid color-mix(in srgb, var(--paper) 25%, transparent); border-radius: 999px; color: color-mix(in srgb, var(--paper) 84%, transparent); background: transparent; cursor: default; font: 500 .78rem var(--font-mono); transition: background .25s, color .25s, transform .25s; }
-    .skill-pill:hover { color: var(--ink); background: var(--paper); transform: rotate(-2deg) translateY(-3px); }
 
     .cert-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-top: 50px; }
     /* Sertifikalar link değil, bu yüzden tıklanabilirlik ima eden ↗ oku kaldırıldı. */
@@ -513,24 +536,16 @@
           <span class="number">01 · ANDROID · DEVAM EDİYOR</span>
           <h3>Mİ-GO, kariyer sorusuna kişisel bir rota çiziyor.</h3>
           <p>Öğrencinin profilini ve hedefini alıp meslek önerisi ve haftalık bir plan çıkaran Android uygulaması. Model çağrıları anahtarı istemcide tutmamak için bir Cloudflare Worker üzerinden geçiyor.</p>
-          <div class="card-tags">
-            <span class="tag">Kotlin</span>
-            <span class="tag">Jetpack Compose</span>
-            <span class="tag">Cloudflare Worker</span>
-            <span class="tag">Llama 3.1</span>
-            <a href="https://github.com/mehmeteminakkaya/Migo" target="_blank" rel="noopener noreferrer" style="margin-left:auto;color:inherit;text-decoration:none;font-weight:600;">GitHub ↗</a>
+          <div class="card-links">
+            <a href="https://github.com/mehmeteminakkaya/Migo" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;font-weight:600;">GitHub ↗</a>
           </div>
         </article>
         <article class="card project-jam reveal">
           <span class="number">02 · GOOGLE HACKATHON FİNALİSTİ</span>
           <h3>KobiFlow, küçük işletmeler için stok ve sipariş paneli.</h3>
           <p>Çoklu depo stok takibi, sipariş akışı ve tedarikçi faturasını fotoğraftan okuyup kalemlere ayırma. Fatura okumayı Llama 3.2 Vision yapıyor, Tesseract yedekte duruyor.</p>
-          <div class="card-tags" style="margin-top:auto;position:relative;">
-            <span class="tag">FastAPI</span>
-            <span class="tag">React / Vite</span>
-            <span class="tag">Llama 3.2 Vision</span>
-            <span class="tag">SQLAlchemy</span>
-            <a href="https://kobiflow-app.vercel.app" target="_blank" rel="noopener noreferrer" style="margin-left:auto;color:inherit;text-decoration:none;font-weight:600;margin-right:12px;">Canlı Uygulama ↗</a>
+          <div class="card-links" style="margin-top:auto;position:relative;">
+            <a href="https://kobiflow-app.vercel.app" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;font-weight:600;margin-right:18px;">Canlı Uygulama ↗</a>
             <a href="https://github.com/mehmeteminakkaya/Nexus-Proje" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;font-weight:600;">GitHub ↗</a>
           </div>
         </article>
@@ -538,32 +553,24 @@
           <span class="number">03 · GÖMÜLÜ SİSTEM · TAKIM PROJESİ</span>
           <h3>Study Buddy, masanda duran bir pomodoro arkadaşı.</h3>
           <p>ESP32-S3 üzerinde çalışan firmware: ortam sensörü, OLED ekran ve mikrofon. Söylediğini Wit.ai yazıya çeviriyor, cevabı Groq üretiyor, VoiceRSS sesli okuyor.</p>
-          <div class="card-tags" style="margin-top:12px;">
-            <span class="tag">ESP32-S3</span>
-            <span class="tag">C++</span>
-            <span class="tag">Groq / Llama 3.1</span>
-            <a href="https://github.com/mehmeteminakkaya/Study-Buddy-Simulation" target="_blank" rel="noopener noreferrer" style="margin-left:auto;color:inherit;text-decoration:none;font-weight:600;">GitHub ↗</a>
+          <div class="card-links" style="margin-top:12px;">
+            <a href="https://github.com/mehmeteminakkaya/Study-Buddy-Simulation" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;font-weight:600;">GitHub ↗</a>
           </div>
         </article>
         <article class="card mini-card accent reveal">
           <span class="number">04 · WEB · YAYINDA</span>
           <h3>BenimHakkımda, mülakat provası yapabildiğin bir site.</h3>
           <p>Soru soruyor, sesli ya da yazılı cevap veriyorsun, cevabı STAR'a göre puanlıyor. Sunucu tarafı tek bir Node dosyası — hiç npm bağımlılığı yok.</p>
-          <div class="card-tags" style="margin-top:12px;">
-            <span class="tag">Node.js (bağımlılıksız)</span>
-            <span class="tag">Llama 3.1</span>
-            <a href="https://benimhakkimda-aim-lakat.vercel.app/" target="_blank" rel="noopener noreferrer" style="margin-left:auto;color:inherit;text-decoration:none;font-weight:600;">Canlı Demo ↗</a>
+          <div class="card-links" style="margin-top:12px;">
+            <a href="https://benimhakkimda-aim-lakat.vercel.app/" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;font-weight:600;">Canlı Demo ↗</a>
           </div>
         </article>
         <article class="card mini-card reveal">
           <span class="number">05 · PYTHON · SERVİS</span>
           <h3>ToDoGemini, büyük görevleri kendi bölen yapılacaklar listesi.</h3>
           <p>Yazdığın maddeyi Gemini'ye verip alt adımlara böldüren FastAPI servisi. Şema değişiklikleri Alembic'te, tamamı Docker'da ayağa kalkıyor.</p>
-          <div class="card-tags" style="margin-top:12px;">
-            <span class="tag">FastAPI</span>
-            <span class="tag">Docker</span>
-            <span class="tag">Gemini</span>
-            <a href="https://github.com/mehmeteminakkaya/ToDo-List" target="_blank" rel="noopener noreferrer" style="margin-left:auto;color:inherit;text-decoration:none;font-weight:600;">GitHub ↗</a>
+          <div class="card-links" style="margin-top:12px;">
+            <a href="https://github.com/mehmeteminakkaya/ToDo-List" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;font-weight:600;">GitHub ↗</a>
           </div>
         </article>
       </div>
@@ -594,7 +601,7 @@
       <div class="wrap">
         <div class="section-head reveal">
           <div><span class="section-kicker">03 / Deney alanı</span><h2>Burada<br>oynayabilirsin.</h2></div>
-          <p style="color:color-mix(in srgb,var(--paper) 74%,transparent)">Soldaki terminal gerçekten çalışıyor, komut yazabilirsin. Sağda da aklımdan geçen, bir kısmı hâlâ defterde duran fikirler var.</p>
+          <p style="color:color-mix(in srgb,var(--paper) 74%,transparent)">Aşağıdaki terminal gerçekten çalışıyor, komut yazabilirsin. Bir de aklımdan geçen, bir kısmı hâlâ defterde duran fikirler var.</p>
         </div>
         <div class="lab-grid">
           <div class="console reveal" id="interactive-terminal" aria-label="Etkileşimli terminal">
@@ -628,9 +635,6 @@
               <span class="idea-count" id="idea-count">FİKİR 01 / 16</span>
             </div>
           </div>
-        </div>
-        <div class="skills-cloud reveal" aria-label="Teknik yetkinlikler">
-          <span class="skill-pill">Python</span><span class="skill-pill">C++</span><span class="skill-pill">Algorithms</span><span class="skill-pill">Data Structures</span><span class="skill-pill">Kotlin</span><span class="skill-pill">Android Studio</span><span class="skill-pill">AI Literacy</span><span class="skill-pill">Problem Solving</span><span class="skill-pill">Project Management</span><span class="skill-pill">Team Leadership</span>
         </div>
       </div>
     </section>
@@ -720,7 +724,7 @@
       <label class="sr-only" id="command-title" for="command-input">Hızlı komutlar</label>
       <input class="command-input" id="command-input" type="text" placeholder="Bir yere git veya bir şey yap…" autocomplete="off">
       <ul class="command-list">
-        <li><button type="button" data-action="isler"><span>Seçilmiş işlere git</span><small>↵</small></button></li>
+        <li><button type="button" data-action="isler"><span>Projelere git</span><small>↵</small></button></li>
         <li><button type="button" data-action="hikaye"><span>Hikâyeye git</span><small>↵</small></button></li>
         <li><button type="button" data-action="lab"><span>Deney alanını aç</span><small>↵</small></button></li>
         <li><button type="button" data-action="iletisim"><span>İletişime git</span><small>↵</small></button></li>
@@ -820,7 +824,11 @@
         if (index !== -1 && index !== activeRow) { activeRow = index; paintActiveRow(); }
       }));
 
+      let paletteOpener = null;
       const openPalette = () => {
+        /* Kapaninca odak <body>'ye dusuyordu; klavyeyle gezen kisi yerini
+           kaybediyordu. Aciliste odagi kimin verdigi saklanir. */
+        paletteOpener = document.activeElement;
         palette.classList.add('open');
         commandInput.value = '';
         paletteRows.forEach(row => { row.hidden = false; });
@@ -830,8 +838,11 @@
         setTimeout(() => commandInput.focus(), 20);
       };
       const closePalette = () => {
+        if (!palette.classList.contains('open')) return;
         palette.classList.remove('open');
         playSound(350, 'sine', 0.04);
+        if (paletteOpener && document.contains(paletteOpener)) paletteOpener.focus();
+        paletteOpener = null;
       };
       document.querySelector('#open-command').addEventListener('click', openPalette);
       palette.addEventListener('click', (event) => { if (event.target === palette) closePalette(); });

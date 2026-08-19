@@ -336,8 +336,8 @@
     }
     .cli-input::placeholder { color: color-mix(in srgb, var(--paper) 70%, transparent); }
     @keyframes blink { 50% { opacity: 0; } }
-    .idea-machine { display: grid; align-content: space-between; padding: 38px; background: var(--acid); color: #11120f; }
-    .idea-machine p { max-width: 600px; margin: 0; font: 400 clamp(2.1rem,4.5vw,4.5rem)/.95 var(--font-serif); letter-spacing: -.035em; }
+    .idea-machine { display: grid; align-content: space-between; gap: 28px; padding: 38px; background: var(--acid); color: #11120f; }
+    .idea-machine p { max-width: 600px; margin: 0; font: 400 clamp(2rem,3vw,2.75rem)/1.02 var(--font-serif); letter-spacing: -.03em; text-wrap: balance; }
     /* Fikir makinesinin zemini her iki temada da asit yeşili kalır,
        bu yüzden butonları tema token'ına değil sabit koyuya bağlanır. */
     .idea-machine .button { width: max-content; color: #11120f; border-color: #11120f; }
@@ -458,7 +458,9 @@
       .timeline-item { grid-template-columns: 1fr; gap: 8px; }
       .cert-grid { grid-template-columns: 1fr; }
       .console { min-height: 380px; padding: 20px; font-size: .78rem; }
-      .idea-machine { min-height: 400px; padding: 28px; }
+      /* En uzun fikir 418px istiyordu; 400'de kalinca panel her tiklamada
+         yeniden boyutlanip altindaki icerigi kaydiriyordu. */
+      .idea-machine { min-height: 420px; padding: 28px; }
       .idea-meta { align-items: start; flex-direction: column; }
       .contact-panel { border-radius: 28px; }
       .footer-inner { align-items: flex-start; flex-direction: column; }
